@@ -1,0 +1,75 @@
+/* --- LAYOUT DA PÁGINA DA MÚSICA (song.css) --- */
+
+.song-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+.song-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.song-header h1 {
+  font-size: 2.5rem;
+  color: var(--primary); /* Azul principal #0099ff */
+  margin: 0;
+}
+
+/* --- BOTÕES DE CONTROLE --- */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.controls button {
+  background-color: var(--bg-card); /* Fundo preto suave */
+  border: 1px solid var(--primary);
+  color: var(--primary-light); /* Azul claro */
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.controls button:hover {
+  background-color: var(--primary); /* Fica azul cheio no hover */
+  color: #000; /* Texto preto para contraste */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 153, 255, 0.4);
+}
+
+/* --- ESTILO DOS ACORDES (A MÁGICA) --- */
+.chord {
+  color: var(--primary-light); /* Azul Neon (#00c3ff) */
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 4px; 
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.chord:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px var(--primary);
+  transform: scale(1.15);
+}
+
+/* --- ÁREA DA LETRA DA MÚSICA --- */
+pre {
+  color: var(--text-muted); /* Cinza claro */
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 18px;
+  line-height: 3.0; /* Altura boa para o acorde não encostar */
+  white-space: pre-wrap;
+  overflow-x: hidden;
+  text-align: left; /* Garante que a letra comece na esquerda */
+  padding-left: 10px; /* Um pequeno respiro lateral */
+}

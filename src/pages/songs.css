@@ -1,0 +1,79 @@
+.songs-page {
+  padding: 40px 30px;
+  background: #000;
+  min-height: 100vh;
+  color: #fff;
+}
+
+.songs-page h1 {
+  font-size: 2.4rem;
+  margin-bottom: 30px;
+}
+
+.songs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.song-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+.song-image {
+  height: 160px;
+  background: linear-gradient(135deg, #111, #222);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.song-card:hover .song-image {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* COR DE DESTAQUE (vamos mudar depois aqui) */
+.song-image {
+  border: 2px solid #00aaff;
+}
+
+.song-info {
+  margin-top: 10px;
+}
+
+.song-info h2 {
+  font-size: 0.95rem;
+}
+
+/* --- Adicione isto ao final do arquivo song.css --- */
+
+/* Estilo dos acordes no meio da letra */
+.chord {
+  color: var(--primary-light); /* Azul claro destaque (#00c3ff) */
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 4px; /* Um respiro entre o acorde e a letra */
+  transition: all 0.2s ease;
+  display: inline-block; /* Garante que o transform funcione */
+}
+
+.chord:hover {
+  color: #ffffff; /* Fica branco no hover */
+  text-shadow: 0 0 10px var(--primary); /* Brilho neon azul */
+  transform: scale(1.1); /* Efeito de "pulo" */
+}
+
+/* Ajuste da letra da música para o modo escuro */
+pre {
+  color: var(--text-muted); /* Cinza claro para não cansar a vista */
+  font-family: 'Consolas', 'Monaco', monospace; /* Fonte fixa para alinhar */
+  font-size: 18px;
+  line-height: 3.0; /* Altura generosa para o acorde não atropelar a linha de cima */
+  white-space: pre-wrap; /* Quebra de linha automática */
+  overflow-x: hidden;
+}

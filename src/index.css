@@ -1,15 +1,17 @@
 :root {
-  --bg-main: #000000;
-  --bg-card: #0c0c0c;
-  --primary: #0099ff;
-  --primary-light: #00c3ff;
-  --text-main: #ffffff;
-  --text-muted: #bdbdbd;
+  /* Paleta Oficial - Tocando Pra Valer */
+  --bg-main: #000000;       /* Preto absoluto */
+  --bg-card: #0c0c0c;       /* Preto suave (para cartões e fundos secundários) */
+  --primary: #0099ff;       /* Azul principal (Botões, títulos) */
+  --primary-light: #00c3ff; /* Azul claro destaque (Acordes, hovers) */
+  --text-main: #ffffff;     /* Branco (Texto principal) */
+  --text-muted: #bdbdbd;    /* Cinza (Ícones, textos secundários) */
 }
 
 body {
   margin: 0;
   background-color: var(--bg-main);
   color: var(--text-main);
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
