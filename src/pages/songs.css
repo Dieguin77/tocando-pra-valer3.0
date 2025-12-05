@@ -1,111 +1,191 @@
-.songs-page {
-  padding: 40px 30px;
-  background: #000;
+/* src/pages/songs.css */
+
+/* --- FUNDO GERAL --- */
+.songs-wrapper {
   min-height: 100vh;
-  color: #fff;
+  background-color: #000;
+  /* Brilho azulado de fundo */
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(0, 153, 255, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(0, 195, 255, 0.05) 0%, transparent 40%);
+  color: white;
+  font-family: 'Inter', system-ui, sans-serif;
+  padding-bottom: 60px;
 }
 
-.songs-page h1 {
-  font-size: 2.4rem;
-  margin-bottom: 30px;
+/* --- MENU FLUTUANTE (GLASS NAV) --- */
+.glass-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px); /* O efeito de vidro */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.nav-logo img {
+  height: 30px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #888;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+.nav-cta {
+  background: linear-gradient(90deg, #0099ff, #00ccff);
+  padding: 8px 20px;
+  border-radius: 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: transform 0.2s;
+}
+
+.nav-cta:hover {
+  transform: scale(1.05);
+}
+
+/* --- CABEÇALHO DA PÁGINA --- */
+.songs-header-section {
+  padding-top: 120px; /* Espaço para o menu fixo não cobrir */
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #ffffff 0%, #0099ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-subtitle {
+  color: #888;
+  font-size: 1.1rem;
+}
+
+/* --- GRID DE MÚSICAS --- */
 .songs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
+/* --- CARD DA MÚSICA (EFEITO VIDRO) --- */
 .song-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 25px;
   text-decoration: none;
-  color: inherit;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.song-image {
-  height: 160px;
-  background: linear-gradient(135deg, #111, #222);
-  border-radius: 12px;
+.song-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #0099ff; /* Corrigido var(--primary) para azul direto */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+              0 0 15px rgba(0, 153, 255, 0.2);
+}
+
+.card-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 153, 255, 0.1);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #0099ff;
+  transition: all 0.3s;
 }
 
-.song-card:hover .song-image {
-  transform: scale(1.05);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-/* COR DE DESTAQUE (vamos mudar depois aqui) */
-.song-image {
-  border: 2px solid #00aaff;
-}
-
-.song-info {
-  margin-top: 10px;
+.song-card:hover .card-icon-wrapper {
+  background: #0099ff;
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 153, 255, 0.6);
+  transform: scale(1.1);
 }
 
 .song-info h2 {
-  font-size: 0.95rem;
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 600;
+  text-align: center;
 }
 
-/* --- Adicione isto ao final do arquivo song.css --- */
+.song-info p {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 5px 0 0 0;
+  text-align: center;
+}
 
-/* Estilo dos acordes no meio da letra */
-.chord {
-  color: var(--primary-light); /* Azul claro destaque (#00c3ff) */
+.play-btn {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #0099ff;
   font-weight: bold;
-  cursor: pointer;
-  margin-right: 4px; /* Um respiro entre o acorde e a letra */
-  transition: all 0.2s ease;
-  display: inline-block; /* Garante que o transform funcione */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s;
 }
 
-.chord:hover {
-  color: #ffffff; /* Fica branco no hover */
-  text-shadow: 0 0 10px var(--primary); /* Brilho neon azul */
-  transform: scale(1.1); /* Efeito de "pulo" */
+.song-card:hover .play-btn {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Ajuste da letra da música para o modo escuro */
-pre {
-  color: var(--text-muted); /* Cinza claro para não cansar a vista */
-  font-family: 'Consolas', 'Monaco', monospace; /* Fonte fixa para alinhar */
-  font-size: 18px;
-  line-height: 3.0; /* Altura generosa para o acorde não atropelar a linha de cima */
-  white-space: pre-wrap; /* Quebra de linha automática */
-  overflow-x: hidden;
-}
-
-/* src/pages/song.css - Adicione ao final */
-
-/* Força o tamanho do SVG para ele não sumir */
-.chord-diagram-tooltip svg {
-    min-width: 100px;
-    min-height: 120px;
-    display: block;
-}
-
-/* Pinta as linhas e trastes de Branco */
-.chord-diagram-tooltip svg text,
-.chord-diagram-tooltip svg line, 
-.chord-diagram-tooltip svg path {
-    stroke: #ffffff !important;
-    fill: #ffffff !important;
-}
-
-/* Pinta as bolinhas (dedos) e pestanas de Azul Neon */
-.chord-diagram-tooltip svg circle,
-.chord-diagram-tooltip svg rect {
-    stroke: #0099ff !important;
-    fill: #0099ff !important;
-    stroke-width: 1px !important;
-}
-
-/* Remove preenchimento de texto das cordas para não ficar "gordo" */
-.chord-diagram-tooltip svg text {
-    stroke: none !important;
-    fill: #ffffff !important;
-    font-size: 16px;
+@media (max-width: 768px) {
+  .page-title { font-size: 2.5rem; }
+  .songs-header-section { padding-top: 100px; }
+  .glass-nav { padding: 15px 20px; }
+  .nav-links { display: none; } /* Esconde links no mobile se quiser */
 }

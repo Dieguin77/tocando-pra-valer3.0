@@ -1,57 +1,115 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import { musicas } from "../data/musicas";
-import logoImg from "../assets/logo.png"; // Importando a logo para o menu
-import "./songs.css";
+import chordsDB from "../data/chords-db";
+import ChordDiagram from "./ChordDiagram";
+import "./song.css";
 
-export default function Songs() {
-  return (
-    <div className="songs-wrapper">
-      
-      {/* 1. MENU FLUTUANTE (Igual ao da Home para manter padrão) */}
-      <nav className="glass-nav">
-        <Link to="/" className="nav-logo">
-          <img src={logoImg} alt="Logo" />
-          <span>Tocando Pra Valer</span>
-        </Link>
+// --- LÓGICA DE TRANSPOSIÇÃO (Mantida igual) ---
+const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+const normalizeChord = (chord) => {
+  const map = { "Db": "C#", "Eb": "D#", "Gb": "F#", "Ab": "G#", "Bb": "A#" };
+  return map[chord] || chord;
+};
+const transposeChord = (chord, semitones) => {
+  if (!chord) return "";
+  const match = chord.match(/^([A-G][#b]?)(.*)$/);
+  if (!match) return chord;
+  let [_, root, suffix] = match;
+  root = normalizeChord(root);
+  let index = NOTES.indexOf(root);
+  if (index === -1) return chord;
+  let newIndex = (index + semitones) % 12;
+  if (newIndex < 0) newIndex += 12;
+  return NOTES[newIndex] + suffix;
+};
 
-        <div className="nav-links">
-          <Link to="/" className="nav-link">Início</Link>
-          <Link to="/musicas" className="nav-link" style={{color: '#fff'}}>Repertório</Link>
-        </div>
+export default function Song() {
+  const { id } = useParams();
+  const song = musicas.find((m) => m.id === parseInt(id));
 
-        <Link to="/" className="nav-cta">
-          Voltar
-        </Link>
-      </nav>
+  // --- ESTADOS ---
+  const [semitones, setSemitones] = useState(0);
+  const [fontSize, setFontSize] = useState(18);
+  
+  // ESTADO NOVO: Qual acorde está "selecionado" (clicado) no mobile?
+  const [activeChordIndex, setActiveChordIndex] = useState(null);
 
-      {/* 2. CABEÇALHO */}
-      <header className="songs-header-section">
-        <h1 className="page-title">
-          Seu <span className="gradient-text">Repertório</span>
-        </h1>
-        <p className="page-subtitle">Escolha uma música e comece a praticar agora.</p>
-      </header>
+  // Fecha o balão se clicar fora (opcional, para UX melhor)
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.chord-wrapper')) {
+        setActiveChordIndex(null);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
-      {/* 3. GRID DE CARDS PREMIUM */}
-      <div className="songs-grid">
-        {musicas.map((song) => (
-          <Link to={`/musica/${song.id}`} key={song.id} className="song-card">
+  if (!song) return <div className="song-page-container"><h1>Música não encontrada!</h1></div>;
+
+  const renderLyrics = (lyrics) => {
+    const parts = lyrics.split(/(\[.*?\])/g);
+
+    return parts.map((part, index) => {
+      if (part.startsWith("[") && part.endsWith("]")) {
+        const originalChord = part.slice(1, -1);
+        const currentChord = transposeChord(originalChord, semitones);
+        const chordData = chordsDB[currentChord] || chordsDB[normalizeChord(currentChord)];
+
+        // Verifica se este é o acorde clicado no momento
+        const isActive = activeChordIndex === index;
+
+        return (
+          <span 
+            key={index} 
+            className={`chord-wrapper ${isActive ? 'active' : ''}`}
+            onClick={(e) => {
+              e.stopPropagation(); // Impede que o clique feche o balão imediatamente
+              // Se já está ativo, desativa. Se não, ativa este.
+              setActiveChordIndex(isActive ? null : index);
+            }}
+          >
+            <span className="chord-symbol">{currentChord}</span>
             
-            {/* Ícone com brilho neon */}
-            <div className="card-icon-wrapper">
-              🎵
-            </div>
+            {/* O Balão aparece se tiver dados E (estiver ativo OU sendo "hovered" pelo CSS) */}
+            {chordData && (
+              <div className="chord-tooltip">
+                <ChordDiagram chordData={chordData} />
+              </div>
+            )}
+          </span>
+        );
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
 
-            <div className="song-info">
-              <h2>{song.titulo}</h2>
-              <p>{song.artista || "Artista Desconhecido"}</p>
-            </div>
-
-            <span className="play-btn">Tocar Agora →</span>
-          </Link>
-        ))}
+  return (
+    <div className="song-page-container">
+      <div className="song-header">
+        <Link to="/musicas" className="back-link">← Voltar para o Repertório</Link>
+        <h1>{song.titulo}</h1>
+        <p className="artist">{song.artista || "Artista Desconhecido"}</p>
       </div>
 
+      <div className="controls-bar">
+        <div className="control-group">
+          <span className="label">Tom:</span>
+          <button className="btn-control" onClick={() => setSemitones(semitones - 1)}>-</button>
+          <span className="value">{semitones > 0 ? `+${semitones}` : semitones}</span>
+          <button className="btn-control" onClick={() => setSemitones(semitones + 1)}>+</button>
+        </div>
+        <div className="control-group">
+          <span className="label">Fonte:</span>
+          <button className="btn-control" onClick={() => setFontSize(Math.max(12, fontSize - 2))}>A-</button>
+          <button className="btn-control" onClick={() => setFontSize(Math.min(36, fontSize + 2))}>A+</button>
+        </div>
+      </div>
+
+      <div className="lyrics-box" style={{ fontSize: `${fontSize}px` }}>
+        <pre style={{ fontSize: `${fontSize}px`, lineHeight: 3.5 }}>{renderLyrics(song.letra)}</pre>
+      </div>
     </div>
   );
 }
