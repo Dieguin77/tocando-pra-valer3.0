@@ -1,0 +1,224 @@
+/* src/pages/home.css */
+
+/* --- FUNDO IMERSIVO --- */
+.home-wrapper {
+  min-height: 100vh;
+  background-color: #000;
+  /* Cria um brilho azulado no fundo que segue o scroll */
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(0, 153, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(0, 195, 255, 0.05) 0%, transparent 50%);
+  color: white;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* --- MENU DE NAVEGAÇÃO (GLASSMORPHISM) --- */
+.glass-nav {
+  position: fixed; /* Fixo no topo */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* O efeito de vidro fosco chique */
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-logo img {
+  height: 40px;
+  border-radius: 8px; /* Arredonda levemente a logo quadrada */
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  color: #bdbdbd;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.nav-cta {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 20px;
+  border-radius: 20px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s;
+}
+
+.nav-cta:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 15px rgba(0, 153, 255, 0.4);
+}
+
+/* --- HERO SECTION (IMPACTO) --- */
+.hero-container {
+  padding-top: 140px; /* Espaço para o menu fixo */
+  padding-bottom: 80px;
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Efeito de Texto Gradiente (Wow Factor) */
+.gradient-text {
+  background: linear-gradient(90deg, #ffffff 0%, #0099ff 100%);
+  
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-title {
+  font-size: 4.5rem; /* Gigante */
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+  animation: slideUp 0.8s ease-out;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #888;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  line-height: 1.6;
+  animation: slideUp 1s ease-out;
+}
+
+/* Botão Principal Pulsante */
+.main-cta-button {
+  background: var(--primary);
+  color: white;
+  padding: 18px 50px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
+  transition: all 0.3s;
+  animation: pulse 3s infinite;
+}
+
+.main-cta-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(0, 153, 255, 0.6);
+}
+
+/* --- GRID DE FEATURES (VISUAL CLEAN) --- */
+.features-section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.feature-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 16px;
+  transition: transform 0.3s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-box:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Ícone brilhante */
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  display: inline-block;
+  background: rgba(0, 153, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  color: var(--primary);
+}
+
+.feature-box h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.3rem;
+}
+
+.feature-box p {
+  color: #999;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* --- FOOTER --- */
+.site-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 60px 20px;
+  text-align: center;
+  color: #555;
+  margin-top: 60px;
+  background: #050505;
+}
+
+.footer-logo {
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 153, 255, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(0, 153, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 153, 255, 0); }
+}
+
+/* Responsivo Mobile */
+@media (max-width: 768px) {
+  .hero-title { font-size: 3rem; }
+  .glass-nav { padding: 15px 20px; }
+  .nav-links { display: none; } /* Esconde links no mobile p/ simplificar */
+}

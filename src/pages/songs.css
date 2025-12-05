@@ -77,3 +77,35 @@ pre {
   white-space: pre-wrap; /* Quebra de linha automática */
   overflow-x: hidden;
 }
+
+/* src/pages/song.css - Adicione ao final */
+
+/* Força o tamanho do SVG para ele não sumir */
+.chord-diagram-tooltip svg {
+    min-width: 100px;
+    min-height: 120px;
+    display: block;
+}
+
+/* Pinta as linhas e trastes de Branco */
+.chord-diagram-tooltip svg text,
+.chord-diagram-tooltip svg line, 
+.chord-diagram-tooltip svg path {
+    stroke: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+/* Pinta as bolinhas (dedos) e pestanas de Azul Neon */
+.chord-diagram-tooltip svg circle,
+.chord-diagram-tooltip svg rect {
+    stroke: #0099ff !important;
+    fill: #0099ff !important;
+    stroke-width: 1px !important;
+}
+
+/* Remove preenchimento de texto das cordas para não ficar "gordo" */
+.chord-diagram-tooltip svg text {
+    stroke: none !important;
+    fill: #ffffff !important;
+    font-size: 16px;
+}
