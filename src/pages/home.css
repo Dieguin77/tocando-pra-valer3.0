@@ -1,13 +1,59 @@
-/* src/pages/home.css */
+/* No seu arquivo src/pages/home.css */
+
+.home-container {
+  /* --- AQUI ESTÁ O SEGREDO --- */
+  /* Nós colocamos DOIS backgrounds separados por vírgula. */
+  /* O PRIMEIRO é o que fica por cima (o degradê azul transparente). */
+  /* O SEGUNDO é o que fica por baixo (a sua imagem). */
+
+  background-image:
+    /* Camada 1 (Topo): O Degradê Azul */
+    linear-gradient(
+      to bottom right,      /* Direção do degradê (canto superior esq. para inferior dir.) */
+      rgba(0, 50, 150, 0.8), /* Cor inicial: Azul médio, 80% visível */
+      rgba(0, 20, 60, 0.95)  /* Cor final: Azul bem escuro, 95% visível */
+    ),
+    /* Camada 2 (Fundo): A Imagem do instrumento */
+    url('../assets/imagem-fundo.jpg'); /* <--- TROQUE PELO CAMINHO DA SUA IMAGEM */
+
+
+  /* --- Propriedades para a imagem ficar perfeita --- */
+  background-size: cover;   /* Faz a imagem cobrir todo o espaço sem distorcer */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Não repete a imagem se a tela for gigante */
+
+  /* Garante que o container ocupe a tela toda */
+  width: 100%;
+  min-height: 100vh; /* Altura mínima de 100% da tela */
+
+  /* (Opcional) Efeito Parallax: a imagem fica fixa enquanto você rola a página */
+  /* background-attachment: fixed; */
+
+  /* Estilos para centralizar o texto (provavelmente você já tem) */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white; /* Texto branco para contrastar */
+}/* src/pages/home.css */
 
 /* --- FUNDO IMERSIVO --- */
+/* src/pages/home.css */
+
 .home-wrapper {
   min-height: 100vh;
-  background-color: #000;
-  /* Cria um brilho azulado no fundo que segue o scroll */
+  
+  /* Gradiente Azul + Foto do Baixo */
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(0, 153, 255, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 85% 30%, rgba(0, 195, 255, 0.05) 0%, transparent 50%);
+    linear-gradient(to bottom right, rgba(0, 50, 150, 0.85), rgba(0, 0, 0, 0.95)),
+    url('../assets/novo-fundo.jpg'); /* <--- Caminho para a nova foto do baixo */
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  /* Resto das configurações... */
   color: white;
   font-family: 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
@@ -221,4 +267,452 @@
   .hero-title { font-size: 3rem; }
   .glass-nav { padding: 15px 20px; }
   .nav-links { display: none; } /* Esconde links no mobile p/ simplificar */
+}
+
+/* --- ESTILOS DA GALERIA (Adicionar no final do arquivo) --- */
+
+.gallery-section {
+  padding: 80px 20px;
+  background-color: #111; /* Fundo escuro para contrastar com o Hero */
+  text-align: center;
+}
+
+.gallery-title {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.gallery-subtitle {
+  color: #888;
+  margin-bottom: 50px;
+  font-size: 1.1rem;
+}
+
+/* O Grid Mágico */
+.gallery-grid {
+  display: grid;
+  /* Cria colunas automáticas: mínimo de 250px cada */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Cartão da Foto */
+.gallery-card {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden; /* Corta a imagem se ela passar da borda */
+  height: 300px; /* Altura fixa para ficar alinhado */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.gallery-card:hover {
+  transform: translateY(-5px); /* Sobe um pouquinho ao passar o mouse */
+}
+
+/* A Imagem */
+.gallery-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Garante que a foto preencha tudo sem esticar */
+  transition: transform 0.5s ease;
+}
+
+.gallery-card:hover img {
+  transform: scale(1.1); /* Zoom suave na imagem */
+}
+
+/* Texto sobre a imagem (opcional) */
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  padding: 20px;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-card:hover .card-overlay {
+  opacity: 1; /* Aparece o texto só quando passa o mouse */
+}
+
+/* --- ADICIONE ISSO AO SEU home.css --- */
+
+/* Ajuste no Hero para botões duplos */
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.secondary-button {
+  padding: 18px 40px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.secondary-button:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: white;
+}
+
+/* --- 2. FAIXA DE ESTATÍSTICAS --- */
+.stats-bar {
+  background: #000;
+  border-bottom: 1px solid #222;
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+  margin: 10px;
+}
+
+.stat-number {
+  display: block;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #0099ff; /* Azul Neon */
+  text-shadow: 0 0 15px rgba(0, 153, 255, 0.4);
+}
+
+.stat-label {
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+/* --- 3. SEÇÃO BENEFÍCIOS --- */
+.benefits-section {
+  padding: 100px 20px;
+  background: #050505;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  color: #aaa;
+  margin-bottom: 60px;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.benefit-card {
+  background: linear-gradient(145deg, #111, #0a0a0a);
+  padding: 40px;
+  border-radius: 20px;
+  border: 1px solid #222;
+  transition: 0.3s;
+}
+
+.benefit-card:hover {
+  transform: translateY(-10px);
+  border-color: #0099ff;
+  box-shadow: 0 10px 30px rgba(0, 153, 255, 0.1);
+}
+
+.benefit-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.benefit-card h3 {
+  color: white;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.benefit-card p {
+  color: #888;
+  line-height: 1.6;
+}
+
+/* --- 4. SEÇÃO FEATURES (Texto + Imagem) --- */
+.features-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100px 5%;
+  background: #080808;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.feature-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.feature-content h2 {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li {
+  margin-bottom: 25px;
+  color: #ccc;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  border-left: 3px solid #0099ff;
+  padding-left: 20px;
+}
+
+.feature-list strong {
+  color: white;
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.feature-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.feature-image img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: -20px 20px 0px rgba(0, 153, 255, 0.1); /* Efeito visual chique */
+}
+
+/* --- 6. CTA FINAL --- */
+.final-cta {
+  padding: 100px 20px;
+  text-align: center;
+  background: linear-gradient(to right, #001133, #000);
+  border-top: 1px solid #111;
+}
+
+.final-cta h2 {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.final-cta p {
+  color: #ccc;
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.cta-button-large {
+  background: #0099ff;
+  color: white;
+  padding: 20px 60px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 0 30px rgba(0, 153, 255, 0.5);
+  transition: 0.3s;
+  display: inline-block;
+}
+
+.cta-button-large:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 50px rgba(0, 153, 255, 0.8);
+  background: white;
+  color: #0099ff;
+}
+
+.site-footer {
+  padding: 40px;
+  text-align: center;
+  color: #555;
+  background: #000;
+  border-top: 1px solid #222;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .features-section {
+    flex-direction: column;
+  }
+  .stat-number {
+    font-size: 2.5rem;
+  }
+}
+
+/* --- ESTILOS DA SEÇÃO DE VÍDEOS (Adicionar no final do home.css) --- */
+
+.videos-section {
+  padding: 100px 20px;
+  background: #080808; /* Fundo escuro, ligeiramente diferente dos benefícios */
+  text-align: center;
+}
+
+/* Grid para 3 vídeos por linha em telas grandes, 2 em médias, 1 em pequenas */
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.video-card {
+  background: #111;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid #222;
+  transition: 0.3s;
+}
+
+.video-card:hover {
+  border-color: #0099ff;
+  box-shadow: 0 5px 20px rgba(0, 153, 255, 0.2);
+}
+
+.video-card h3 {
+  color: white;
+  font-size: 1.1rem;
+  padding: 15px;
+  margin: 0;
+  text-align: left;
+}
+
+/* --- O TRUQUE DO VÍDEO RESPONSIVO (16:9) --- */
+/* Isso garante que o iframe do YouTube nunca fique esticado ou distorcido */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* Proporção 16:9 (9 dividido por 16 = 0.5625) */
+  height: 0;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Ajuste para celulares pequenos */
+@media (max-width: 480px) {
+  .videos-grid {
+    grid-template-columns: 1fr; /* 1 vídeo por coluna no celular */
+  }
+}
+
+/* --- ESTILOS DO FOOTER E REDES SOCIAIS --- */
+
+.site-footer {
+  padding: 60px 20px 40px; /* Mais espaço no topo */
+  background: #050505;
+  border-top: 1px solid #222;
+  text-align: center;
+}
+
+.footer-title {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.footer-content p {
+  color: #888;
+  margin-bottom: 30px;
+}
+
+/* Container para alinhar os botões lado a lado */
+.social-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Espaço entre os botões */
+  flex-wrap: wrap; /* Se a tela for pequena, desce para a próxima linha */
+  margin-bottom: 40px;
+}
+
+/* Estilo Base dos Botões */
+.btn-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 25px;
+  border-radius: 50px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-social:hover {
+  transform: translateY(-3px);
+  color: white;
+}
+
+/* Cores Específicas */
+
+/* Instagram (Degradê) */
+.btn-instagram {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3);
+}
+.btn-instagram:hover {
+  box-shadow: 0 6px 20px rgba(220, 39, 67, 0.6);
+}
+
+/* WhatsApp (Verde Oficial) */
+.btn-whatsapp {
+  background-color: #25D366;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+.btn-whatsapp:hover {
+  background-color: #20bd5a;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+
+/* YouTube (Vermelho Oficial) */
+.btn-youtube {
+  background-color: #FF0000;
+  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+}
+.btn-youtube:hover {
+  background-color: #cc0000;
+  box-shadow: 0 6px 20px rgba(255, 0, 0, 0.6);
+}
+
+.footer-copyright {
+  border-top: 1px solid #111;
+  padding-top: 20px;
+  font-size: 0.85rem;
+  color: #555;
 }

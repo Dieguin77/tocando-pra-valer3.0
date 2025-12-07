@@ -87,13 +87,18 @@ export default function Song() {
 
   return (
     <div className="song-page-container">
+      
+      {/* --- MUDANÇA AQUI: Alterar o Link para apontar para "/" --- */}
       <div className="song-header">
-        <Link to="/musicas" className="back-link">← Voltar para o Repertório</Link>
+        <Link to="/" className="back-link">
+           &larr; Voltar para o Início
+        </Link>
         <h1>{song.titulo}</h1>
         <p className="artist">{song.artista || "Artista Desconhecido"}</p>
       </div>
 
       <div className="controls-bar">
+        {/* ... (resto do código dos botões mantém igual) ... */}
         <div className="control-group">
           <span className="label">Tom:</span>
           <button className="btn-control" onClick={() => setSemitones(semitones - 1)}>-</button>
@@ -112,4 +117,5 @@ export default function Song() {
       </div>
     </div>
   );
+
 }
