@@ -1,18 +1,28 @@
+/* --- FUNDO GERAL COM NOTAS MUSICAIS --- */
 /* src/pages/songs.css */
 
-/* --- FUNDO GERAL --- */
 .songs-wrapper {
-  min-height: 100vh;
-  background-color: #000;
-  /* Brilho azulado de fundo */
+  min-height: 100vh; /* Garante que ocupa a altura toda da tela */
+  
+  /* --- A MÁGICA DO FUNDO DUPLO --- */
   background-image: 
-    radial-gradient(circle at 20% 20%, rgba(0, 153, 255, 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(0, 195, 255, 0.05) 0%, transparent 40%);
+    /* Camada 1: O degradê escuro (transparente) que fica POR CIMA */
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 20, 50, 0.95)),
+    
+    /* Camada 2: A sua imagem de notas musicais que fica POR BAIXO */
+    url('../assets/fundo-notas.jpg'); /* <--- CONFIRA SE O NOME ESTÁ CERTO */
+
+  /* Configurações para a imagem ficar perfeita */
+  background-size: cover;       /* Estica a imagem para cobrir tudo */
+  background-position: center;  /* Centraliza */
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* (Opcional) Faz a imagem ficar parada quando você rola a página */
+
+  /* Resto das configurações de texto */
   color: white;
   font-family: 'Inter', system-ui, sans-serif;
   padding-bottom: 60px;
 }
-
 /* --- MENU FLUTUANTE (GLASS NAV) --- */
 .glass-nav {
   display: flex;
@@ -188,4 +198,44 @@
   .songs-header-section { padding-top: 100px; }
   .glass-nav { padding: 15px 20px; }
   .nav-links { display: none; } /* Esconde links no mobile se quiser */
+}
+
+/* src/pages/songs.css */
+
+.songs-header-nav {
+  display: flex;
+  flex-direction: column; /* Coloca o botão em cima do título */
+  align-items: flex-start; /* Alinha à esquerda */
+  gap: 15px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #333; /* Uma linha para separar do repertório */
+  margin: 25px;
+}
+
+.btn-voltar-home {
+  margin: 25px;
+  text-decoration:rgb(22, 81, 207);
+  color: white; /* Ou #333 se o fundo for claro */
+  background-color: #222; /* Fundo escuro do botão */
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  border: 1px solid #444;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Espaço entre a seta e o texto */
+}
+
+.btn-voltar-home:hover {
+  background-color: #0099ff; /* Azul neon ao passar o mouse */
+  border-color: #0099ff;
+  transform: translateX(-5px); /* Efeito de "puxar" para a esquerda */
+}
+
+.songs-header-nav h1 {
+  margin: 25px;
+  font-size: 2rem;
+  color: rgb(255, 255, 255); /* Ajuste conforme a cor do seu tema */
 }

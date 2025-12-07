@@ -5,7 +5,6 @@ import chordsDB from "../data/chords-db";
 import ChordDiagram from "./ChordDiagram";
 import "./song.css";
 
-// --- LÓGICA DE TRANSPOSIÇÃO (Mantida igual) ---
 const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 const normalizeChord = (chord) => {
   const map = { "Db": "C#", "Eb": "D#", "Gb": "F#", "Ab": "G#", "Bb": "A#" };
