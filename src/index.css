@@ -37,7 +37,7 @@ body {
   --highlight-blue: #00c3ff;
 }
 
-body.dark-mode {
+html.dark-mode, body.dark-mode {
   /* MODO ESCURO (Sua paleta original) */
   --bg-main: #000000;
   --text-main: #ffffff;

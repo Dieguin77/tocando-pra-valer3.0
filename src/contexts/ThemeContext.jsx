@@ -7,18 +7,24 @@ export const ThemeProvider = ({ children }) => {
   // Estado para guardar o tema. Começa verificando o localStorage
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
-    // Se não tiver nada salvo, assume 'dark' (já que seu site é nativamente escuro)
-    return savedTheme ? savedTheme : 'dark';
+    if (savedTheme) return savedTheme;
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
   });
 
   // Efeito que roda sempre que o 'theme' muda
   useEffect(() => {
+    const root = document.documentElement;
     const body = document.body;
     
     if (theme === 'dark') {
-      body.classList.add('dark-mode');
+      root.classList.add('dark-mode');
+      if (body) body.classList.add('dark-mode');
     } else {
-      body.classList.remove('dark-mode');
+      root.classList.remove('dark-mode');
+      if (body) body.classList.remove('dark-mode');
     }
 
     // Salva a escolha no navegador

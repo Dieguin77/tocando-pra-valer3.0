@@ -8,6 +8,26 @@
     <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+    <script>
+      (function() {
+        try {
+          const saved = localStorage.getItem('theme');
+          let theme = saved;
+          if (!theme) {
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            theme = prefersDark ? 'dark' : 'light';
+          }
+          const apply = (el) => {
+            if (!el) return;
+            if (theme === 'dark') el.classList.add('dark-mode');
+            else el.classList.remove('dark-mode');
+          };
+          apply(document.documentElement);
+          if (document.body) apply(document.body);
+          else document.addEventListener('DOMContentLoaded', () => apply(document.body));
+        } catch (e) {}
+      })();
+    </script>
 </head>
   <body>
     <div id="root"></div>
