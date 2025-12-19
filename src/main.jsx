@@ -1,16 +1,14 @@
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import "./index.css";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css' // Seus imports de estilo
+import { BrowserRouter } from 'react-router-dom' // Importante verificar esse import
 
-// 1. Importe o Provider que criamos
-import { ThemeProvider } from "./contexts/ThemeContext";
-
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    {/* 2. Envolva o App com o ThemeProvider */}
-    <ThemeProvider>
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    {/* AQUI ESTÁ O SEGREDO: Adicione o basename com o nome do repositório */}
+    <BrowserRouter basename="/tocando-pra-valer3.0">
       <App />
-    </ThemeProvider>
-  </BrowserRouter>
-);
+    </BrowserRouter>
+  </React.StrictMode>,
+)
