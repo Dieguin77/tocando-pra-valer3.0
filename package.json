@@ -4,7 +4,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://diegu1n77.github.io/tocando-pra-valer3.0",
+  "homepage": "https://dieguin77.github.io/tocando-pra-valer3.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
