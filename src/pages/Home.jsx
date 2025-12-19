@@ -1,18 +1,16 @@
-
 import { Link } from "react-router-dom";
 import "./home.css";
+import ThemeToggle from "../components/ThemeToggle";
 
 // --- IMPORTAÇÃO DAS IMAGENS (Nomes exatos da sua pasta) ---
-// Se alguma imagem der erro, verifique se o nome aqui bate com o arquivo na pasta
 import imgAdolescente from "../assets/adolescente-tocando.jpg";
-// Atenção: Se o seu arquivo for "criancas" (sem ç), mude abaixo. Se for "crianças", mantenha.
 import imgCriancas from "../assets/crianças-tocando.jpg"; 
 import imgHomem from "../assets/homem-tocando.jpg";
 import imgIdosos from "../assets/idosos-tocando.jpg";
 import imgLife from "../assets/life-violao.jpg";
-// Adicione esta linha no topo do arquivo
 import { FaInstagram, FaWhatsapp, FaYoutube } from "react-icons/fa";
-export default function Home() {
+
+export default function Home({ darkMode, toggleTheme }) {
   
   // Dados da Galeria de Fotos
   const fotosGaleria = [
@@ -211,6 +209,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Botão de Tema Flutuante */}
+      <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
 
     </div>
   );

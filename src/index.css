@@ -1,61 +1,61 @@
-:root {
-  /* Paleta Oficial - Tocando Pra Valer */
-  --bg-main: #000000;       /* Preto absoluto */
-  --bg-card: #0c0c0c;       /* Preto suave (para cartões e fundos secundários) */
-  --primary: #0099ff;       /* Azul principal (Botões, títulos) */
-  --primary-light: #00c3ff; /* Azul claro destaque (Acordes, hovers) */
-  --text-main: #ffffff;     /* Branco (Texto principal) */
-  --text-muted: #bdbdbd;    /* Cinza (Ícones, textos secundários) */
-}
-
-body {
-  margin: 0;
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
 /* src/index.css */
 
+/* 1. VARIÁVEIS DO MODO CLARO (Padrão do sistema) */
 :root {
-  /* MODO CLARO (Padrão) */
-  --bg-main: #ffffff;
-  --text-main: #121212;
-  --text-secondary: #555555;
+  --bg-main: #ffffff;          /* Fundo branco */
+  --bg-card: #f5f5f5;          /* Cartões levemente cinzas */
+  --text-main: #121212;        /* Texto quase preto */
+  --text-secondary: #555555;   /* Texto secundário */
   --border-color: #e0e0e0;
   
-  /* UI Elements */
+  /* Cores da Marca (Mantive os azuis da sua paleta oficial) */
+  --primary: #0099ff;
+  --primary-light: #00c3ff;
+
+  /* Elementos de UI */
   --glass-bg: rgba(0, 0, 0, 0.05);
-  --glass-border: rgba(0, 170, 255, 0.3);
   --btn-bg: #f0f0f0;
   --btn-text: #000;
-  --tooltip-bg: #ffffff;
-  
-  /* Destaques (Azuis da marca) */
-  --accent-color: #00aaff;
-  --highlight-blue: #00c3ff;
 }
 
-html.dark-mode, body.dark-mode {
-  /* MODO ESCURO (Sua paleta original) */
-  --bg-main: #000000;
-  --text-main: #ffffff;
-  --text-secondary: #bdbdbd;
+/* 2. VARIÁVEIS DO MODO ESCURO (Sua Paleta Oficial) */
+/* Essa classe é ativada pelo React quando você clica no botão */
+body.dark-mode {
+  --bg-main: #000000;          /* Preto absoluto */
+  --bg-card: #0c0c0c;          /* Preto suave para cartões */
+  --text-main: #ffffff;        /* Texto branco */
+  --text-secondary: #bdbdbd;   /* Cinza claro */
   --border-color: #333333;
-  
-  /* UI Elements */
+
+  /* Elementos de UI Adaptados */
   --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(0, 170, 255, 0.2);
   --btn-bg: #222;
   --btn-text: #fff;
-  --tooltip-bg: #1a1a1a;
 }
 
+/* 3. ESTILOS GERAIS */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  
+  /* Aqui aplicamos as variáveis */
   background-color: var(--bg-main);
   color: var(--text-main);
+  
+  /* Essa linha faz a mágica da transição suave entre as cores */
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Exemplo de uso para garantir que seus cards/containers usem a cor certa */
+.card, .container-box {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+}
+
+button {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 }

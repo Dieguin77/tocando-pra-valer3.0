@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { musicas } from "../data/musicas";
 import chordsDB from "../data/chords-db";
 import ChordDiagram from "./ChordDiagram";
+import ThemeToggle from "../components/ThemeToggle";
 import "./song.css";
 
 const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -23,7 +24,7 @@ const transposeChord = (chord, semitones) => {
   return NOTES[newIndex] + suffix;
 };
 
-export default function Song() {
+export default function Song({ darkMode, toggleTheme }) {
   const { id } = useParams();
   const song = musicas.find((m) => m.id === parseInt(id));
 
@@ -87,7 +88,6 @@ export default function Song() {
   return (
     <div className="song-page-container">
       
-      {/* --- MUDANÇA AQUI: Alterar o Link para apontar para "/" --- */}
       <div className="song-header">
         <Link to="/" className="back-link">
            &larr; Voltar para o Início
@@ -97,7 +97,6 @@ export default function Song() {
       </div>
 
       <div className="controls-bar">
-        {/* ... (resto do código dos botões mantém igual) ... */}
         <div className="control-group">
           <span className="label">Tom:</span>
           <button className="btn-control" onClick={() => setSemitones(semitones - 1)}>-</button>
@@ -114,7 +113,9 @@ export default function Song() {
       <div className="lyrics-box" style={{ fontSize: `${fontSize}px` }}>
         <pre style={{ fontSize: `${fontSize}px`, lineHeight: 3.5 }}>{renderLyrics(song.letra)}</pre>
       </div>
+
+      {/* Botão de Tema Flutuante */}
+      <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
     </div>
   );
-
 }

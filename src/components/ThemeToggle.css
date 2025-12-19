@@ -1,0 +1,64 @@
+/* src/components/ThemeToggle.css */
+
+.theme-toggle-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: var(--btn-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle-btn .icon {
+  width: 28px;
+  height: 28px;
+  color: var(--text-main);
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover .icon {
+  transform: rotate(20deg);
+}
+
+/* Animação especial para o sol */
+.sun-icon {
+  color: #ffa500;
+}
+
+/* Animação especial para a lua */
+.moon-icon {
+  color: #4a90e2;
+}
+
+/* Responsivo para mobile */
+@media (max-width: 768px) {
+  .theme-toggle-btn {
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .theme-toggle-btn .icon {
+    width: 24px;
+    height: 24px;
+  }
+}
