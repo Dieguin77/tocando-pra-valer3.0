@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { musicas } from "../data/musicas";
 import chordsDB from "../data/chords-db";
-import ChordDiagram from "./ChordDiagram";
+import ChordDiagram from "./chordDiagram";
 import ThemeToggle from "../components/ThemeToggle";
 import { useTheme } from "../contexts/ThemeContext";
 import PrintView from "../components/PrintView";
