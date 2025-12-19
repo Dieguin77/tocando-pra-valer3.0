@@ -221,9 +221,145 @@
   to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
 }
 
+/* --- BARRA DE AÇÕES (IMPRESSÃO E DOWNLOAD) --- */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 40px 0;
+  flex-wrap: wrap;
+}
+
+.btn-action {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.btn-print-view {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-print-view:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+}
+
+.btn-download-txt {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.btn-download-txt:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(245, 87, 108, 0.4);
+}
+
+/* --- PÁGINA DE IMPRESSÃO --- */
+.print-page-wrapper {
+  background-color: #ffffff;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.print-toolbar {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-bottom: 2px solid #cccccc;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-wrap: wrap;
+}
+
+.btn-back-from-print,
+.btn-print,
+.btn-download {
+  padding: 10px 16px;
+  font-size: 14px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-back-from-print {
+  background-color: #e0e0e0;
+}
+
+.btn-back-from-print:hover {
+  background-color: #d0d0d0;
+}
+
+.btn-print {
+  background-color: #4CAF50;
+  color: white;
+  border-color: #45a049;
+}
+
+.btn-print:hover {
+  background-color: #45a049;
+}
+
+.btn-download {
+  background-color: #2196F3;
+  color: white;
+  border-color: #0b7dda;
+}
+
+.btn-download:hover {
+  background-color: #0b7dda;
+}
+
+/* Hide print toolbar on actual print */
+@media print {
+  .print-toolbar {
+    display: none !important;
+  }
+}
+
 /* Responsivo para Celular */
 @media (max-width: 600px) {
   .song-header h1 { font-size: 2rem; }
   .controls-bar { gap: 15px; padding: 15px; }
   .lyrics-box { padding: 20px; }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .btn-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .print-toolbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .btn-back-from-print,
+  .btn-print,
+  .btn-download {
+    width: 100%;
+  }
 }

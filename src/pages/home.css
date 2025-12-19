@@ -440,6 +440,10 @@
 .benefit-icon {
   font-size: 4rem;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
 }
 
 .benefit-card h3 {
@@ -489,9 +493,12 @@
   line-height: 1.5;
   border-left: 3px solid #0099ff;
   padding-left: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
 }
 
-.feature-list strong {
+.feature-list li strong {
   color: white;
   display: block;
   font-size: 1.2rem;
@@ -677,6 +684,13 @@
 .btn-social:hover {
   transform: translateY(-3px);
   color: white;
+}
+
+.btn-social svg {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* Cores Específicas */

@@ -4,6 +4,10 @@ import { musicas } from "../data/musicas";
 import chordsDB from "../data/chords-db";
 import ChordDiagram from "./ChordDiagram";
 import ThemeToggle from "../components/ThemeToggle";
+import { useTheme } from "../contexts/ThemeContext";
+import PrintView from "../components/PrintView";
+import { downloadCifraAsTxt } from "../utils/downloadCifra";
+import EmojiIcon from "../components/EmojiIcon";
 import "./song.css";
 
 const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -24,7 +28,9 @@ const transposeChord = (chord, semitones) => {
   return NOTES[newIndex] + suffix;
 };
 
-export default function Song({ darkMode, toggleTheme }) {
+export default function Song() {
+  const { theme, toggleTheme } = useTheme();
+  const darkMode = theme === 'dark';
   const { id } = useParams();
   const song = musicas.find((m) => m.id === parseInt(id));
 
@@ -34,6 +40,9 @@ export default function Song({ darkMode, toggleTheme }) {
   
   // ESTADO NOVO: Qual acorde está "selecionado" (clicado) no mobile?
   const [activeChordIndex, setActiveChordIndex] = useState(null);
+
+  // Estado para view de impressão
+  const [showPrintView, setShowPrintView] = useState(false);
 
   // Fecha o balão se clicar fora (opcional, para UX melhor)
   useEffect(() => {
@@ -47,6 +56,35 @@ export default function Song({ darkMode, toggleTheme }) {
   }, []);
 
   if (!song) return <div className="song-page-container"><h1>Música não encontrada!</h1></div>;
+
+  // Se está na view de impressão, mostrar apenas o PrintView
+  if (showPrintView) {
+    return (
+      <div className="print-page-wrapper">
+        <div className="print-toolbar">
+          <button 
+            className="btn-back-from-print" 
+            onClick={() => setShowPrintView(false)}
+          >
+            ← Voltar
+          </button>
+          <button 
+            className="btn-print" 
+            onClick={() => window.print()}
+          >
+            <EmojiIcon emoji="print" size="md" /> Imprimir
+          </button>
+          <button 
+            className="btn-download" 
+            onClick={() => downloadCifraAsTxt(song, semitones)}
+          >
+            <EmojiIcon emoji="download" size="md" /> Baixar TXT
+          </button>
+        </div>
+        <PrintView song={song} semitones={semitones} />
+      </div>
+    );
+  }
 
   const renderLyrics = (lyrics) => {
     const parts = lyrics.split(/(\[.*?\])/g);
@@ -112,6 +150,24 @@ export default function Song({ darkMode, toggleTheme }) {
 
       <div className="lyrics-box" style={{ fontSize: `${fontSize}px` }}>
         <pre style={{ fontSize: `${fontSize}px`, lineHeight: 3.5 }}>{renderLyrics(song.letra)}</pre>
+      </div>
+
+      {/* Barra de Ações */}
+      <div className="action-buttons">
+        <button 
+          className="btn-action btn-print-view" 
+          onClick={() => setShowPrintView(true)}
+          title="Ver página de impressão com informações da música"
+        >
+          <EmojiIcon emoji="eye" size="md" /> Ver Para Impressão
+        </button>
+        <button 
+          className="btn-action btn-download-txt" 
+          onClick={() => downloadCifraAsTxt(song, semitones)}
+          title="Baixar cifra em formato TXT"
+        >
+          <EmojiIcon emoji="download" size="md" /> Baixar Cifra (TXT)
+        </button>
       </div>
 
       {/* Botão de Tema Flutuante */}

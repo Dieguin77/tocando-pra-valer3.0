@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import "./home.css";
 import ThemeToggle from "../components/ThemeToggle";
+import { useTheme } from "../contexts/ThemeContext";
+import EmojiIcon from "../components/EmojiIcon";
 
 // --- IMPORTAÇÃO DAS IMAGENS (Nomes exatos da sua pasta) ---
 import imgAdolescente from "../assets/adolescente-tocando.jpg";
@@ -10,7 +12,9 @@ import imgIdosos from "../assets/idosos-tocando.jpg";
 import imgLife from "../assets/life-violao.jpg";
 import { FaInstagram, FaWhatsapp, FaYoutube } from "react-icons/fa";
 
-export default function Home({ darkMode, toggleTheme }) {
+export default function Home() {
+  const { theme, toggleTheme } = useTheme();
+  const darkMode = theme === 'dark';
   
   // Dados da Galeria de Fotos
   const fotosGaleria = [
@@ -89,17 +93,17 @@ export default function Home({ darkMode, toggleTheme }) {
         
         <div className="benefits-grid">
           <div className="benefit-card">
-            <div className="benefit-icon">🧠</div>
+            <div className="benefit-icon"><EmojiIcon emoji="brain" size="xl" /></div>
             <h3>Poder Cerebral</h3>
             <p>Aumenta a memória e a capacidade de foco em até 40%.</p>
           </div>
           <div className="benefit-card">
-            <div className="benefit-icon">😌</div>
+            <div className="benefit-icon"><EmojiIcon emoji="smile" size="xl" /></div>
             <h3>Zero Estresse</h3>
             <p>Tocar reduz o cortisol instantaneamente.</p>
           </div>
           <div className="benefit-card">
-            <div className="benefit-icon">🤝</div>
+            <div className="benefit-icon"><EmojiIcon emoji="users" size="xl" /></div>
             <h3>Conexão Social</h3>
             <p>Quem toca nunca está sozinho. A música une pessoas.</p>
           </div>
@@ -111,9 +115,9 @@ export default function Home({ darkMode, toggleTheme }) {
         <div className="feature-content">
           <h2>Tecnologia a favor da sua Arte</h2>
           <ul className="feature-list">
-            <li><strong>🎼 Transposição Inteligente:</strong> Mude o tom com um clique.</li>
-            <li><strong>👀 Diagramas Interativos:</strong> Veja o acorde exato no braço.</li>
-            <li><strong>📱 Modo Palco:</strong> Design limpo para tocar ao vivo.</li>
+            <li><strong><EmojiIcon emoji="music" size="md" /> Transposição Inteligente:</strong> Mude o tom com um clique.</li>
+            <li><strong><EmojiIcon emoji="eye" size="md" /> Diagramas Interativos:</strong> Veja o acorde exato no braço.</li>
+            <li><strong><EmojiIcon emoji="play" size="md" /> Modo Palco:</strong> Design limpo para tocar ao vivo.</li>
           </ul>
         </div>
         <div className="feature-image">
@@ -180,7 +184,7 @@ export default function Home({ darkMode, toggleTheme }) {
               rel="noopener noreferrer" 
               className="btn-social btn-instagram"
             >
-              📸 Instagram
+              <FaInstagram /> Instagram
             </a>
 
             {/* Botão WhatsApp */}
@@ -190,7 +194,7 @@ export default function Home({ darkMode, toggleTheme }) {
               rel="noopener noreferrer" 
               className="btn-social btn-whatsapp"
             >
-              💬 WhatsApp
+              <FaWhatsapp /> WhatsApp
             </a>
 
             {/* Botão YouTube */}
@@ -200,7 +204,7 @@ export default function Home({ darkMode, toggleTheme }) {
               rel="noopener noreferrer" 
               className="btn-social btn-youtube"
             >
-              ▶️ YouTube
+              <FaYoutube /> YouTube
             </a>
           </div>
 

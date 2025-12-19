@@ -1,0 +1,273 @@
+/* src/pages/AdminMusic.css */
+
+.admin-music-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+.admin-header {
+  text-align: center;
+  margin-bottom: 40px;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 20px;
+}
+
+.admin-header h1 {
+  font-size: 2.2rem;
+  margin: 15px 0;
+  color: #667eea;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+
+.admin-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.back-link {
+  display: inline-block;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 15px;
+  transition: all 0.3s;
+}
+
+.back-link:hover {
+  color: #764ba2;
+  transform: translateX(-3px);
+}
+
+/* Songs Added Section */
+.songs-added {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+.songs-added h2 {
+  color: #667eea;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.songs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.song-card {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  position: relative;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.song-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.song-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.song-details h3 {
+  color: #333;
+  font-size: 1.1rem;
+  margin: 0 0 8px 0;
+  word-break: break-word;
+}
+
+.song-details p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 4px 0;
+}
+
+.song-details strong {
+  color: #667eea;
+}
+
+.song-details a {
+  display: inline-block;
+  margin-top: 8px;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.song-details a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+.btn-remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #ff6b6b;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-remove:hover {
+  background-color: #ff5252;
+  transform: scale(1.1);
+}
+
+/* Export Section */
+.export-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.export-section h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-export {
+  padding: 12px 24px;
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 2px solid white;
+  color: white;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s;
+  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-export:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.export-section .info {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.export-section code {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+}
+
+/* Info Box */
+.info-box {
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  padding: 20px;
+  border-radius: 6px;
+  margin-top: 30px;
+}
+
+.info-box h3 {
+  color: #1565c0;
+  margin-top: 0;
+}
+
+.info-box ol {
+  color: #333;
+  line-height: 1.8;
+}
+
+.info-box li {
+  margin-bottom: 8px;
+}
+
+/* Dark Mode */
+[data-theme="dark"] .songs-added {
+  background: #2a2a2a;
+}
+
+[data-theme="dark"] .song-card {
+  background: #1e1e1e;
+  border-color: #444;
+}
+
+[data-theme="dark"] .song-card:hover {
+  border-color: #667eea;
+}
+
+[data-theme="dark"] .song-details h3,
+[data-theme="dark"] .song-details p {
+  color: #ddd;
+}
+
+[data-theme="dark"] .info-box {
+  background: #1e3a5f;
+  border-left-color: #667eea;
+}
+
+[data-theme="dark"] .info-box h3 {
+  color: #90caf9;
+}
+
+[data-theme="dark"] .info-box ol {
+  color: #ddd;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .admin-music-container {
+    padding: 20px;
+  }
+
+  .admin-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .songs-list {
+    grid-template-columns: 1fr;
+  }
+
+  .songs-added {
+    padding: 20px;
+  }
+}

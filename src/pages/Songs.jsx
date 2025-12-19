@@ -2,9 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { musicas } from "../data/musicas";
 import ThemeToggle from "../components/ThemeToggle";
+import { useTheme } from "../contexts/ThemeContext";
 import "./songs.css";
 
-export default function Songs({ darkMode, toggleTheme }) {
+export default function Songs() {
+  const { theme, toggleTheme } = useTheme();
+  const darkMode = theme === 'dark';
   const [searchTerm, setSearchTerm] = useState("");
 
   // Filtrar músicas com base no termo de busca

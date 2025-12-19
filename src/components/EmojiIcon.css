@@ -1,0 +1,188 @@
+
+/* Estilos base para ícones */
+.emoji-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  color: inherit;
+}
+
+/* Variações de tamanho */
+.emoji-icon-xs {
+  width: 16px;
+  height: 16px;
+}
+
+.emoji-icon-sm {
+  width: 20px;
+  height: 20px;
+}
+
+.emoji-icon-md {
+  width: 24px;
+  height: 24px;
+}
+
+.emoji-icon-lg {
+  width: 32px;
+  height: 32px;
+}
+
+.emoji-icon-xl {
+  width: 40px;
+  height: 40px;
+}
+
+/* Combinação de ícone com texto */
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+/* Botão com ícone */
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.icon-button:hover {
+  transform: translateY(-2px);
+}
+
+.icon-button:active {
+  transform: scale(0.98);
+}
+
+/* Variantes de botão */
+.icon-button-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.icon-button-primary:hover {
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.icon-button-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.icon-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.icon-button-danger {
+  background: #ff6b6b;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.icon-button-danger:hover {
+  background: #ff5252;
+  box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+}
+
+.icon-button-success {
+  background: #51cf66;
+  color: white;
+  box-shadow: 0 4px 12px rgba(81, 207, 102, 0.3);
+}
+
+.icon-button-success:hover {
+  background: #40c057;
+  box-shadow: 0 6px 16px rgba(81, 207, 102, 0.4);
+}
+
+.icon-button-ghost {
+  background: transparent;
+  color: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.icon-button-ghost:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode */
+.dark-mode .icon-button-ghost {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .icon-button-ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Animação de rotação para ícones animados */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.emoji-icon.spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Animação de pulso */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.emoji-icon.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Animação de bounce */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.emoji-icon.bounce {
+  animation: bounce 0.6s ease-in-out infinite;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .icon-button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    gap: 6px;
+  }
+
+  .icon-button-lg {
+    width: 28px;
+    height: 28px;
+  }
+}
