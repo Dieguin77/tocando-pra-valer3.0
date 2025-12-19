@@ -1,148 +1,37 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste Tema Claro/Escuro</title>
-    <style>
-        /* Variáveis do Modo Claro (Padrão) */
-        :root {
-            --bg-main: #ffffff;
-            --bg-card: #f5f5f5;
-            --text-main: #121212;
-            --text-secondary: #555555;
-            --border-color: #e0e0e0;
-            --primary: #0099ff;
-        }
-
-        /* Variáveis do Modo Escuro */
-        body.dark-mode {
-            --bg-main: #000000;
-            --bg-card: #0c0c0c;
-            --text-main: #ffffff;
-            --text-secondary: #bdbdbd;
-            --border-color: #333333;
-            --primary: #00c3ff;
-        }
-
-        /* Estilos Gerais */
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            transition: all 0.3s ease;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
-            background-color: var(--bg-card);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        h1 {
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .theme-toggle-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 2px solid var(--border-color);
-            background: var(--bg-card);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
-            font-size: 28px;
-            z-index: 1000;
-        }
-
-        .theme-toggle-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .status {
-            margin-top: 30px;
-            padding: 20px;
-            background: var(--primary);
-            color: white;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🎵 Teste do Sistema de Tema</h1>
-        <p>Se você está vendo este texto claramente, o tema está funcionando!</p>
-        <p>Clique no botão flutuante no canto inferior direito para alternar entre os modos.</p>
-        
-        <div class="status" id="status">
-            Modo atual: <span id="modeText">Carregando...</span>
-        </div>
-    </div>
-
-    <button class="theme-toggle-btn" id="themeBtn" onclick="toggleTheme()">
-        <span id="icon">🌙</span>
-    </button>
-
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/tocando-pra-valer3.0/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-default>Vite + React</title>
+    <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
     <script>
-        // Verificar tema inicial
-        let darkMode = localStorage.getItem('theme') === 'dark';
-        
-        // Aplicar tema inicial
-        if (darkMode) {
-            document.body.classList.add('dark-mode');
-        }
-        
-        updateUI();
-
-        function toggleTheme() {
-            darkMode = !darkMode;
-            
-            console.log('🔄 Alternando tema para:', darkMode ? 'Escuro' : 'Claro');
-            
-            if (darkMode) {
-                document.body.classList.add('dark-mode');
-            } else {
-                document.body.classList.remove('dark-mode');
-            }
-            
-            localStorage.setItem('theme', darkMode ? 'dark' : 'light');
-            updateUI();
-        }
-
-        function updateUI() {
-            const icon = document.getElementById('icon');
-            const modeText = document.getElementById('modeText');
-            
-            if (darkMode) {
-                icon.textContent = '☀️';
-                modeText.textContent = 'Escuro (clique para Claro)';
-            } else {
-                icon.textContent = '🌙';
-                modeText.textContent = 'Claro (clique para Escuro)';
-            }
-            
-            console.log('✅ Tema atual:', darkMode ? 'Escuro' : 'Claro');
-        }
+      (function() {
+        try {
+          const saved = localStorage.getItem('theme');
+          let theme = saved;
+          if (!theme) {
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            theme = prefersDark ? 'dark' : 'light';
+          }
+          const apply = (el) => {
+            if (!el) return;
+            if (theme === 'dark') el.classList.add('dark-mode');
+            else el.classList.remove('dark-mode');
+          };
+          apply(document.documentElement);
+          if (document.body) apply(document.body);
+          else document.addEventListener('DOMContentLoaded', () => apply(document.body));
+        } catch (e) {}
+      })();
     </script>
-</body>
+  <script type="module" crossorigin src="/tocando-pra-valer3.0/assets/index-DT0Yesg8.js"></script>
+  <link rel="stylesheet" crossorigin href="/tocando-pra-valer3.0/assets/index-BOdsmHUC.css">
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
