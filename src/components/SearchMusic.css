@@ -1,11 +1,12 @@
 /* src/components/SearchMusic.css */
 
 .search-music-container {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 30px;
   margin: 20px 0;
-  color: white;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -18,6 +19,7 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
+  color: var(--text-main);
 }
 
 .search-form {
@@ -38,24 +40,24 @@
   font-weight: 600;
   margin-bottom: 6px;
   text-transform: uppercase;
-  opacity: 0.9;
+  color: var(--text-secondary);
 }
 
 .form-group input {
   padding: 10px 12px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid var(--border-color);
   border-radius: 6px;
   font-size: 1rem;
-  background-color: rgba(255, 255, 255, 0.95);
-  color: #333;
+  background-color: var(--bg-main);
+  color: var(--text-main);
   transition: all 0.3s;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: white;
-  background-color: white;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+  border-color: var(--primary);
+  background-color: var(--bg-main);
+  box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.2);
 }
 
 .form-group input:disabled {
@@ -65,8 +67,8 @@
 
 .btn-search {
   padding: 10px 24px;
-  background-color: rgba(255, 255, 255, 0.25);
-  border: 2px solid white;
+  background-color: var(--primary);
+  border: 2px solid var(--primary);
   color: white;
   font-weight: 600;
   border-radius: 6px;
@@ -80,7 +82,8 @@
 }
 
 .btn-search:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: var(--primary-light);
+  border-color: var(--primary-light);
   transform: translateY(-2px);
 }
 
@@ -100,16 +103,17 @@
 }
 
 .search-result {
-  background-color: rgba(255, 255, 255, 0.95);
-  color: #333;
+  background-color: var(--bg-card);
+  color: var(--text-main);
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
+  border: 1px solid var(--border-color);
 }
 
 .search-result h3 {
   margin-top: 0;
-  color: #667eea;
+  color: var(--primary);
   font-size: 1.3rem;
 }
 
@@ -125,10 +129,11 @@
 .result-info p {
   margin: 8px 0;
   font-size: 0.95rem;
+  color: var(--text-main);
 }
 
 .result-info strong {
-  color: #667eea;
+  color: var(--primary);
   margin-right: 6px;
 }
 
@@ -136,7 +141,7 @@
   display: inline-block;
   margin-top: 12px;
   padding: 10px 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--primary);
   color: white;
   text-decoration: none;
   border-radius: 6px;
@@ -153,24 +158,28 @@
 }
 
 .genius-info {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--bg-main);
   padding: 15px;
   border-radius: 8px;
-  border-left: 4px solid rgba(255, 255, 255, 0.5);
+  border-left: 4px solid var(--primary);
   font-size: 0.9rem;
+  color: var(--text-secondary);
 }
 
 .genius-info h4 {
   margin-top: 0;
   margin-bottom: 8px;
+  color: var(--text-main);
 }
 
 .genius-info p {
   margin: 6px 0;
+  color: var(--text-main);
 }
 
 .genius-info code {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--bg-card);
+  color: var(--primary);
   padding: 2px 6px;
   border-radius: 3px;
   font-family: 'Courier New', monospace;

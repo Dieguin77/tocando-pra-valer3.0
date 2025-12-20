@@ -21,10 +21,10 @@ export const ThemeProvider = ({ children }) => {
     
     if (theme === 'dark') {
       root.classList.add('dark-mode');
-      if (body) body.classList.add('dark-mode');
+      body.classList.add('dark-mode');
     } else {
       root.classList.remove('dark-mode');
-      if (body) body.classList.remove('dark-mode');
+      body.classList.remove('dark-mode');
     }
 
     // Salva a escolha no navegador

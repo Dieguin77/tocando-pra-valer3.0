@@ -17,7 +17,9 @@
 
 /* 2. VARIÁVEIS DO MODO ESCURO (Sua Paleta Oficial) */
 /* Essa classe é ativada pelo React quando você clica no botão */
-body.dark-mode {
+html.dark-mode,
+body.dark-mode,
+:root.dark-mode {
   --bg-main: #000000;          /* Preto absoluto */
   --bg-card: #0c0c0c;          /* Preto suave para cartões */
   --text-main: #ffffff;        /* Texto branco */

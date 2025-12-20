@@ -5,19 +5,22 @@
   margin: 0 auto;
   padding: 40px 20px;
   min-height: 100vh;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .admin-header {
   text-align: center;
   margin-bottom: 40px;
-  border-bottom: 2px solid #667eea;
+  border-bottom: 2px solid var(--primary);
   padding-bottom: 20px;
 }
 
 .admin-header h1 {
   font-size: 2.2rem;
   margin: 15px 0;
-  color: #667eea;
+  color: var(--primary);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -25,13 +28,13 @@
 }
 
 .admin-header p {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 1.1rem;
 }
 
 .back-link {
   display: inline-block;
-  color: #667eea;
+  color: var(--primary);
   text-decoration: none;
   font-weight: 600;
   margin-bottom: 15px;
@@ -39,20 +42,21 @@
 }
 
 .back-link:hover {
-  color: #764ba2;
+  color: var(--primary-light);
   transform: translateX(-3px);
 }
 
 /* Songs Added Section */
 .songs-added {
-  background: #f9f9f9;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 30px;
   margin-top: 40px;
+  border: 1px solid var(--border-color);
 }
 
 .songs-added h2 {
-  color: #667eea;
+  color: var(--primary);
   margin-bottom: 20px;
   font-size: 1.6rem;
   display: flex;
@@ -68,8 +72,8 @@
 }
 
 .song-card {
-  background: white;
-  border: 2px solid #e0e0e0;
+  background: var(--bg-main);
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   padding: 15px;
   position: relative;
@@ -78,8 +82,8 @@
 }
 
 .song-card:hover {
-  border-color: #667eea;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(0, 153, 255, 0.2);
 }
 
 .song-image {
@@ -91,7 +95,7 @@
 }
 
 .song-details h3 {
-  color: #333;
+  color: var(--text-main);
   font-size: 1.1rem;
   margin: 0 0 8px 0;
   word-break: break-word;
@@ -99,18 +103,18 @@
 
 .song-details p {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text-secondary);
   margin: 4px 0;
 }
 
 .song-details strong {
-  color: #667eea;
+  color: var(--primary);
 }
 
 .song-details a {
   display: inline-block;
   margin-top: 8px;
-  color: #667eea;
+  color: var(--primary);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.85rem;
@@ -121,7 +125,7 @@
 }
 
 .song-details a:hover {
-  color: #764ba2;
+  color: var(--primary-light);
   text-decoration: underline;
 }
 
@@ -150,11 +154,12 @@
 
 /* Export Section */
 .export-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: var(--bg-card);
+  color: var(--text-main);
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
+  border: 1px solid var(--border-color);
 }
 
 .export-section h3 {
@@ -163,12 +168,13 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  color: var(--primary);
 }
 
 .btn-export {
   padding: 12px 24px;
-  background-color: rgba(255, 255, 255, 0.25);
-  border: 2px solid white;
+  background-color: var(--primary);
+  border: 2px solid var(--primary);
   color: white;
   font-weight: 600;
   border-radius: 6px;
@@ -182,75 +188,80 @@
 }
 
 .btn-export:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: var(--primary-light);
+  border-color: var(--primary-light);
   transform: translateY(-2px);
 }
 
 .export-section .info {
   font-size: 0.9rem;
   opacity: 0.9;
+  color: var(--text-secondary);
 }
 
 .export-section code {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--bg-main);
   padding: 2px 6px;
   border-radius: 3px;
   font-family: 'Courier New', monospace;
+  color: var(--primary);
 }
 
 /* Info Box */
 .info-box {
-  background: #e3f2fd;
-  border-left: 4px solid #2196f3;
+  background: var(--bg-card);
+  border-left: 4px solid var(--primary);
   padding: 20px;
   border-radius: 6px;
   margin-top: 30px;
+  border: 1px solid var(--border-color);
 }
 
 .info-box h3 {
-  color: #1565c0;
+  color: var(--primary);
   margin-top: 0;
 }
 
 .info-box ol {
-  color: #333;
+  color: var(--text-main);
   line-height: 1.8;
 }
 
 .info-box li {
   margin-bottom: 8px;
+  color: var(--text-secondary);
 }
 
 /* Dark Mode */
 [data-theme="dark"] .songs-added {
-  background: #2a2a2a;
+  background: var(--bg-card);
 }
 
 [data-theme="dark"] .song-card {
-  background: #1e1e1e;
-  border-color: #444;
+  background: var(--bg-main);
+  border-color: var(--border-color);
 }
 
 [data-theme="dark"] .song-card:hover {
-  border-color: #667eea;
+  border-color: var(--primary);
 }
 
 [data-theme="dark"] .song-details h3,
 [data-theme="dark"] .song-details p {
-  color: #ddd;
+  color: var(--text-main);
 }
 
 [data-theme="dark"] .info-box {
-  background: #1e3a5f;
-  border-left-color: #667eea;
+  background: var(--bg-card);
+  border-left-color: var(--primary);
 }
 
 [data-theme="dark"] .info-box h3 {
-  color: #90caf9;
+  color: var(--primary);
 }
 
 [data-theme="dark"] .info-box ol {
-  color: #ddd;
+  color: var(--text-main);
 }
 
 /* Responsivo */

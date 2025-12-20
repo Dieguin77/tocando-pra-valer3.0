@@ -44,6 +44,7 @@ export default function Home() {
           <Link to="/" className="nav-logo"> Tocando Pra Valer</Link>
           <div className="nav-links">
             <Link to="/musicas" className="nav-link">Repertório</Link>
+            <Link to="/upload" className="nav-link">📤 Enviar Cifra</Link>
             <a href="#beneficios" className="nav-link">Benefícios</a>
             <a href="#videos" className="nav-link">Vídeos</a>
             <a href="#galeria" className="nav-link">Comunidade</a>
