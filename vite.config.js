@@ -4,5 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/tocando-pra-valer3.0/",
+  
+  // ADICIONE ESTA LINHA ABAIXO 👇
+  base: "/tocando-pra-valer3.0/", 
 })
