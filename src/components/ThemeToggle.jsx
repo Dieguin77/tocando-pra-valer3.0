@@ -1,8 +1,12 @@
 // src/components/ThemeToggle.jsx
 import { Sun, Moon } from 'lucide-react';
 import './ThemeToggle.css';
+import { useTheme } from '../contexts/ThemeContext';
 
-export default function ThemeToggle({ darkMode, toggleTheme }) {
+export default function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+  const darkMode = theme === 'dark';
+
   return (
     <button 
       className="theme-toggle-btn" 

@@ -216,7 +216,7 @@ export default function Home() {
       </footer>
 
       {/* Botão de Tema Flutuante */}
-      <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
+      <ThemeToggle />
 
     </div>
   );

@@ -207,7 +207,7 @@ Você é poderoso em meu coração`}</pre>
       </div>
 
       {/* Botão de Tema */}
-      <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
+      <ThemeToggle />
     </div>
   );
 }

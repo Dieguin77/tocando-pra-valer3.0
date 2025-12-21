@@ -52,7 +52,7 @@ export default function Songs() {
       </div>
 
       {/* Botão de Tema Flutuante */}
-      <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
+      <ThemeToggle />
     </div>
   );
 }

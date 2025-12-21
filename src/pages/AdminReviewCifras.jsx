@@ -312,7 +312,7 @@ export default function AdminReviewCifras() {
       </div>
 
       {/* Botão de Tema */}
-      <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
+      <ThemeToggle />
     </div>
   );
 }
