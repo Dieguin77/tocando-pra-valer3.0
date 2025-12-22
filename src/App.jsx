@@ -16,9 +16,12 @@ export default function App() {
   }, []);
 
   return (
-    <div className="app-container">
+    // ADICIONEI AS CLASSES AQUI EMBAIXO 👇
+    // min-h-screen: garante que o site ocupe a altura toda
+    // dark:bg-gray-900: define o fundo preto global
+    // dark:text-white: define a cor da letra branca global
+    <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300">
       <Routes>
-        {/* As páginas receberão o tema via useTheme() */}
         <Route path="/" element={<Home />} />
         <Route path="/musicas" element={<Songs />} />
         <Route path="/musica/:id" element={<Song />} />
