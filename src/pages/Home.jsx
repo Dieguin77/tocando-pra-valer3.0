@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./home.css"; // Pode manter para detalhes menores, mas o layout agora é Tailwind
+import "./home.css";
 import ThemeToggle from "../components/ThemeToggle";
 import { useTheme } from "../contexts/ThemeContext";
 import EmojiIcon from "../components/EmojiIcon";
@@ -33,170 +33,158 @@ export default function Home() {
   ];
 
   return (
-    <div className="page-container transition-colors duration-300 dark:bg-gray-950 dark:text-gray-100 overflow-x-hidden">
+    // overflow-x-hidden: Impede que o site balance para os lados no celular
+    <div className="page-container transition-colors duration-300 dark:bg-gray-950 dark:text-gray-100 overflow-x-hidden w-full">
       
       {/* --- HERO SECTION --- */}
-      <div className="relative min-h-screen flex flex-col justify-center">
-        {/* Fundo com imagem/overlay manual para garantir contraste */}
-        <div className="absolute inset-0 z-0">
-            {/* Você pode colocar a imagem de fundo aqui via CSS ou img tag */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-gray-900/90 dark:from-black/90 dark:to-black"></div>
-        </div>
-
-        {/* Navbar Responsiva */}
-        <nav className="relative z-10 flex flex-col md:flex-row items-center justify-between p-6 glass-nav dark:bg-black/20 border-b border-white/10">
-          <Link to="/" className="text-2xl font-bold text-white mb-4 md:mb-0">Tocando Pra Valer</Link>
+      <div className="home-wrapper relative">
+        
+        {/* NAV: flex-col no celular (empilhado) -> md:flex-row no PC (lado a lado) */}
+        <nav className="glass-nav dark:bg-black/50 dark:text-white flex flex-col md:flex-row items-center justify-between p-4 md:p-6 gap-4">
+          <Link to="/" className="nav-logo text-white text-2xl font-bold"> Tocando Pra Valer</Link>
           
-          {/* Links: No celular empilha ou rola horizontalmente, no PC fica em linha */}
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8">
-            <Link to="/musicas" className="text-white hover:text-orange-400 text-sm md:text-base">Repertório</Link>
-            <Link to="/upload" className="text-white hover:text-orange-400 text-sm md:text-base">📤 Enviar Cifra</Link>
-            <a href="#beneficios" className="text-white hover:text-orange-400 text-sm md:text-base">Benefícios</a>
-            <a href="#videos" className="text-white hover:text-orange-400 text-sm md:text-base">Vídeos</a>
+          {/* Links: flex-wrap permite que quebrem linha se a tela for muito pequena */}
+          <div className="nav-links flex flex-wrap justify-center gap-4 md:gap-6 text-center">
+            <Link to="/musicas" className="nav-link text-white hover:text-orange-400">Repertório</Link>
+            <Link to="/upload" className="nav-link text-white hover:text-orange-400">📤 Enviar Cifra</Link>
+            <a href="#beneficios" className="nav-link text-white hover:text-orange-400">Benefícios</a>
+            <a href="#videos" className="nav-link text-white hover:text-orange-400">Vídeos</a>
+            <a href="#galeria" className="nav-link text-white hover:text-orange-400">Comunidade</a>
           </div>
           
-          <Link to="/login" className="hidden md:block bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full font-bold transition">
-            Área do Aluno
-          </Link>
+          <Link to="/login" className="nav-cta bg-orange-600 px-4 py-2 rounded-full text-white hover:bg-orange-700 transition">Área do Aluno</Link>
         </nav>
 
-        {/* Conteúdo Hero */}
-        <div className="relative z-10 container mx-auto px-4 text-center mt-10 md:mt-0">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+        <div className="hero-container flex flex-col items-center justify-center text-center px-4 mt-8 md:mt-0">
+          <h1 className="hero-title text-white text-3xl md:text-5xl lg:text-6xl font-bold leading-tight">
             Domine o Instrumento e <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600">
-              Toque com Alma
-            </span>
+            <span className="gradient-text text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Toque com Alma</span>
           </h1>
-          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-8">
+          <p className="hero-subtitle text-gray-200 text-base md:text-xl max-w-2xl mt-4 mb-8">
             Mais do que cifras: uma plataforma completa com inteligência musical para você evoluir do iniciante ao profissional.
           </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <Link to="/musicas" className="bg-orange-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-700 transition shadow-lg shadow-orange-600/30">
+          
+          {/* Botões empilhados no celular, lado a lado no PC */}
+          <div className="hero-buttons flex flex-col md:flex-row gap-4 w-full md:w-auto">
+            <Link to="/musicas" className="main-cta-button bg-orange-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-orange-700 text-center">
               Começar Agora 
             </Link>
-            <a href="#beneficios" className="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-black transition">
+            <a href="#beneficios" className="secondary-button text-white border-2 border-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white hover:text-black transition text-center">
               Saber Mais
             </a>
           </div>
         </div>
       </div>
 
-      {/* --- FAIXA DE DADOS (Responsiva: Coluna no celular -> Linha no PC) --- */}
-      <div className="bg-orange-500 dark:bg-gray-800 text-white py-8">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row justify-around gap-8 text-center">
-          <div className="stat-item">
-            <span className="block text-4xl font-bold">+1.000</span>
-            <span className="text-sm uppercase tracking-wider">Músicas Cifradas</span>
-          </div>
-          <div className="stat-item">
-            <span className="block text-4xl font-bold">100%</span>
-            <span className="text-sm uppercase tracking-wider">Precisão Musical</span>
-          </div>
-          <div className="stat-item">
-            <span className="block text-4xl font-bold">24h</span>
-            <span className="text-sm uppercase tracking-wider">Acesso Ilimitado</span>
-          </div>
+      {/* --- FAIXA DE DADOS --- */}
+      {/* Flex-col no celular para empilhar os números */}
+      <div className="stats-bar bg-orange-500 dark:bg-gray-800 text-white py-8 flex flex-col md:flex-row justify-center md:justify-around gap-8 text-center px-4">
+        <div className="stat-item">
+          <span className="stat-number text-3xl md:text-4xl font-bold block">+1.000</span>
+          <span className="stat-label text-sm uppercase">Músicas Cifradas</span>
+        </div>
+        <div className="stat-item">
+          <span className="stat-number text-3xl md:text-4xl font-bold block">100%</span>
+          <span className="stat-label text-sm uppercase">Precisão Musical</span>
+        </div>
+        <div className="stat-item">
+          <span className="stat-number text-3xl md:text-4xl font-bold block">24h</span>
+          <span className="stat-label text-sm uppercase">Acesso Ilimitado</span>
         </div>
       </div>
 
-      {/* --- BENEFÍCIOS (Grid Responsivo) --- */}
-      <section id="beneficios" className="py-16 px-4 bg-white dark:bg-gray-900 transition-colors duration-300">
+      {/* --- BENEFÍCIOS --- */}
+      <section id="beneficios" className="benefits-section py-16 px-4 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 dark:text-white">A Música Transforma Vidas</h2>
-          <p className="text-center text-gray-600 dark:text-gray-400 mb-12">O que a ciência diz sobre aprender um instrumento:</p>
-          
-          {/* AQUI ESTÁ A MÁGICA: grid-cols-1 (celular) md:grid-cols-3 (PC) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <h2 className="section-title dark:text-white text-3xl font-bold text-center mb-2">A Música Transforma Vidas</h2>
+            <p className="section-subtitle dark:text-gray-300 text-center text-gray-600 mb-12">O que a ciência diz sobre aprender um instrumento:</p>
             
-            <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform">
-              <div className="text-5xl mb-6 dark:text-white"><EmojiIcon emoji="brain" size="xl" /></div>
-              <h3 className="text-xl font-bold mb-3 dark:text-white">Poder Cerebral</h3>
-              <p className="text-gray-600 dark:text-gray-300">Aumenta a memória e a capacidade de foco em até 40%.</p>
+            {/* GRID RESPONSIVO: 1 coluna no celular (grid-cols-1), 3 no PC (md:grid-cols-3) */}
+            <div className="benefits-grid grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="benefit-card bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md transition-all hover:-translate-y-1">
+                <div className="benefit-icon text-4xl mb-4 dark:text-white"><EmojiIcon emoji="brain" size="xl" /></div>
+                <h3 className="font-bold text-xl mb-2 dark:text-white">Poder Cerebral</h3>
+                <p className="dark:text-gray-300">Aumenta a memória e a capacidade de foco em até 40%.</p>
             </div>
             
-            <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform">
-              <div className="text-5xl mb-6 dark:text-white"><EmojiIcon emoji="smile" size="xl" /></div>
-              <h3 className="text-xl font-bold mb-3 dark:text-white">Zero Estresse</h3>
-              <p className="text-gray-600 dark:text-gray-300">Tocar reduz o cortisol instantaneamente.</p>
+            <div className="benefit-card bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md transition-all hover:-translate-y-1">
+                <div className="benefit-icon text-4xl mb-4 dark:text-white"><EmojiIcon emoji="smile" size="xl" /></div>
+                <h3 className="font-bold text-xl mb-2 dark:text-white">Zero Estresse</h3>
+                <p className="dark:text-gray-300">Tocar reduz o cortisol instantaneamente.</p>
             </div>
             
-            <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-transform">
-              <div className="text-5xl mb-6 dark:text-white"><EmojiIcon emoji="users" size="xl" /></div>
-              <h3 className="text-xl font-bold mb-3 dark:text-white">Conexão Social</h3>
-              <p className="text-gray-600 dark:text-gray-300">Quem toca nunca está sozinho. A música une pessoas.</p>
+            <div className="benefit-card bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md transition-all hover:-translate-y-1">
+                <div className="benefit-icon text-4xl mb-4 dark:text-white"><EmojiIcon emoji="users" size="xl" /></div>
+                <h3 className="font-bold text-xl mb-2 dark:text-white">Conexão Social</h3>
+                <p className="dark:text-gray-300">Quem toca nunca está sozinho. A música une pessoas.</p>
             </div>
-
-          </div>
+            </div>
         </div>
       </section>
 
-      {/* --- FUNCIONALIDADES (Flex reverso no celular para imagem ficar em cima ou embaixo) --- */}
-      <section className="py-16 px-4 bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
-        <div className="container mx-auto flex flex-col md:flex-row items-center gap-12">
-          
-          <div className="flex-1 space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold dark:text-white">Tecnologia a favor da sua Arte</h2>
-            <ul className="space-y-4 text-lg">
-              <li className="flex items-center gap-3 dark:text-gray-300">
-                  <span className="p-2 bg-orange-100 dark:bg-orange-900 rounded-lg dark:text-white"><EmojiIcon emoji="music" size="md" /></span> 
-                  <span><strong>Transposição Inteligente:</strong> Mude o tom com um clique.</span>
-              </li>
-              <li className="flex items-center gap-3 dark:text-gray-300">
-                  <span className="p-2 bg-orange-100 dark:bg-orange-900 rounded-lg dark:text-white"><EmojiIcon emoji="eye" size="md" /></span> 
-                  <span><strong>Diagramas Interativos:</strong> Veja o acorde exato no braço.</span>
-              </li>
-              <li className="flex items-center gap-3 dark:text-gray-300">
-                  <span className="p-2 bg-orange-100 dark:bg-orange-900 rounded-lg dark:text-white"><EmojiIcon emoji="play" size="md" /></span> 
-                  <span><strong>Modo Palco:</strong> Design limpo para tocar ao vivo.</span>
-              </li>
-            </ul>
-          </div>
-          
-          <div className="flex-1 w-full">
-             <img src={imgHomem} alt="Músico" className="rounded-2xl shadow-2xl w-full h-auto object-cover" />
-          </div>
-
+      {/* --- FUNCIONALIDADES --- */}
+      <section className="features-section py-16 px-4 bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
+        <div className="container mx-auto flex flex-col md:flex-row items-center gap-10">
+            <div className="feature-content flex-1">
+                <h2 className="dark:text-white text-3xl font-bold mb-6">Tecnologia a favor da sua Arte</h2>
+                <ul className="feature-list space-y-4">
+                    <li className="flex items-center gap-3 dark:text-gray-300">
+                        <span className="p-2 bg-orange-100 rounded dark:bg-gray-800 dark:text-white"><EmojiIcon emoji="music" size="md" /></span> 
+                        <span className="dark:text-white"><strong>Transposição Inteligente:</strong> Mude o tom com um clique.</span>
+                    </li>
+                    <li className="flex items-center gap-3 dark:text-gray-300">
+                        <span className="p-2 bg-orange-100 rounded dark:bg-gray-800 dark:text-white"><EmojiIcon emoji="eye" size="md" /></span> 
+                        <span className="dark:text-white"><strong>Diagramas Interativos:</strong> Veja o acorde exato no braço.</span>
+                    </li>
+                    <li className="flex items-center gap-3 dark:text-gray-300">
+                        <span className="p-2 bg-orange-100 rounded dark:bg-gray-800 dark:text-white"><EmojiIcon emoji="play" size="md" /></span> 
+                        <span className="dark:text-white"><strong>Modo Palco:</strong> Design limpo para tocar ao vivo.</span>
+                    </li>
+                </ul>
+            </div>
+            <div className="feature-image flex-1 w-full">
+                <img src={imgHomem} alt="Músico usando o app" className="rounded-xl shadow-2xl w-full h-auto object-cover" />
+            </div>
         </div>
       </section>
 
       {/* --- VÍDEOS --- */}
-      <section id="videos" className="py-16 px-4 bg-white dark:bg-gray-900 transition-colors duration-300">
+      <section id="videos" className="videos-section py-16 px-4 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-2 dark:text-white">Veja na Prática</h2>
-          <p className="text-center text-gray-500 mb-12 dark:text-gray-400">Assista a demonstrações exclusivas.</p>
-          
-          {/* GRID RESPONSIVO: 1 coluna (cel), 2 colunas (tablet), 3 colunas (PC) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <h2 className="section-title dark:text-white text-3xl font-bold text-center mb-2">Veja na Prática</h2>
+            <p className="section-subtitle dark:text-gray-300 text-center text-gray-500 mb-12">Assista a demonstrações exclusivas.</p>
+            
+            {/* GRID RESPONSIVO PARA VÍDEOS */}
+            <div className="videos-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {videosDemonstracao.map((video) => (
-              <div key={video.id} className="bg-white dark:bg-gray-800 shadow-md rounded-xl overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="relative w-full aspect-video">
-                  <iframe 
+                <div key={video.id} className="video-card bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="video-container aspect-video w-full">
+                    <iframe 
                     src={`https://www.youtube.com/embed/${video.youtubeId}`} 
                     title={video.title} 
-                    className="absolute inset-0 w-full h-full"
                     frameBorder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowFullScreen
-                  ></iframe>
+                    className="w-full h-full"
+                    ></iframe>
                 </div>
                 <h3 className="p-4 font-semibold text-lg dark:text-white">{video.title}</h3>
-              </div>
+                </div>
             ))}
-          </div>
+            </div>
         </div>
       </section>
 
       {/* --- GALERIA --- */}
-      <div id="galeria" className="py-16 px-4 bg-gray-50 dark:bg-gray-950">
-        <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">Nossa Comunidade</h2>
-        {/* GALERIA FLEXÍVEL */}
-        <div className="container mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      <div id="galeria" className="gallery-section py-16 px-4 bg-gray-50 dark:bg-gray-950">
+        <h2 className="gallery-title dark:text-white mb-8 text-center text-3xl font-bold">Nossa Comunidade</h2>
+        {/* Grid de 2 colunas no celular e 5 no PC */}
+        <div className="gallery-grid container mx-auto grid grid-cols-2 md:grid-cols-5 gap-4">
           {fotosGaleria.map((item) => (
-            <div key={item.id} className="relative group overflow-hidden rounded-xl aspect-[3/4]">
+            <div key={item.id} className="gallery-card relative group rounded-lg overflow-hidden aspect-[3/4]">
               <img src={item.img} alt={item.titulo} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                <span className="text-white font-bold text-sm">{item.titulo}</span>
+              <div className="card-overlay absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-white font-bold text-center px-2">{item.titulo}</span>
               </div>
             </div>
           ))}
@@ -204,42 +192,44 @@ export default function Home() {
       </div>
 
       {/* --- CTA FINAL --- */}
-      <div className="bg-gradient-to-r from-orange-600 to-red-600 py-20 px-4 text-center text-white">
+      <div className="final-cta bg-orange-600 py-20 px-4 text-center text-white dark:bg-orange-800">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Pronto para elevar seu nível?</h2>
-        <Link to="/musicas" className="inline-block bg-white text-orange-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition shadow-lg">
+        <Link to="/musicas" className="cta-button-large inline-block bg-white text-orange-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors shadow-lg">
           Acessar Acervo Agora
         </Link>
       </div>
 
       {/* --- FOOTER --- */}
-      <footer className="bg-gray-900 text-white py-12 px-4 dark:bg-black border-t border-gray-800">
-        <div className="container mx-auto text-center">
-          <h3 className="text-2xl font-bold mb-4">Vamos tocar juntos?</h3>
+      <footer className="site-footer bg-gray-900 text-white py-12 px-4 dark:bg-black">
+        <div className="footer-content text-center container mx-auto">
+          <h3 className="footer-title text-2xl font-bold mb-4">Vamos tocar juntos?</h3>
           <p className="mb-8 text-gray-400">Siga nossas redes e entre em contato direto.</p>
           
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
+          <div className="social-buttons-container flex flex-wrap justify-center gap-4 mb-8">
             <a href="https://www.instagram.com/tocandopravaler" target="_blank" rel="noopener noreferrer" 
-               className="flex items-center gap-2 bg-pink-600 px-6 py-3 rounded-lg hover:bg-pink-700 transition">
+               className="btn-social btn-instagram flex items-center gap-2 bg-pink-600 px-4 py-2 rounded-lg hover:bg-pink-700 transition">
               <FaInstagram /> Instagram
             </a>
+
             <a href="https://wa.me/55999941669" target="_blank" rel="noopener noreferrer" 
-               className="flex items-center gap-2 bg-green-600 px-6 py-3 rounded-lg hover:bg-green-700 transition">
+               className="btn-social btn-whatsapp flex items-center gap-2 bg-green-600 px-4 py-2 rounded-lg hover:bg-green-700 transition">
               <FaWhatsapp /> WhatsApp
             </a>
+
             <a href="https://www.youtube.com/@TocandoPraValer" target="_blank" rel="noopener noreferrer" 
-               className="flex items-center gap-2 bg-red-600 px-6 py-3 rounded-lg hover:bg-red-700 transition">
+               className="btn-social btn-youtube flex items-center gap-2 bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700 transition">
               <FaYoutube /> YouTube
             </a>
           </div>
 
-          <div className="text-gray-500 text-sm">
+          <div className="footer-copyright text-gray-500 text-sm">
             <p>© 2025 Tocando Pra Valer. Desenvolvido por Diego Gomes.</p>
           </div>
         </div>
       </footer>
 
       {/* Botão de Tema Flutuante */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-4 right-4 z-50">
          <ThemeToggle />
       </div>
 
