@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
 import EmojiIcon from '../components/EmojiIcon';
 import ThemeToggle from '../components/ThemeToggle';
+import { Guitar, Clock, CheckCircle, XCircle, PartyPopper, Piano, BarChart2, Calendar, ChevronDown, ChevronRight, Trash2, ArrowLeft, MailX } from 'lucide-react';
 import './AdminReviewCifras.css';
 
 export default function AdminReviewCifras() {
@@ -106,9 +107,9 @@ export default function AdminReviewCifras() {
     <div className="admin-review-container">
       {/* Header */}
       <div className="admin-review-header">
-        <Link to="/" className="back-link">← Voltar</Link>
-        <h1>
-          <EmojiIcon emoji="🎸" /> Revisar Cifras Enviadas
+        <Link to="/" className="back-link flex items-center gap-1"><ArrowLeft size={16} /> Voltar</Link>
+        <h1 className="flex items-center gap-2">
+          <Guitar size={28} /> Revisar Cifras Enviadas
         </h1>
         <p>Gerencie as cifras submetidas pela comunidade</p>
       </div>
@@ -119,19 +120,19 @@ export default function AdminReviewCifras() {
           className={`tab ${tab === 'pendentes' ? 'active' : ''}`}
           onClick={() => setTab('pendentes')}
         >
-          <EmojiIcon emoji="⏳" /> Pendentes ({cifrasPendentes.length})
+          <Clock size={16} /> Pendentes ({cifrasPendentes.length})
         </button>
         <button
           className={`tab ${tab === 'aprovadas' ? 'active' : ''}`}
           onClick={() => setTab('aprovadas')}
         >
-          <EmojiIcon emoji="✅" /> Aprovadas ({cifrasAprovadas.length})
+          <CheckCircle size={16} /> Aprovadas ({cifrasAprovadas.length})
         </button>
         <button
           className={`tab ${tab === 'rejeitadas' ? 'active' : ''}`}
           onClick={() => setTab('rejeitadas')}
         >
-          <EmojiIcon emoji="❌" /> Rejeitadas ({cifrasRejeitadas.length})
+          <XCircle size={16} /> Rejeitadas ({cifrasRejeitadas.length})
         </button>
       </div>
 
@@ -140,8 +141,8 @@ export default function AdminReviewCifras() {
         {tab === 'pendentes' && (
           <div className="tab-content">
             {cifrasPendentes.length === 0 ? (
-              <div className="empty-state">
-                <EmojiIcon emoji="🎉" /> Parabéns! Não há cifras pendentes.
+              <div className="empty-state flex items-center gap-2">
+                <PartyPopper size={20} /> Parabéns! Não há cifras pendentes.
               </div>
             ) : (
               <div className="cifras-list">
@@ -153,24 +154,24 @@ export default function AdminReviewCifras() {
                     </div>
 
                     <div className="cifra-meta">
-                      <span>
-                        <EmojiIcon emoji="🎹" /> Tom: {cifra.tom}
+                      <span className="flex items-center gap-1">
+                        <Piano size={14} /> Tom: {cifra.tom}
                       </span>
-                      <span>
-                        <EmojiIcon emoji="📊" /> Dificuldade: {cifra.dificuldade}
+                      <span className="flex items-center gap-1">
+                        <BarChart2 size={14} /> Dificuldade: {cifra.dificuldade}
                       </span>
-                      <span>
-                        <EmojiIcon emoji="📅" /> {formatarData(cifra.dataCriacao)}
+                      <span className="flex items-center gap-1">
+                        <Calendar size={14} /> {formatarData(cifra.dataCriacao)}
                       </span>
                     </div>
 
                     <button
-                      className="btn-expand"
+                      className="btn-expand flex items-center gap-1"
                       onClick={() =>
                         setExpandedId(expandedId === cifra.id ? null : cifra.id)
                       }
                     >
-                      {expandedId === cifra.id ? '▼ Ocultar' : '▶ Ver Cifra'}
+                      {expandedId === cifra.id ? <><ChevronDown size={14} /> Ocultar</> : <><ChevronRight size={14} /> Ver Cifra</>}
                     </button>
 
                     {expandedId === cifra.id && (
@@ -188,17 +189,17 @@ export default function AdminReviewCifras() {
 
                         <div className="cifra-actions">
                           <button
-                            className="btn-approve"
+                            className="btn-approve flex items-center gap-1"
                             onClick={() => {
                               aprovarCifra(cifra.id);
                               alert('Cifra aprovada com sucesso!');
                             }}
                           >
-                            <EmojiIcon emoji="✅" /> Aprovar
+                            <CheckCircle size={16} /> Aprovar
                           </button>
 
                           <button
-                            className="btn-reject"
+                            className="btn-reject flex items-center gap-1"
                             onClick={() => {
                               const motivo = prompt('Motivo da rejeição:');
                               if (motivo) {
@@ -207,7 +208,7 @@ export default function AdminReviewCifras() {
                               }
                             }}
                           >
-                            <EmojiIcon emoji="❌" /> Rejeitar
+                            <XCircle size={16} /> Rejeitar
                           </button>
                         </div>
                       </div>
@@ -222,8 +223,8 @@ export default function AdminReviewCifras() {
         {tab === 'aprovadas' && (
           <div className="tab-content">
             {cifrasAprovadas.length === 0 ? (
-              <div className="empty-state">
-                <EmojiIcon emoji="📭" /> Nenhuma cifra aprovada ainda.
+              <div className="empty-state flex items-center gap-2">
+                <MailX size={20} /> Nenhuma cifra aprovada ainda.
               </div>
             ) : (
               <div className="cifras-list">
@@ -234,26 +235,26 @@ export default function AdminReviewCifras() {
                         <h3>{cifra.titulo}</h3>
                         <span className="artista">{cifra.artista}</span>
                       </div>
-                      <span className="badge-approved">✅ Aprovada</span>
+                      <span className="badge-approved flex items-center gap-1"><CheckCircle size={14} /> Aprovada</span>
                     </div>
 
                     <div className="cifra-meta">
-                      <span>
-                        <EmojiIcon emoji="🎹" /> Tom: {cifra.tom}
+                      <span className="flex items-center gap-1">
+                        <Piano size={14} /> Tom: {cifra.tom}
                       </span>
-                      <span>
-                        <EmojiIcon emoji="📊" /> Dificuldade: {cifra.dificuldade}
+                      <span className="flex items-center gap-1">
+                        <BarChart2 size={14} /> Dificuldade: {cifra.dificuldade}
                       </span>
-                      <span>
-                        <EmojiIcon emoji="📅" /> {formatarData(cifra.dataAprovacao)}
+                      <span className="flex items-center gap-1">
+                        <Calendar size={14} /> {formatarData(cifra.dataAprovacao)}
                       </span>
                     </div>
 
                     <button
-                      className="btn-delete"
+                      className="btn-delete flex items-center gap-1"
                       onClick={() => deletarCifra(cifra.id, 'aprovada')}
                     >
-                      <EmojiIcon emoji="🗑️" /> Deletar
+                      <Trash2 size={16} /> Deletar
                     </button>
                   </div>
                 ))}
@@ -265,8 +266,8 @@ export default function AdminReviewCifras() {
         {tab === 'rejeitadas' && (
           <div className="tab-content">
             {cifrasRejeitadas.length === 0 ? (
-              <div className="empty-state">
-                <EmojiIcon emoji="📭" /> Nenhuma cifra rejeitada.
+              <div className="empty-state flex items-center gap-2">
+                <MailX size={20} /> Nenhuma cifra rejeitada.
               </div>
             ) : (
               <div className="cifras-list">
@@ -277,18 +278,18 @@ export default function AdminReviewCifras() {
                         <h3>{cifra.titulo}</h3>
                         <span className="artista">{cifra.artista}</span>
                       </div>
-                      <span className="badge-rejected">❌ Rejeitada</span>
+                      <span className="badge-rejected flex items-center gap-1"><XCircle size={14} /> Rejeitada</span>
                     </div>
 
                     <div className="cifra-meta">
-                      <span>
-                        <EmojiIcon emoji="🎹" /> Tom: {cifra.tom}
+                      <span className="flex items-center gap-1">
+                        <Piano size={14} /> Tom: {cifra.tom}
                       </span>
-                      <span>
-                        <EmojiIcon emoji="📊" /> Dificuldade: {cifra.dificuldade}
+                      <span className="flex items-center gap-1">
+                        <BarChart2 size={14} /> Dificuldade: {cifra.dificuldade}
                       </span>
-                      <span>
-                        <EmojiIcon emoji="📅" /> {formatarData(cifra.dataRejeicao)}
+                      <span className="flex items-center gap-1">
+                        <Calendar size={14} /> {formatarData(cifra.dataRejeicao)}
                       </span>
                     </div>
 
@@ -298,10 +299,10 @@ export default function AdminReviewCifras() {
                     </div>
 
                     <button
-                      className="btn-delete"
+                      className="btn-delete flex items-center gap-1"
                       onClick={() => deletarCifra(cifra.id, 'rejeitada')}
                     >
-                      <EmojiIcon emoji="🗑️" /> Deletar
+                      <Trash2 size={16} /> Deletar
                     </button>
                   </div>
                 ))}

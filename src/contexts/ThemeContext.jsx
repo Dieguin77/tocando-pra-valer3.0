@@ -20,10 +20,14 @@ export const ThemeProvider = ({ children }) => {
     const body = document.body;
     
     if (theme === 'dark') {
+      root.classList.add('dark');
       root.classList.add('dark-mode');
+      body.classList.add('dark');
       body.classList.add('dark-mode');
     } else {
+      root.classList.remove('dark');
       root.classList.remove('dark-mode');
+      body.classList.remove('dark');
       body.classList.remove('dark-mode');
     }
 

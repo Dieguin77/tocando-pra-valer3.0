@@ -23,3 +23,7 @@ dist-ssr
 *.sw?
 node_modules
 node_modules
+# Variáveis de ambiente (IMPORTANTE!)
+.env
+.env.local
+.env.*.local

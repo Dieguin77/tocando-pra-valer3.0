@@ -17,7 +17,32 @@ import {
   Camera,
   Play,
   Volume2,
-  Settings
+  Settings,
+  Guitar,
+  Piano,
+  Mic,
+  Globe,
+  Upload,
+  Lightbulb,
+  Wrench,
+  Timer,
+  Target,
+  Award,
+  Star,
+  Clock,
+  Send,
+  MessageCircle,
+  Mail,
+  Home,
+  ArrowLeft,
+  ArrowRight,
+  ChevronDown,
+  ChevronUp,
+  Menu,
+  X,
+  AlertCircle,
+  Info,
+  HelpCircle
 } from 'lucide-react';
 import './EmojiIcon.css';
 
@@ -38,8 +63,17 @@ const EMOJI_ICON_MAP = {
   
   // Música
   '🎵': Music,
-  '🎸': Music,
   'music': Music,
+  'note': Music,
+  
+  // Instrumentos
+  '🎸': Guitar,
+  'guitar': Guitar,
+  '🎹': Piano,
+  'piano': Piano,
+  '🎤': Mic,
+  'mic': Mic,
+  'microphone': Mic,
   
   // Livro/Documentação
   '📚': BookOpen,
@@ -60,8 +94,84 @@ const EMOJI_ICON_MAP = {
   'remove': Trash2,
   
   // Compartilhar
-  '📤': Share2,
+  '📤': Upload,
   'share': Share2,
+  'upload': Upload,
+  
+  // Globe/Mundo
+  '🌍': Globe,
+  '🌎': Globe,
+  '🌏': Globe,
+  'globe': Globe,
+  'world': Globe,
+  
+  // Ferramentas
+  '🛠️': Wrench,
+  'tools': Wrench,
+  'wrench': Wrench,
+  
+  // Dicas/Ideias
+  '💡': Lightbulb,
+  'lightbulb': Lightbulb,
+  'tip': Lightbulb,
+  'idea': Lightbulb,
+  
+  // Timer/Metrônomo
+  '⏱️': Timer,
+  'timer': Timer,
+  'metronome': Timer,
+  
+  // Alvo/Meta
+  '🎯': Target,
+  'target': Target,
+  'goal': Target,
+  
+  // Prêmio
+  '🏆': Award,
+  'award': Award,
+  'trophy': Award,
+  
+  // Estrela
+  '⭐': Star,
+  'star': Star,
+  
+  // Relógio
+  '🕐': Clock,
+  'clock': Clock,
+  'time': Clock,
+  
+  // Enviar
+  '📨': Send,
+  'send': Send,
+  
+  // Chat/Mensagem
+  '💬': MessageCircle,
+  'chat': MessageCircle,
+  'message': MessageCircle,
+  
+  // Email
+  '📧': Mail,
+  'mail': Mail,
+  'email': Mail,
+  
+  // Casa
+  '🏠': Home,
+  'home': Home,
+  
+  // Setas
+  '⬅️': ArrowLeft,
+  'arrow-left': ArrowLeft,
+  '➡️': ArrowRight,
+  'arrow-right': ArrowRight,
+  
+  // Menu
+  '☰': Menu,
+  'menu': Menu,
+  
+  // Fechar
+  '✖️': X,
+  'close': X,
+  'x': X,
   
   // Cérebro (Poder cerebral)
   '🧠': Brain,
@@ -79,6 +189,7 @@ const EMOJI_ICON_MAP = {
   // Flash (Energia)
   '⚡': Zap,
   'flash': Zap,
+  'energy': Zap,
   
   // Coração (Love)
   '❤️': Heart,
@@ -87,6 +198,7 @@ const EMOJI_ICON_MAP = {
   // Verificado
   '✅': CheckCircle,
   'check': CheckCircle,
+  'success': CheckCircle,
   
   // Câmera (Foto)
   '📸': Camera,
@@ -99,10 +211,25 @@ const EMOJI_ICON_MAP = {
   // Volume (Som)
   '🔊': Volume2,
   'volume': Volume2,
+  'sound': Volume2,
   
   // Configurações
   '⚙️': Settings,
   'settings': Settings,
+  'config': Settings,
+  
+  // Alerta
+  '⚠️': AlertCircle,
+  'alert': AlertCircle,
+  'warning': AlertCircle,
+  
+  // Info
+  'ℹ️': Info,
+  'info': Info,
+  
+  // Ajuda
+  '❓': HelpCircle,
+  'help': HelpCircle,
 };
 
 export default function EmojiIcon({ 

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Wrench } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 import './navbar.css';
 import logo from '../assets/logo.png';
 
@@ -18,7 +20,15 @@ const Navbar = () => {
         <li>
           <Link to="/musicas">Músicas</Link>
         </li>
+        <li>
+          <Link to="/ferramentas" className="flex items-center gap-1">
+            <Wrench size={16} /> Ferramentas
+          </Link>
+        </li>
       </ul>
+      <div className="navbar-actions">
+        <ThemeToggle />
+      </div>
     </nav>
   );
 };

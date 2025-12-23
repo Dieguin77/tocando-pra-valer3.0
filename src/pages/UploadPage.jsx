@@ -4,6 +4,7 @@ import UploadCifra from '../components/UploadCifra';
 import ThemeToggle from '../components/ThemeToggle';
 import { useTheme } from '../contexts/ThemeContext';
 import EmojiIcon from '../components/EmojiIcon';
+import { Guitar, Music, Search, CheckCircle, Globe, Star, BookOpen, Pencil, Target, AlertTriangle, HelpCircle, Mail, Trophy } from 'lucide-react';
 import './UploadPage.css';
 
 export default function UploadPage() {
@@ -21,8 +22,8 @@ export default function UploadPage() {
       {/* Navegação */}
       <nav className="upload-nav">
         <div className="nav-container">
-          <Link to="/" className="nav-logo">
-            🎸 Tocando Pra Valer
+          <Link to="/" className="nav-logo flex items-center gap-2">
+            <Guitar size={24} /> Tocando Pra Valer
           </Link>
           <div className="nav-links">
             <Link to="/" className="nav-link">Início</Link>
@@ -35,8 +36,8 @@ export default function UploadPage() {
       {/* Hero Section */}
       <section className="upload-hero">
         <div className="hero-content">
-          <h1>
-            <EmojiIcon emoji="🎵" /> Contribua com o Nosso Acervo
+          <h1 className="flex items-center justify-center gap-2">
+            <Music size={32} /> Contribua com o Nosso Acervo
           </h1>
           <p>Compartilhe suas cifras e ajude músicos de todo o mundo</p>
           <div className="hero-stats">
@@ -62,25 +63,25 @@ export default function UploadPage() {
           {/* Info Cards */}
           <div className="info-cards">
             <div className="info-card">
-              <div className="card-icon">🔍</div>
+              <div className="card-icon"><Search size={32} /></div>
               <h3>Revisão de Qualidade</h3>
               <p>Toda cifra é revisada por nossa equipe antes de ser publicada</p>
             </div>
 
             <div className="info-card">
-              <div className="card-icon">✅</div>
+              <div className="card-icon"><CheckCircle size={32} /></div>
               <h3>Simples e Rápido</h3>
               <p>Preencha o formulário e envie sua cifra em poucos cliques</p>
             </div>
 
             <div className="info-card">
-              <div className="card-icon">🌍</div>
+              <div className="card-icon"><Globe size={32} /></div>
               <h3>Compartilhe com Todos</h3>
               <p>Sua cifra será acessível para músicos em todo o mundo</p>
             </div>
 
             <div className="info-card">
-              <div className="card-icon">⭐</div>
+              <div className="card-icon"><Star size={32} /></div>
               <h3>Reconhecimento</h3>
               <p>Seu nome aparecerá como colaborador na cifra</p>
             </div>
@@ -91,13 +92,13 @@ export default function UploadPage() {
 
           {/* Guia de Formatação */}
           <section className="formatting-guide">
-            <h2>
-              <EmojiIcon emoji="📚" /> Guia de Formatação
+            <h2 className="flex items-center gap-2">
+              <BookOpen size={24} /> Guia de Formatação
             </h2>
 
             <div className="guide-content">
               <div className="guide-section">
-                <h3>✏️ Como Formatar Sua Cifra</h3>
+                <h3 className="flex items-center gap-2"><Pencil size={18} /> Como Formatar Sua Cifra</h3>
                 <p>Siga este padrão para melhor compatibilidade:</p>
                 <pre className="code-block">{`[Verso 1]
 C      F
@@ -113,7 +114,7 @@ Você é poderoso em meu coração`}</pre>
               </div>
 
               <div className="guide-section">
-                <h3>🎯 Boas Práticas</h3>
+                <h3 className="flex items-center gap-2"><Target size={18} /> Boas Práticas</h3>
                 <ul className="guide-list">
                   <li>✓ Use acordes entre colchetes quando apropriado</li>
                   <li>✓ Separe os acordes do texto com espaços</li>
@@ -125,7 +126,7 @@ Você é poderoso em meu coração`}</pre>
               </div>
 
               <div className="guide-section">
-                <h3>⚠️ Direitos Autorais</h3>
+                <h3 className="flex items-center gap-2"><AlertTriangle size={18} /> Direitos Autorais</h3>
                 <p>
                   Ao enviar uma cifra, você confirma que:
                 </p>
@@ -140,8 +141,8 @@ Você é poderoso em meu coração`}</pre>
 
           {/* FAQ */}
           <section className="faq-section">
-            <h2>
-              <EmojiIcon emoji="❓" /> Perguntas Frequentes
+            <h2 className="flex items-center gap-2">
+              <HelpCircle size={24} /> Perguntas Frequentes
             </h2>
 
             <div className="faq-items">
@@ -171,8 +172,8 @@ Você é poderoso em meu coração`}</pre>
         {/* Sidebar */}
         <aside className="upload-sidebar">
           <div className="sidebar-card">
-            <h3>
-              <EmojiIcon emoji="🎯" /> Dica Importante
+            <h3 className="flex items-center gap-2">
+              <Target size={20} /> Dica Importante
             </h3>
             <p>
               Músicas com cifras bem organizadas têm <strong>maior chance de aprovação</strong>. 
@@ -181,26 +182,26 @@ Você é poderoso em meu coração`}</pre>
           </div>
 
           <div className="sidebar-card">
-            <h3>
-              <EmojiIcon emoji="📧" /> Precisa de Ajuda?
+            <h3 className="flex items-center gap-2">
+              <Mail size={20} /> Precisa de Ajuda?
             </h3>
             <p>
               Entre em contato conosco:
             </p>
-            <a href="mailto:suporte@tocandopravaler.com" className="btn-contact">
-              📨 Email de Suporte
+            <a href="mailto:suporte@tocandopravaler.com" className="btn-contact flex items-center gap-2 justify-center">
+              <Mail size={16} /> Email de Suporte
             </a>
           </div>
 
           <div className="sidebar-card highlight">
-            <h3>
-              <EmojiIcon emoji="🏆" /> Seja um Colaborador!
+            <h3 className="flex items-center gap-2">
+              <Trophy size={20} /> Seja um Colaborador!
             </h3>
             <p>
               Colaboradores ativos ganham <strong>selo especial</strong> no site!
             </p>
-            <button className="btn-collaborator">
-              ⭐ Saiba Mais
+            <button className="btn-collaborator flex items-center gap-2 justify-center">
+              <Star size={16} /> Saiba Mais
             </button>
           </div>
         </aside>

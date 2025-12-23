@@ -1,34 +1,68 @@
-// App.jsx
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom"; 
+import { Routes, Route, Outlet } from "react-router-dom";
+import { initEmailJS } from "./services/emailService";
+
+// Importação das Páginas
 import Home from "./pages/Home";
 import Songs from "./pages/Songs";
 import Song from "./pages/Song";
 import AdminMusic from "./pages/AdminMusic";
 import UploadPage from "./pages/UploadPage";
 import AdminReviewCifras from "./pages/AdminReviewCifras";
-import { initEmailJS } from "./services/emailService";
+import GlobalSearch from "./pages/GlobalSearch";
+import PianoPage from "./pages/PianoPage";
+import ToolsPage from "./pages/ToolsPage";
+
+// Importação dos Componentes de Layout
+import Navbar from "./components/Navbar";
+
+// --- LAYOUTS ---
+
+// 1. Layout Público (Só o Header Horizontal)
+const PublicLayout = () => (
+  <div className="min-h-screen bg-slate-950 text-white">
+    <Navbar />
+    <main className="pt-24">
+      <Outlet />
+    </main>
+  </div>
+);
+
+// 2. Layout da Plataforma (Com Navbar)
+const PlatformLayout = () => (
+  <div className="min-h-screen bg-slate-900 text-white">
+    <Navbar />
+    <main className="pt-24 p-6">
+      <Outlet />
+    </main>
+  </div>
+);
 
 export default function App() {
-  // Inicializar EmailJS na primeira montagem
   useEffect(() => {
     initEmailJS();
   }, []);
 
   return (
-    // ADICIONEI AS CLASSES AQUI EMBAIXO 👇
-    // min-h-screen: garante que o site ocupe a altura toda
-    // dark:bg-gray-900: define o fundo preto global
-    // dark:text-white: define a cor da letra branca global
-    <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300">
-      <Routes>
+    <Routes>
+      {/* GRUPO 1: Rotas Públicas (Site, Vendas, Busca) */}
+      <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/busca-global" element={<GlobalSearch />} />
+        <Route path="/piano" element={<PianoPage />} />
+      </Route>
+
+      {/* GRUPO 2: Rotas da Plataforma (Área do Aluno / Admin) */}
+      <Route element={<PlatformLayout />}>
         <Route path="/musicas" element={<Songs />} />
         <Route path="/musica/:id" element={<Song />} />
         <Route path="/upload" element={<UploadPage />} />
+        <Route path="/ferramentas" element={<ToolsPage />} />
+        
+        {/* Admin */}
         <Route path="/admin/musicas" element={<AdminMusic />} />
         <Route path="/admin/revisar-cifras" element={<AdminReviewCifras />} />
-      </Routes>
-    </div>
+      </Route>
+    </Routes>
   );
 }

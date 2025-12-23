@@ -3,6 +3,7 @@ import "./home.css";
 import ThemeToggle from "../components/ThemeToggle";
 import { useTheme } from "../contexts/ThemeContext";
 import EmojiIcon from "../components/EmojiIcon";
+import { Globe, Upload, Instagram, MessageCircle, Youtube, Music } from "lucide-react";
 
 // --- IMPORTAÇÃO DAS IMAGENS ---
 import imgAdolescente from "../assets/adolescente-tocando.jpg";
@@ -10,7 +11,6 @@ import imgCriancas from "../assets/crianças-tocando.jpg";
 import imgHomem from "../assets/homem-tocando.jpg";
 import imgIdosos from "../assets/idosos-tocando.jpg";
 import imgLife from "../assets/life-violao.jpg";
-import { FaInstagram, FaWhatsapp, FaYoutube } from "react-icons/fa";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -40,19 +40,25 @@ export default function Home() {
       <div className="home-wrapper relative">
         
         {/* NAV: flex-col no celular (empilhado) -> md:flex-row no PC (lado a lado) */}
-        <nav className="glass-nav dark:bg-black/50 dark:text-white flex flex-col md:flex-row items-center justify-between p-4 md:p-6 gap-4">
-          <Link to="/" className="nav-logo text-white text-2xl font-bold"> Tocando Pra Valer</Link>
+        <nav className="glass-nav dark:bg-black/50 dark:text-white flex flex-col md:flex-row items-center justify-between p-3 md:p-4 gap-2 md:gap-4">
+          <Link to="/" className="nav-logo text-white text-lg md:text-xl font-bold"> Tocando Pra Valer</Link>
           
           {/* Links: flex-wrap permite que quebrem linha se a tela for muito pequena */}
-          <div className="nav-links flex flex-wrap justify-center gap-4 md:gap-6 text-center">
+          <div className="nav-links flex flex-wrap justify-center gap-2 md:gap-4 text-center text-sm">
+            <Link to="/busca-global" className="nav-link text-yellow-300 hover:text-yellow-400 font-bold flex items-center gap-1">
+              <Globe size={14} /> Busca Vagalume
+            </Link>
+  {/* ----------------------------------- */}
             <Link to="/musicas" className="nav-link text-white hover:text-orange-400">Repertório</Link>
-            <Link to="/upload" className="nav-link text-white hover:text-orange-400">📤 Enviar Cifra</Link>
-            <a href="#beneficios" className="nav-link text-white hover:text-orange-400">Benefícios</a>
-            <a href="#videos" className="nav-link text-white hover:text-orange-400">Vídeos</a>
-            <a href="#galeria" className="nav-link text-white hover:text-orange-400">Comunidade</a>
+            <Link to="/upload" className="nav-link text-white hover:text-orange-400 flex items-center gap-1">
+              <Upload size={14} /> Enviar Cifra
+            </Link>
+            <a href="#beneficios" className="nav-link text-white hover:text-orange-400 hidden sm:block">Benefícios</a>
+            <a href="#videos" className="nav-link text-white hover:text-orange-400 hidden sm:block">Vídeos</a>
+            <a href="#galeria" className="nav-link text-white hover:text-orange-400 hidden md:block">Comunidade</a>
           </div>
           
-          <Link to="/login" className="nav-cta bg-orange-600 px-4 py-2 rounded-full text-white hover:bg-orange-700 transition">Área do Aluno</Link>
+          <Link to="/login" className="nav-cta bg-orange-600 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-white text-sm hover:bg-orange-700 transition">Área do Aluno</Link>
         </nav>
 
         <div className="hero-container flex flex-col items-center justify-center text-center px-4 mt-8 md:mt-0">
@@ -208,17 +214,17 @@ export default function Home() {
           <div className="social-buttons-container flex flex-wrap justify-center gap-4 mb-8">
             <a href="https://www.instagram.com/tocandopravaler" target="_blank" rel="noopener noreferrer" 
                className="btn-social btn-instagram flex items-center gap-2 bg-pink-600 px-4 py-2 rounded-lg hover:bg-pink-700 transition">
-              <FaInstagram /> Instagram
+              <Instagram size={20} /> Instagram
             </a>
 
             <a href="https://wa.me/55999941669" target="_blank" rel="noopener noreferrer" 
                className="btn-social btn-whatsapp flex items-center gap-2 bg-green-600 px-4 py-2 rounded-lg hover:bg-green-700 transition">
-              <FaWhatsapp /> WhatsApp
+              <MessageCircle size={20} /> WhatsApp
             </a>
 
             <a href="https://www.youtube.com/@TocandoPraValer" target="_blank" rel="noopener noreferrer" 
                className="btn-social btn-youtube flex items-center gap-2 bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700 transition">
-              <FaYoutube /> YouTube
+              <Youtube size={20} /> YouTube
             </a>
           </div>
 

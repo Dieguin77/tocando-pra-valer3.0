@@ -66,43 +66,73 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 15px 40px;
+  padding: 10px 20px; /* Reduzido para mobile */
   display: flex;
   justify-content: space-between;
   align-items: center;
   /* O efeito de vidro fosco chique */
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   z-index: 1000;
   box-sizing: border-box;
 }
 
+/* Responsividade do menu */
+@media (min-width: 768px) {
+  .glass-nav {
+    padding: 12px 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .glass-nav {
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 15px;
+  }
+}
+
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: white;
   text-decoration: none;
 }
 
 .nav-logo img {
-  height: 40px;
-  border-radius: 8px; /* Arredonda levemente a logo quadrada */
+  height: 32px;
+  border-radius: 6px;
 }
 
 .nav-links {
   display: flex;
-  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .nav-links {
+    gap: 20px;
+  }
 }
 
 .nav-link {
   color: #bdbdbd;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   transition: color 0.3s;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .nav-link {
+    font-size: 0.9rem;
+  }
 }
 
 .nav-link:hover {
@@ -111,13 +141,20 @@
 
 .nav-cta {
   background: rgba(255, 255, 255, 0.1);
-  padding: 8px 20px;
+  padding: 6px 16px;
   border-radius: 20px;
   color: #fff;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s;
+}
+
+@media (min-width: 768px) {
+  .nav-cta {
+    padding: 8px 18px;
+    font-size: 0.85rem;
+  }
 }
 
 .nav-cta:hover {
@@ -128,13 +165,20 @@
 
 /* --- HERO SECTION (IMPACTO) --- */
 .hero-container {
-  padding-top: 140px; /* Espaço para o menu fixo */
-  padding-bottom: 80px;
+  padding-top: 100px; /* Espaço para o menu fixo - mobile */
+  padding-bottom: 60px;
   text-align: center;
   max-width: 1000px;
   margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (min-width: 768px) {
+  .hero-container {
+    padding-top: 120px;
+    padding-bottom: 80px;
+  }
 }
 
 /* Efeito de Texto Gradiente (Wow Factor) */

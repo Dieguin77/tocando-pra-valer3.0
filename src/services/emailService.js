@@ -1,21 +1,34 @@
 import emailjs from 'emailjs-com';
 
-// Configurar EmailJS - MUDE PARA SUAS CREDENCIAIS
-const SERVICE_ID = 'service_tocandopravaler'; // Seu Service ID
-const TEMPLATE_ID_CONFIRMACAO = 'template_confirmacao'; // Template para confirmação
-const TEMPLATE_ID_NOTIF_ADMIN = 'template_notif_admin'; // Template para notificar admin
-const TEMPLATE_ID_APROVACAO = 'template_aprovacao'; // Template para aprovação
-const TEMPLATE_ID_REJEICAO = 'template_rejeicao'; // Template para rejeição
-const PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; // Seu Public Key
+// As credenciais do EmailJS devem ser armazenadas em um arquivo .env
+// Crie um arquivo .env na raiz do projeto e adicione as seguintes variáveis:
+// VITE_EMAILJS_SERVICE_ID=seu_service_id
+// VITE_EMAILJS_TEMPLATE_CONFIRMACAO=seu_template_id
+// VITE_EMAILJS_TEMPLATE_NOTIF_ADMIN=seu_template_id
+// VITE_EMAILJS_TEMPLATE_APROVACAO=seu_template_id
+// VITE_EMAILJS_TEMPLATE_REJEICAO=seu_template_id
+// VITE_EMAILJS_PUBLIC_KEY=sua_public_key
+// VITE_ADMIN_EMAIL=seu_email_de_admin
 
-// Email de admin para notificações
-const ADMIN_EMAIL = 'admin@tocandopravaler.com'; // MUDE PARA SEU EMAIL
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID_CONFIRMACAO = import.meta.env.VITE_EMAILJS_TEMPLATE_CONFIRMACAO;
+const TEMPLATE_ID_NOTIF_ADMIN = import.meta.env.VITE_EMAILJS_TEMPLATE_NOTIF_ADMIN;
+const TEMPLATE_ID_APROVACAO = import.meta.env.VITE_EMAILJS_TEMPLATE_APROVACAO;
+const TEMPLATE_ID_REJEICAO = import.meta.env.VITE_EMAILJS_TEMPLATE_REJEICAO;
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
+
+const areEmailJsCredsAvailable = SERVICE_ID && TEMPLATE_ID_CONFIRMACAO && TEMPLATE_ID_NOTIF_ADMIN && TEMPLATE_ID_APROVACAO && TEMPLATE_ID_REJEICAO && PUBLIC_KEY && ADMIN_EMAIL;
 
 /**
  * Inicializar EmailJS
  * Chamado uma única vez na App
  */
 export const initEmailJS = () => {
+  if (!areEmailJsCredsAvailable) {
+    console.warn('Credenciais do EmailJS não configuradas. Verifique seu arquivo .env');
+    return;
+  }
   try {
     emailjs.init(PUBLIC_KEY);
     console.log('✅ EmailJS inicializado com sucesso');
@@ -31,6 +44,7 @@ export const initEmailJS = () => {
  * @param {string} artista - Nome do artista
  */
 export const enviarConfirmacao = async (musicoEmail, titulo, artista) => {
+    if (!areEmailJsCredsAvailable) return false;
   try {
     const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID_CONFIRMACAO, {
       to_email: musicoEmail,
@@ -52,6 +66,7 @@ export const enviarConfirmacao = async (musicoEmail, titulo, artista) => {
  * @param {object} cifra - Dados da cifra
  */
 export const notificarAdminNovaCifra = async (cifra) => {
+    if (!areEmailJsCredsAvailable) return false;
   try {
     const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID_NOTIF_ADMIN, {
       to_email: ADMIN_EMAIL,
@@ -79,6 +94,7 @@ export const notificarAdminNovaCifra = async (cifra) => {
  * @param {string} artista - Nome do artista
  */
 export const enviarNotificacaoAprovacao = async (musicoEmail, titulo, artista) => {
+    if (!areEmailJsCredsAvailable) return false;
   try {
     const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID_APROVACAO, {
       to_email: musicoEmail,
@@ -103,6 +119,7 @@ export const enviarNotificacaoAprovacao = async (musicoEmail, titulo, artista) =
  * @param {string} motivo - Motivo da rejeição
  */
 export const enviarNotificacaoRejeicao = async (musicoEmail, titulo, motivo) => {
+    if (!areEmailJsCredsAvailable) return false;
   try {
     const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID_REJEICAO, {
       to_email: musicoEmail,
