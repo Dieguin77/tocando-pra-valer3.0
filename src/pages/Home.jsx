@@ -1,9 +1,10 @@
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
 import ThemeToggle from "../components/ThemeToggle";
 import { useTheme } from "../contexts/ThemeContext";
 import EmojiIcon from "../components/EmojiIcon";
-import { Globe, Upload, Instagram, MessageCircle, Youtube, Music } from "lucide-react";
+import { Globe, Upload, Instagram, MessageCircle, Youtube, Music, ChevronDown, Wrench, BookOpen, Send } from "lucide-react";
 
 // --- IMPORTAÇÃO DAS IMAGENS ---
 import imgAdolescente from "../assets/adolescente-tocando.jpg";
@@ -14,6 +15,19 @@ import imgLife from "../assets/life-violao.jpg";
 
 export default function Home() {
   const { theme } = useTheme();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Fechar dropdown ao clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const fotosGaleria = [
     { id: 1, img: imgAdolescente, titulo: "Jovens Talentos" },
@@ -34,7 +48,7 @@ export default function Home() {
 
   return (
     // overflow-x-hidden: Impede que o site balance para os lados no celular
-    <div className="page-container transition-colors duration-300 dark:bg-gray-950 dark:text-gray-100 overflow-x-hidden w-full">
+    <div className="page-container bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-x-hidden w-full">
       
       {/* --- HERO SECTION --- */}
       <div className="home-wrapper relative">
@@ -58,7 +72,45 @@ export default function Home() {
             <a href="#galeria" className="nav-link text-white hover:text-orange-400 hidden md:block">Comunidade</a>
           </div>
           
-          <Link to="/login" className="nav-cta bg-orange-600 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-white text-sm hover:bg-orange-700 transition">Área do Aluno</Link>
+          {/* Dropdown Área do Aluno */}
+          <div className="relative" ref={dropdownRef}>
+            <button 
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="nav-cta bg-orange-600 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-white text-sm hover:bg-orange-700 transition flex items-center gap-1"
+            >
+              Área do Aluno
+              <ChevronDown size={16} className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {dropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden z-50 animate-fadeIn">
+                <Link 
+                  to="/musicas" 
+                  className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-gray-700 transition"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <BookOpen size={18} className="text-orange-500" />
+                  <span>Repertório</span>
+                </Link>
+                <Link 
+                  to="/ferramentas" 
+                  className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-gray-700 transition"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <Wrench size={18} className="text-orange-500" />
+                  <span>Ferramentas</span>
+                </Link>
+                <Link 
+                  to="/upload" 
+                  className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-gray-700 transition"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <Send size={18} className="text-orange-500" />
+                  <span>Enviar Cifra</span>
+                </Link>
+              </div>
+            )}
+          </div>
         </nav>
 
         <div className="hero-container flex flex-col items-center justify-center text-center px-4 mt-8 md:mt-0">
@@ -132,19 +184,19 @@ export default function Home() {
       <section className="features-section py-16 px-4 bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
         <div className="container mx-auto flex flex-col md:flex-row items-center gap-10">
             <div className="feature-content flex-1">
-                <h2 className="dark:text-white text-3xl font-bold mb-6">Tecnologia a favor da sua Arte</h2>
+                <h2 className="text-gray-900 dark:text-white text-3xl font-bold mb-6">Tecnologia a favor da sua Arte</h2>
                 <ul className="feature-list space-y-4">
-                    <li className="flex items-center gap-3 dark:text-gray-300">
+                    <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
                         <span className="p-2 bg-orange-100 rounded dark:bg-gray-800 dark:text-white"><EmojiIcon emoji="music" size="md" /></span> 
-                        <span className="dark:text-white"><strong>Transposição Inteligente:</strong> Mude o tom com um clique.</span>
+                        <span className="text-gray-800 dark:text-white"><strong>Transposição Inteligente:</strong> Mude o tom com um clique.</span>
                     </li>
-                    <li className="flex items-center gap-3 dark:text-gray-300">
+                    <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
                         <span className="p-2 bg-orange-100 rounded dark:bg-gray-800 dark:text-white"><EmojiIcon emoji="eye" size="md" /></span> 
-                        <span className="dark:text-white"><strong>Diagramas Interativos:</strong> Veja o acorde exato no braço.</span>
+                        <span className="text-gray-800 dark:text-white"><strong>Diagramas Interativos:</strong> Veja o acorde exato no braço.</span>
                     </li>
-                    <li className="flex items-center gap-3 dark:text-gray-300">
+                    <li className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
                         <span className="p-2 bg-orange-100 rounded dark:bg-gray-800 dark:text-white"><EmojiIcon emoji="play" size="md" /></span> 
-                        <span className="dark:text-white"><strong>Modo Palco:</strong> Design limpo para tocar ao vivo.</span>
+                        <span className="text-gray-800 dark:text-white"><strong>Modo Palco:</strong> Design limpo para tocar ao vivo.</span>
                     </li>
                 </ul>
             </div>
@@ -157,13 +209,13 @@ export default function Home() {
       {/* --- VÍDEOS --- */}
       <section id="videos" className="videos-section py-16 px-4 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="container mx-auto">
-            <h2 className="section-title dark:text-white text-3xl font-bold text-center mb-2">Veja na Prática</h2>
-            <p className="section-subtitle dark:text-gray-300 text-center text-gray-500 mb-12">Assista a demonstrações exclusivas.</p>
+            <h2 className="section-title text-gray-900 dark:text-white text-3xl font-bold text-center mb-2">Veja na Prática</h2>
+            <p className="section-subtitle text-gray-600 dark:text-gray-300 text-center mb-12">Assista a demonstrações exclusivas.</p>
             
             {/* GRID RESPONSIVO PARA VÍDEOS */}
             <div className="videos-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {videosDemonstracao.map((video) => (
-                <div key={video.id} className="video-card bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div key={video.id} className="video-card bg-gray-50 dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="video-container aspect-video w-full">
                     <iframe 
                     src={`https://www.youtube.com/embed/${video.youtubeId}`} 
@@ -174,7 +226,7 @@ export default function Home() {
                     className="w-full h-full"
                     ></iframe>
                 </div>
-                <h3 className="p-4 font-semibold text-lg dark:text-white">{video.title}</h3>
+                <h3 className="p-4 font-semibold text-lg text-gray-900 dark:text-white">{video.title}</h3>
                 </div>
             ))}
             </div>
@@ -182,8 +234,8 @@ export default function Home() {
       </section>
 
       {/* --- GALERIA --- */}
-      <div id="galeria" className="gallery-section py-16 px-4 bg-gray-50 dark:bg-gray-950">
-        <h2 className="gallery-title dark:text-white mb-8 text-center text-3xl font-bold">Nossa Comunidade</h2>
+      <div id="galeria" className="gallery-section py-16 px-4 bg-gray-100 dark:bg-gray-950 transition-colors duration-300">
+        <h2 className="gallery-title text-gray-900 dark:text-white mb-8 text-center text-3xl font-bold">Nossa Comunidade</h2>
         {/* Grid de 2 colunas no celular e 5 no PC */}
         <div className="gallery-grid container mx-auto grid grid-cols-2 md:grid-cols-5 gap-4">
           {fotosGaleria.map((item) => (
@@ -198,7 +250,7 @@ export default function Home() {
       </div>
 
       {/* --- CTA FINAL --- */}
-      <div className="final-cta bg-orange-600 py-20 px-4 text-center text-white dark:bg-orange-800">
+      <div className="final-cta bg-gradient-to-r from-orange-500 to-orange-600 dark:from-orange-600 dark:to-orange-800 py-20 px-4 text-center text-white">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Pronto para elevar seu nível?</h2>
         <Link to="/musicas" className="cta-button-large inline-block bg-white text-orange-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors shadow-lg">
           Acessar Acervo Agora
@@ -206,10 +258,10 @@ export default function Home() {
       </div>
 
       {/* --- FOOTER --- */}
-      <footer className="site-footer bg-gray-900 text-white py-12 px-4 dark:bg-black">
+      <footer className="site-footer bg-gray-100 dark:bg-gray-900 py-12 px-4 transition-colors duration-300">
         <div className="footer-content text-center container mx-auto">
-          <h3 className="footer-title text-2xl font-bold mb-4">Vamos tocar juntos?</h3>
-          <p className="mb-8 text-gray-400">Siga nossas redes e entre em contato direto.</p>
+          <h3 className="footer-title text-2xl font-bold mb-4 text-gray-900 dark:text-white">Vamos tocar juntos?</h3>
+          <p className="mb-8 text-gray-600 dark:text-gray-400">Siga nossas redes e entre em contato direto.</p>
           
           <div className="social-buttons-container flex flex-wrap justify-center gap-4 mb-8">
             <a href="https://www.instagram.com/tocandopravaler" target="_blank" rel="noopener noreferrer" 
@@ -228,7 +280,7 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="footer-copyright text-gray-500 text-sm">
+          <div className="footer-copyright text-gray-500 dark:text-gray-500 text-sm border-t border-gray-200 dark:border-gray-700 pt-6 mt-6">
             <p>© 2025 Tocando Pra Valer. Desenvolvido por Diego Gomes.</p>
           </div>
         </div>

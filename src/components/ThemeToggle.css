@@ -1,14 +1,11 @@
 /* src/components/ThemeToggle.css */
 
 .theme-toggle-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  border: 2px solid var(--border-color);
-  background: var(--btn-bg);
+  border: 2px solid var(--border-color, #e0e0e0);
+  background: var(--btn-bg, #f0f0f0);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -30,7 +27,7 @@
 .theme-toggle-btn .icon {
   width: 28px;
   height: 28px;
-  color: var(--text-main);
+  color: var(--text-main, #121212);
   transition: transform 0.3s ease;
 }
 
@@ -40,12 +37,12 @@
 
 /* Animação especial para o sol */
 .sun-icon {
-  color: #ffa500;
+  color: #ffa500 !important;
 }
 
 /* Animação especial para a lua */
 .moon-icon {
-  color: #4a90e2;
+  color: #4a90e2 !important;
 }
 
 /* Responsivo para mobile */
@@ -53,8 +50,6 @@
   .theme-toggle-btn {
     width: 50px;
     height: 50px;
-    bottom: 20px;
-    right: 20px;
   }
   
   .theme-toggle-btn .icon {

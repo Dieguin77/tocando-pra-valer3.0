@@ -20,7 +20,7 @@ import Navbar from "./components/Navbar";
 
 // 1. Layout Público (Só o Header Horizontal)
 const PublicLayout = () => (
-  <div className="min-h-screen bg-slate-950 text-white">
+  <div className="min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-white transition-colors duration-300">
     <Navbar />
     <main className="pt-24">
       <Outlet />
@@ -30,7 +30,7 @@ const PublicLayout = () => (
 
 // 2. Layout da Plataforma (Com Navbar)
 const PlatformLayout = () => (
-  <div className="min-h-screen bg-slate-900 text-white">
+  <div className="min-h-screen bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white transition-colors duration-300">
     <Navbar />
     <main className="pt-24 p-6">
       <Outlet />
@@ -45,9 +45,11 @@ export default function App() {
 
   return (
     <Routes>
+      {/* Home tem layout próprio */}
+      <Route path="/" element={<Home />} />
+      
       {/* GRUPO 1: Rotas Públicas (Site, Vendas, Busca) */}
       <Route element={<PublicLayout />}>
-        <Route path="/" element={<Home />} />
         <Route path="/busca-global" element={<GlobalSearch />} />
         <Route path="/piano" element={<PianoPage />} />
       </Route>

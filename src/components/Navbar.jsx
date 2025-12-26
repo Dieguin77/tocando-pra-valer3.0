@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Wrench } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
 import './navbar.css';
 import logo from '../assets/logo.png';
 
@@ -26,9 +25,6 @@ const Navbar = () => {
           </Link>
         </li>
       </ul>
-      <div className="navbar-actions">
-        <ThemeToggle />
-      </div>
     </nav>
   );
 };

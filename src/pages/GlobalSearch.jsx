@@ -11,13 +11,36 @@ export default function GlobalSearch() {
   const [loading, setLoading] = useState(false);
   const [transposition, setTransposition] = useState(0);
 
-  // CHAVE PÚBLICA (Funciona na maioria dos casos para testes)
+  // CHAVE PÚBLICA do Vagalume
   const API_KEY = "660a4395f992ff67786584e238f501aa"; 
 
-  // URL DO TÚNEL (PROXY) para contornar o erro de CORS
-  const PROXY = "https://api.allorigins.win/raw?url=";
+  // Lista de proxies para tentar (fallback)
+  const PROXIES = [
+    "https://corsproxy.io/?",
+    "https://api.allorigins.win/raw?url=",
+    "https://proxy.cors.sh/"
+  ];
 
-  // 1. Busca a lista de músicas (USANDO O PROXY)
+  // Função para tentar múltiplos proxies
+  const fetchWithProxy = async (targetUrl) => {
+    for (const proxy of PROXIES) {
+      try {
+        const response = await fetch(proxy + encodeURIComponent(targetUrl), {
+          headers: {
+            'Origin': window.location.origin
+          }
+        });
+        if (response.ok) {
+          return await response.json();
+        }
+      } catch (e) {
+        console.log(`Proxy ${proxy} falhou, tentando próximo...`);
+      }
+    }
+    throw new Error("Todos os proxies falharam");
+  };
+
+  // 1. Busca a lista de músicas
   const searchVagalume = async () => {
     if (!query) return;
     setLoading(true);
@@ -25,15 +48,8 @@ export default function GlobalSearch() {
     setSelectedSong(null);
 
     try {
-      // Montamos a URL original do Vagalume
       const targetUrl = `https://api.vagalume.com.br/search.excerpt?q=${encodeURIComponent(query)}&limit=10&apikey=${API_KEY}`;
-      
-      // Chamamos através do PROXY
-      const response = await fetch(PROXY + encodeURIComponent(targetUrl));
-      
-      if (!response.ok) throw new Error("Falha na conexão");
-      
-      const data = await response.json();
+      const data = await fetchWithProxy(targetUrl);
       
       if (data.response && data.response.docs) {
         setResults(data.response.docs);
@@ -48,15 +64,12 @@ export default function GlobalSearch() {
     }
   };
 
-  // 2. Busca a letra/cifra (USANDO O PROXY)
+  // 2. Busca a letra/cifra
   const fetchSongContent = async (id) => {
     setLoading(true);
     try {
       const targetUrl = `https://api.vagalume.com.br/search.php?musid=${id}&apikey=${API_KEY}`;
-      
-      // Chamamos através do PROXY
-      const response = await fetch(PROXY + encodeURIComponent(targetUrl));
-      const data = await response.json();
+      const data = await fetchWithProxy(targetUrl);
       
       if (data.type === 'exact' || data.type === 'approx') {
         setSelectedSong({
@@ -70,6 +83,7 @@ export default function GlobalSearch() {
       }
     } catch (error) {
       console.error("Erro ao abrir música:", error);
+      alert("Não foi possível carregar a letra. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -79,13 +93,13 @@ export default function GlobalSearch() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       
       {/* --- CABEÇALHO --- */}
-      <header className="bg-white dark:bg-black/40 shadow-sm border-b border-gray-200 dark:border-gray-800 p-6 sticky top-0 z-10 backdrop-blur-md">
+      <header className="bg-white dark:bg-slate-900/90 shadow-sm border-b border-gray-200 dark:border-gray-800 p-6 sticky top-0 z-10 backdrop-blur-md transition-colors duration-300">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <Link to="/" className="flex items-center gap-2 text-gray-500 hover:text-orange-600 transition font-medium">
+          <Link to="/" className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-orange-600 transition font-medium">
             <ArrowLeft size={18} /> Voltar
           </Link>
-          <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
-            <span className="text-orange-600">Mini</span> Cifra Club <Globe size={22} className="text-orange-500" />
+          <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-2 text-sky-500">
+            Cifra <span className="text-sky-400">Tocando Pra Valer</span> <Globe size={22} className="text-sky-400" />
           </h1>
           <div className="w-20"></div>
         </div>

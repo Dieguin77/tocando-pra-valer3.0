@@ -3,12 +3,33 @@
 :root {
   --primary: #0099ff;
   --primary-dark: #0077cc;
+  --primary-light: #00c3ff;
   --secondary: #ff6b35;
   --text: #ffffff;
-  --text-secondary: #888888;
+  --text-main: #121212;
+  --text-secondary: #555555;
+  --bg-main: #ffffff;
+  --bg-card: #f5f5f5;
   --bg-dark: #050505;
   --bg-darker: #000000;
+  --border-color: #e0e0e0;
+  --glass-bg: rgba(0, 0, 0, 0.05);
+  --btn-bg: #f0f0f0;
+  --btn-text: #000;
   --accent: #fbbf24;
+}
+
+/* Modo Escuro */
+body.dark-mode,
+html.dark {
+  --bg-main: #000000;
+  --bg-card: #0c0c0c;
+  --text-main: #ffffff;
+  --text-secondary: #bdbdbd;
+  --border-color: #333333;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --btn-bg: #222222;
+  --btn-text: #ffffff;
 }
 
 @keyframes blob {

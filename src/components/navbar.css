@@ -2,15 +2,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--bg-card);
+  background-color: #ffffff;
   padding: 1rem;
-  border-bottom: 1px solid var(--border-color);
-  transition: background-color 0.3s ease;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+}
+
+/* Modo escuro para navbar */
+.dark .navbar,
+.dark-mode .navbar {
+  background-color: #0f172a;
+  border-bottom-color: #334155;
 }
 
 .navbar-logo img {
@@ -29,14 +36,19 @@
 }
 
 .navbar-links a {
-  color: var(--text-main);
+  color: #1f2937;
   text-decoration: none;
   font-size: 1.1rem;
   transition: color 0.3s ease;
 }
 
+.dark .navbar-links a,
+.dark-mode .navbar-links a {
+  color: #ffffff;
+}
+
 .navbar-links a:hover {
-  color: var(--primary);
+  color: var(--primary, #0099ff);
   text-decoration: underline;
 }
 

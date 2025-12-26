@@ -122,7 +122,6 @@
 }
 
 .nav-link {
-  color: #bdbdbd;
   text-decoration: none;
   font-size: 0.85rem;
   transition: color 0.3s;
@@ -136,7 +135,7 @@
 }
 
 .nav-link:hover {
-  color: #fff;
+  opacity: 0.8;
 }
 
 .nav-cta {
@@ -202,7 +201,6 @@
 
 .hero-subtitle {
   font-size: 1.2rem;
-  color: #888;
   max-width: 600px;
   margin: 0 auto 40px auto;
   line-height: 1.6;
@@ -211,22 +209,17 @@
 
 /* Botão Principal Pulsante */
 .main-cta-button {
-  background: var(--primary);
-  color: white;
   padding: 18px 50px;
   font-size: 1.2rem;
   font-weight: bold;
   border-radius: 50px;
   text-decoration: none;
   display: inline-block;
-  box-shadow: 0 0 20px rgba(0, 153, 255, 0.3);
   transition: all 0.3s;
-  animation: pulse 3s infinite;
 }
 
 .main-cta-button:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 40px rgba(0, 153, 255, 0.6);
 }
 
 /* --- GRID DE FEATURES (VISUAL CLEAN) --- */
@@ -272,24 +265,25 @@
 }
 
 .feature-box p {
-  color: #999;
   line-height: 1.5;
   margin: 0;
 }
 
 /* --- FOOTER --- */
 .site-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 60px 20px;
   text-align: center;
-  color: #555;
   margin-top: 60px;
-  background: #050505;
+}
+
+/* Modo escuro */
+.dark .site-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .footer-logo {
   font-weight: bold;
-  color: white;
   margin-bottom: 10px;
   display: block;
 }
@@ -317,18 +311,15 @@
 
 .gallery-section {
   padding: 80px 20px;
-  background-color: var(--bg-card);
   text-align: center;
 }
 
 .gallery-title {
   font-size: 2.5rem;
-  color: var(--text-main);
   margin-bottom: 10px;
 }
 
 .gallery-subtitle {
-  color: var(--text-secondary);
   margin-bottom: 50px;
   font-size: 1.1rem;
 }
@@ -413,8 +404,6 @@
 
 /* --- 2. FAIXA DE ESTATÍSTICAS --- */
 .stats-bar {
-  background: var(--bg-main);
-  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-around;
   padding: 40px 20px;
@@ -430,12 +419,9 @@
   display: block;
   font-size: 3rem;
   font-weight: 900;
-  color: var(--primary);
-  text-shadow: 0 0 15px rgba(0, 153, 255, 0.4);
 }
 
 .stat-label {
-  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.9rem;
@@ -444,18 +430,15 @@
 /* --- 3. SEÇÃO BENEFÍCIOS --- */
 .benefits-section {
   padding: 100px 20px;
-  background: var(--bg-main);
   text-align: center;
 }
 
 .section-title {
   font-size: 2.5rem;
-  color: var(--text-main);
   margin-bottom: 10px;
 }
 
 .section-subtitle {
-  color: var(--text-secondary);
   margin-bottom: 60px;
 }
 
@@ -468,17 +451,13 @@
 }
 
 .benefit-card {
-  background: var(--bg-card);
   padding: 40px;
   border-radius: 20px;
-  border: 1px solid var(--border-color);
   transition: 0.3s;
 }
 
 .benefit-card:hover {
   transform: translateY(-10px);
-  border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(0, 153, 255, 0.1);
 }
 
 .benefit-icon {
@@ -491,13 +470,11 @@
 }
 
 .benefit-card h3 {
-  color: var(--text-main);
   margin-bottom: 15px;
   font-size: 1.5rem;
 }
 
 .benefit-card p {
-  color: var(--text-secondary);
   line-height: 1.6;
 }
 
@@ -507,7 +484,6 @@
   align-items: center;
   justify-content: space-between;
   padding: 100px 5%;
-  background: var(--bg-main);
   max-width: 1400px;
   margin: 0 auto;
   gap: 50px;
@@ -521,7 +497,6 @@
 
 .feature-content h2 {
   font-size: 2.5rem;
-  color: var(--text-main);
   margin-bottom: 30px;
 }
 
@@ -532,18 +507,14 @@
 
 .feature-list li {
   margin-bottom: 25px;
-  color: var(--text-secondary);
   font-size: 1.1rem;
   line-height: 1.5;
-  border-left: 3px solid var(--primary);
-  padding-left: 20px;
   display: flex;
   align-items: flex-start;
   gap: 12px;
 }
 
 .feature-list li strong {
-  color: var(--text-main);
   display: block;
   font-size: 1.2rem;
   margin-bottom: 5px;
@@ -557,55 +528,41 @@
 .feature-image img {
   width: 100%;
   border-radius: 20px;
-  box-shadow: -20px 20px 0px rgba(0, 153, 255, 0.1); /* Efeito visual chique */
 }
 
 /* --- 6. CTA FINAL --- */
 .final-cta {
   padding: 100px 20px;
   text-align: center;
-  background: var(--bg-main);
-  border-top: 1px solid var(--border-color);
 }
 
 .final-cta h2 {
   font-size: 3rem;
-  color: var(--text-main);
   margin-bottom: 20px;
 }
 
 .final-cta p {
-  color: var(--text-secondary);
   font-size: 1.2rem;
   margin-bottom: 40px;
 }
 
 .cta-button-large {
-  background: var(--primary);
-  color: white;
   padding: 20px 60px;
   font-size: 1.5rem;
   font-weight: bold;
   border-radius: 50px;
   text-decoration: none;
-  box-shadow: 0 0 30px rgba(0, 153, 255, 0.5);
   transition: 0.3s;
   display: inline-block;
 }
 
 .cta-button-large:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 50px rgba(0, 153, 255, 0.8);
-  background: var(--text-main);
-  color: var(--primary);
 }
 
 .site-footer {
   padding: 40px;
   text-align: center;
-  color: var(--text-secondary);
-  background: var(--bg-main);
-  border-top: 1px solid var(--border-color);
 }
 
 /* Responsividade */
@@ -622,7 +579,6 @@
 
 .videos-section {
   padding: 100px 20px;
-  background: var(--bg-main);
   text-align: center;
 }
 
@@ -636,20 +592,16 @@
 }
 
 .video-card {
-  background: var(--bg-card);
   border-radius: 15px;
   overflow: hidden;
-  border: 1px solid var(--border-color);
   transition: 0.3s;
 }
 
 .video-card:hover {
-  border-color: var(--primary);
-  box-shadow: 0 5px 20px rgba(0, 153, 255, 0.2);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 
 .video-card h3 {
-  color: var(--text-main);
   font-size: 1.1rem;
   padding: 15px;
   margin: 0;
@@ -685,19 +637,15 @@
 
 .site-footer {
   padding: 60px 20px 40px;
-  background: var(--bg-main);
-  border-top: 1px solid var(--border-color);
   text-align: center;
 }
 
 .footer-title {
-  color: var(--text-main);
   font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
 .footer-content p {
-  color: var(--text-secondary);
   margin-bottom: 30px;
 }
 
@@ -769,8 +717,22 @@
 }
 
 .footer-copyright {
-  border-top: 1px solid var(--border-color);
   padding-top: 20px;
   font-size: 0.85rem;
-  color: var(--text-secondary);
+}
+
+/* --- DROPDOWN ÁREA DO ALUNO --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out forwards;
 }
