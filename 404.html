@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/tocando-pra-valer3.0/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-default>Vite + React</title>
+    <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+    <script>
+      (function() {
+        try {
+          const saved = localStorage.getItem('theme');
+          let theme = saved;
+          if (!theme) {
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            theme = prefersDark ? 'dark' : 'light';
+          }
+          const apply = (el) => {
+            if (!el) return;
+            if (theme === 'dark') el.classList.add('dark-mode');
+            else el.classList.remove('dark-mode');
+          };
+          apply(document.documentElement);
+          if (document.body) apply(document.body);
+          else document.addEventListener('DOMContentLoaded', () => apply(document.body));
+        } catch (e) {}
+      })();
+    </script>
+  <script type="module" crossorigin src="/tocando-pra-valer3.0/assets/index-CSbTkHJE.js"></script>
+  <link rel="stylesheet" crossorigin href="/tocando-pra-valer3.0/assets/index-BfCyg1GM.css">
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
