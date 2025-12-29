@@ -1,10 +1,7 @@
 import { useState } from 'react';
-import { useTheme } from '../contexts/ThemeContext';
-import EmojiIcon from './EmojiIcon';
-import './UploadCifra.css';
+import { Music, Mic, FileText, Send, Loader2, CheckCircle, AlertCircle, Info } from 'lucide-react';
 
 export default function UploadCifra({ onCifraSubmitted }) {
-  const { theme } = useTheme();
   const [formData, setFormData] = useState({
     titulo: '',
     artista: '',
@@ -41,7 +38,6 @@ export default function UploadCifra({ onCifraSubmitted }) {
       ...prev,
       [name]: value,
     }));
-    // Limpar erro do campo quando usuário começa a digitar
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -60,18 +56,16 @@ export default function UploadCifra({ onCifraSubmitted }) {
     setLoading(true);
 
     try {
-      // Simular delay de processamento
       await new Promise(resolve => setTimeout(resolve, 500));
 
       const cifraPendente = {
         id: `cifra_${Date.now()}`,
         ...formData,
         dataCriacao: new Date().toISOString(),
-        status: 'pendente', // pendente, aprovado, rejeitado
-        musicoEmail: '', // Pode ser adicionado se houver autenticação
+        status: 'pendente',
+        musicoEmail: '',
       };
 
-      // Salvar no localStorage
       const cifraspendentes = JSON.parse(
         localStorage.getItem('cifrasPendentes') || '[]'
       );
@@ -93,7 +87,6 @@ export default function UploadCifra({ onCifraSubmitted }) {
         onCifraSubmitted(cifraPendente);
       }
 
-      // Limpar mensagem de sucesso após 3 segundos
       setTimeout(() => setSuccess(false), 3000);
     } catch (error) {
       console.error('Erro ao enviar cifra:', error);
@@ -103,104 +96,166 @@ export default function UploadCifra({ onCifraSubmitted }) {
     }
   };
 
+  const inputStyle = {
+    background: 'rgba(0, 0, 0, 0.4)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    borderRadius: '12px',
+    padding: '12px 16px',
+    color: '#fff',
+    fontSize: '1rem',
+    width: '100%',
+    outline: 'none',
+    transition: 'all 0.3s ease',
+  };
+
+  const inputErrorStyle = {
+    ...inputStyle,
+    borderColor: '#ff4444',
+  };
+
+  const labelStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    marginBottom: '8px',
+    fontWeight: '600',
+    color: 'rgba(255, 255, 255, 0.9)',
+  };
+
   return (
-    <div className={`upload-cifra-container ${theme}`}>
-      <div className="upload-header">
-        <h2>
-          <EmojiIcon emoji="🎸" /> Enviar Cifra
+    <div 
+      className="rounded-2xl p-6"
+      style={{
+        background: 'rgba(15, 15, 25, 0.8)',
+        border: '1px solid rgba(0, 255, 136, 0.2)',
+      }}
+    >
+      <div className="mb-6">
+        <h2 className="text-xl font-bold text-white flex items-center gap-2 mb-2">
+          <Music size={24} style={{ color: '#00ff88' }} />
+          Enviar Cifra
         </h2>
-        <p>Compartilhe suas cifras com a comunidade</p>
+        <p style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
+          Compartilhe suas cifras com a comunidade
+        </p>
       </div>
 
       {success && (
-        <div className="success-message">
-          <EmojiIcon emoji="✅" /> Cifra enviada com sucesso! Obrigado por contribuir 🎵
+        <div 
+          className="flex items-center gap-3 p-4 rounded-xl mb-6"
+          style={{
+            background: 'rgba(0, 255, 136, 0.1)',
+            border: '1px solid rgba(0, 255, 136, 0.3)',
+          }}
+        >
+          <CheckCircle size={20} style={{ color: '#00ff88' }} />
+          <span style={{ color: '#00ff88' }}>Cifra enviada com sucesso! Obrigado por contribuir 🎵</span>
         </div>
       )}
 
       {errors.submit && (
-        <div className="error-message">
-          <EmojiIcon emoji="❌" /> {errors.submit}
+        <div 
+          className="flex items-center gap-3 p-4 rounded-xl mb-6"
+          style={{
+            background: 'rgba(255, 68, 68, 0.1)',
+            border: '1px solid rgba(255, 68, 68, 0.3)',
+          }}
+        >
+          <AlertCircle size={20} style={{ color: '#ff4444' }} />
+          <span style={{ color: '#ff6666' }}>{errors.submit}</span>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="upload-form">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Linha 1: Título e Artista */}
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="titulo">
-              <EmojiIcon emoji="🎵" /> Título da Música *
+        <div className="grid md:grid-cols-2 gap-4">
+          <div>
+            <label style={labelStyle}>
+              <Music size={16} style={{ color: '#00f5ff' }} /> Título da Música *
             </label>
             <input
               type="text"
-              id="titulo"
               name="titulo"
               value={formData.titulo}
               onChange={handleChange}
               placeholder="Ex: Aleluia"
-              className={errors.titulo ? 'error' : ''}
+              style={errors.titulo ? inputErrorStyle : inputStyle}
+              onFocus={(e) => e.target.style.borderColor = '#00f5ff'}
+              onBlur={(e) => e.target.style.borderColor = errors.titulo ? '#ff4444' : 'rgba(255, 255, 255, 0.1)'}
             />
-            {errors.titulo && <span className="field-error">{errors.titulo}</span>}
+            {errors.titulo && (
+              <span className="text-xs mt-1 block" style={{ color: '#ff6666' }}>{errors.titulo}</span>
+            )}
           </div>
 
-          <div className="form-group">
-            <label htmlFor="artista">
-              <EmojiIcon emoji="🎤" /> Artista *
+          <div>
+            <label style={labelStyle}>
+              <Mic size={16} style={{ color: '#bf00ff' }} /> Artista *
             </label>
             <input
               type="text"
-              id="artista"
               name="artista"
               value={formData.artista}
               onChange={handleChange}
               placeholder="Ex: Gabriela Rocha"
-              className={errors.artista ? 'error' : ''}
+              style={errors.artista ? inputErrorStyle : inputStyle}
+              onFocus={(e) => e.target.style.borderColor = '#bf00ff'}
+              onBlur={(e) => e.target.style.borderColor = errors.artista ? '#ff4444' : 'rgba(255, 255, 255, 0.1)'}
             />
-            {errors.artista && <span className="field-error">{errors.artista}</span>}
+            {errors.artista && (
+              <span className="text-xs mt-1 block" style={{ color: '#ff6666' }}>{errors.artista}</span>
+            )}
           </div>
         </div>
 
         {/* Linha 2: Compositor, Tom, Dificuldade */}
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="compositor">
-              <EmojiIcon emoji="✏️" /> Compositor
+        <div className="grid md:grid-cols-3 gap-4">
+          <div>
+            <label style={labelStyle}>
+              ✏️ Compositor
             </label>
             <input
               type="text"
-              id="compositor"
               name="compositor"
               value={formData.compositor}
               onChange={handleChange}
               placeholder="Ex: Gabriela Rocha"
+              style={inputStyle}
+              onFocus={(e) => e.target.style.borderColor = '#00f5ff'}
+              onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="tom">
-              <EmojiIcon emoji="🎹" /> Tom
+          <div>
+            <label style={labelStyle}>
+              🎹 Tom
             </label>
-            <select id="tom" name="tom" value={formData.tom} onChange={handleChange}>
+            <select 
+              name="tom" 
+              value={formData.tom} 
+              onChange={handleChange}
+              style={inputStyle}
+            >
               {tons.map(t => (
-                <option key={t} value={t}>
+                <option key={t} value={t} style={{ background: '#0a0a0f', color: '#fff' }}>
                   {t}
                 </option>
               ))}
             </select>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="dificuldade">
-              <EmojiIcon emoji="📊" /> Dificuldade
+          <div>
+            <label style={labelStyle}>
+              📊 Dificuldade
             </label>
             <select
-              id="dificuldade"
               name="dificuldade"
               value={formData.dificuldade}
               onChange={handleChange}
+              style={inputStyle}
             >
               {dificuldades.map(d => (
-                <option key={d} value={d.toLowerCase()}>
+                <option key={d} value={d.toLowerCase()} style={{ background: '#0a0a0f', color: '#fff' }}>
                   {d}
                 </option>
               ))}
@@ -209,62 +264,85 @@ export default function UploadCifra({ onCifraSubmitted }) {
         </div>
 
         {/* Cifra */}
-        <div className="form-group full-width">
-          <label htmlFor="cifra">
-            <EmojiIcon emoji="📝" /> Cifra (com acordes) *
+        <div>
+          <label style={labelStyle}>
+            <FileText size={16} style={{ color: '#00ff88' }} /> Cifra (com acordes) *
           </label>
           <textarea
-            id="cifra"
             name="cifra"
             value={formData.cifra}
             onChange={handleChange}
-            placeholder="Cole a cifra aqui. Ex:&#10;C      F&#10;Aleluia, aleluia&#10;Am     G&#10;Que reina em meu coração"
-            rows="12"
-            className={`cifra-textarea ${errors.cifra ? 'error' : ''}`}
+            placeholder={`Cole a cifra aqui. Ex:\nC      F\nAleluia, aleluia\nAm     G\nQue reina em meu coração`}
+            rows="10"
+            style={{
+              ...inputStyle,
+              ...(errors.cifra ? { borderColor: '#ff4444' } : {}),
+              fontFamily: 'monospace',
+              resize: 'vertical',
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#00ff88'}
+            onBlur={(e) => e.target.style.borderColor = errors.cifra ? '#ff4444' : 'rgba(255, 255, 255, 0.1)'}
           />
-          <div className="char-count">
-            {formData.cifra.length} caracteres
+          <div className="flex justify-between mt-2">
+            <span className="text-xs" style={{ color: 'rgba(255, 255, 255, 0.4)' }}>
+              {formData.cifra.length} caracteres
+            </span>
+            {errors.cifra && (
+              <span className="text-xs" style={{ color: '#ff6666' }}>{errors.cifra}</span>
+            )}
           </div>
-          {errors.cifra && <span className="field-error">{errors.cifra}</span>}
         </div>
 
         {/* Comentários */}
-        <div className="form-group full-width">
-          <label htmlFor="comentarios">
-            <EmojiIcon emoji="💬" /> Comentários (opcional)
+        <div>
+          <label style={labelStyle}>
+            💬 Comentários (opcional)
           </label>
           <textarea
-            id="comentarios"
             name="comentarios"
             value={formData.comentarios}
             onChange={handleChange}
             placeholder="Ex: Essa é a versão simplificada, toque com cuidado no refrão..."
-            rows="4"
+            rows="3"
+            style={inputStyle}
+            onFocus={(e) => e.target.style.borderColor = '#00f5ff'}
+            onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
           />
         </div>
 
         {/* Botão de Envio */}
-        <div className="form-actions">
-          <button
-            type="submit"
-            disabled={loading}
-            className="btn-submit"
-          >
-            {loading ? (
-              <>
-                <EmojiIcon emoji="⏳" /> Enviando...
-              </>
-            ) : (
-              <>
-                <EmojiIcon emoji="🚀" /> Enviar Cifra
-              </>
-            )}
-          </button>
-        </div>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full py-4 rounded-xl font-bold text-lg transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3"
+          style={{
+            background: loading ? 'rgba(0, 255, 136, 0.3)' : 'linear-gradient(135deg, #00ff88, #00f5ff)',
+            color: loading ? 'rgba(255, 255, 255, 0.7)' : '#000',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            boxShadow: loading ? 'none' : '0 4px 20px rgba(0, 255, 136, 0.3)',
+          }}
+        >
+          {loading ? (
+            <>
+              <Loader2 size={20} className="animate-spin" /> Enviando...
+            </>
+          ) : (
+            <>
+              <Send size={20} /> Enviar Cifra
+            </>
+          )}
+        </button>
 
-        <div className="form-info">
-          <p>
-            <EmojiIcon emoji="ℹ️" /> Sua cifra será <strong>revisada</strong> antes de ser publicada.
+        <div 
+          className="flex items-start gap-3 p-4 rounded-xl"
+          style={{
+            background: 'rgba(0, 245, 255, 0.1)',
+            border: '1px solid rgba(0, 245, 255, 0.2)',
+          }}
+        >
+          <Info size={18} style={{ color: '#00f5ff', flexShrink: 0, marginTop: '2px' }} />
+          <p className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+            Sua cifra será <strong style={{ color: '#00f5ff' }}>revisada</strong> antes de ser publicada.
             Certifique-se de que está correta!
           </p>
         </div>
@@ -272,3 +350,4 @@ export default function UploadCifra({ onCifraSubmitted }) {
     </div>
   );
 }
+

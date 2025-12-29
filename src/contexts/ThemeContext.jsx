@@ -7,11 +7,7 @@ export const ThemeProvider = ({ children }) => {
   // Estado para guardar o tema. Começa verificando o localStorage
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) return savedTheme;
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
+    return savedTheme || 'light';
   });
 
   // Efeito que roda sempre que o 'theme' muda

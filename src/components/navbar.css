@@ -1,23 +1,189 @@
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #ffffff;
-  padding: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+/* ============================================
+   🚀 NAVBAR HIGH-TECH
+   ============================================ */
+
+.navbar-hightech {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+  padding: 0 2rem;
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Modo escuro para navbar */
-.dark .navbar,
-.dark-mode .navbar {
-  background-color: #0f172a;
-  border-bottom-color: #334155;
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+/* Logo */
+.navbar-logo-hightech {
+  flex-shrink: 0;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.logo-glow {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-glow::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00f5ff, #bf00ff);
+  opacity: 0.5;
+  filter: blur(8px);
+  transition: opacity 0.3s ease;
+}
+
+.logo-link:hover .logo-glow::before {
+  opacity: 0.8;
+}
+
+.logo-glow img {
+  position: relative;
+  height: 40px;
+  width: auto;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.logo-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+.logo-text .text-gradient {
+  background: linear-gradient(135deg, #00f5ff, #bf00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Links de navegação */
+.navbar-links-hightech {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+}
+
+.nav-item-hightech {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.nav-item-hightech:hover {
+  color: #00f5ff;
+  background: rgba(0, 245, 255, 0.1);
+  border-color: rgba(0, 245, 255, 0.2);
+}
+
+.nav-item-hightech.featured {
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.15), rgba(191, 0, 255, 0.15));
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  color: #00f5ff;
+}
+
+.nav-item-hightech.featured:hover {
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.25), rgba(191, 0, 255, 0.25));
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.nav-item-hightech svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .navbar-hightech {
+    padding: 0 1rem;
+  }
+
+  .navbar-container {
+    height: 60px;
+  }
+  
+  .logo-text {
+    display: none;
+  }
+  
+  .navbar-links-hightech {
+    gap: 4px;
+  }
+  
+  .nav-item-hightech {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .nav-item-hightech span {
+    display: none;
+  }
+  
+  .nav-item-hightech svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* ============================================
+   🎭 NAVBAR ANTIGA (COMPATIBILIDADE)
+   ============================================ */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(20px);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  gap: 2rem;
+}
+
+.navbar-logo {
+  flex-shrink: 0;
 }
 
 .navbar-logo img {
@@ -29,31 +195,25 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  flex: 1;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 .navbar-links li {
-  margin-left: 1.5rem;
+  margin: 0;
 }
 
 .navbar-links a {
-  color: #1f2937;
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  font-size: 1.1rem;
-  transition: color 0.3s ease;
-}
-
-.dark .navbar-links a,
-.dark-mode .navbar-links a {
-  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 8px;
 }
 
 .navbar-links a:hover {
-  color: var(--primary, #0099ff);
-  text-decoration: underline;
-}
-
-.navbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  color: #00f5ff;
+  background: rgba(0, 245, 255, 0.1);
 }

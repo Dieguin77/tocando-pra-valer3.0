@@ -4,8 +4,8 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  border: 2px solid var(--border-color, #e0e0e0);
-  background: var(--btn-bg, #f0f0f0);
+  border: 2px solid #e0e0e0;
+  background: #f0f0f0;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -15,9 +15,24 @@
   z-index: 1000;
 }
 
+/* Modo escuro */
+.dark .theme-toggle-btn,
+.dark-mode .theme-toggle-btn,
+body.dark-mode .theme-toggle-btn {
+  border-color: #333333;
+  background: #222222;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
 .theme-toggle-btn:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.dark .theme-toggle-btn:hover,
+.dark-mode .theme-toggle-btn:hover,
+body.dark-mode .theme-toggle-btn:hover {
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
 }
 
 .theme-toggle-btn:active {
@@ -27,8 +42,14 @@
 .theme-toggle-btn .icon {
   width: 28px;
   height: 28px;
-  color: var(--text-main, #121212);
+  color: #121212;
   transition: transform 0.3s ease;
+}
+
+.dark .theme-toggle-btn .icon,
+.dark-mode .theme-toggle-btn .icon,
+body.dark-mode .theme-toggle-btn .icon {
+  color: #ffffff;
 }
 
 .theme-toggle-btn:hover .icon {

@@ -1,60 +1,541 @@
 @import "tailwindcss";
 
+/* ============================================
+   🚀 HIGH-TECH DESIGN SYSTEM
+   Tocando Pra Valer - Futuristic Music Platform
+   ============================================ */
+
 :root {
-  --primary: #0099ff;
-  --primary-dark: #0077cc;
-  --primary-light: #00c3ff;
-  --secondary: #ff6b35;
-  --text: #ffffff;
-  --text-main: #121212;
-  --text-secondary: #555555;
-  --bg-main: #ffffff;
-  --bg-card: #f5f5f5;
-  --bg-dark: #050505;
-  --bg-darker: #000000;
-  --border-color: #e0e0e0;
-  --glass-bg: rgba(0, 0, 0, 0.05);
-  --btn-bg: #f0f0f0;
-  --btn-text: #000;
-  --accent: #fbbf24;
+  /* 🎨 Cores Neon Primárias */
+  --neon-cyan: #00f5ff;
+  --neon-purple: #bf00ff;
+  --neon-pink: #ff006e;
+  --neon-blue: #0066ff;
+  --neon-green: #00ff88;
+  --neon-orange: #ff6b00;
+  --neon-yellow: #ffd000;
+  
+  /* 🌑 Cores de Fundo Dark */
+  --bg-dark: #0a0a0f;
+  --bg-darker: #050508;
+  --bg-card: rgba(15, 15, 25, 0.8);
+  --bg-card-hover: rgba(25, 25, 45, 0.9);
+  
+  /* ✨ Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  
+  /* 📝 Texto */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.4);
+  
+  /* 🎵 Cores Musicais */
+  --music-gold: #ffd700;
+  --music-silver: #c0c0c0;
+  --tuner-green: #00ff88;
+  --tuner-yellow: #ffd000;
+  --tuner-red: #ff4444;
+  
+  /* 🔲 Gradientes */
+  --gradient-primary: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  --gradient-warm: linear-gradient(135deg, var(--neon-orange), var(--neon-pink));
+  --gradient-cool: linear-gradient(135deg, var(--neon-blue), var(--neon-cyan));
+  --gradient-dark: linear-gradient(180deg, var(--bg-dark), var(--bg-darker));
+  --gradient-card: linear-gradient(145deg, rgba(30, 30, 50, 0.6), rgba(10, 10, 20, 0.8));
+  
+  /* ⚡ Efeitos */
+  --glow-cyan: 0 0 20px rgba(0, 245, 255, 0.5);
+  --glow-purple: 0 0 20px rgba(191, 0, 255, 0.5);
+  --glow-green: 0 0 20px rgba(0, 255, 136, 0.5);
+  --glow-orange: 0 0 20px rgba(255, 107, 0, 0.5);
+  
+  /* 📐 Spacing & Sizing */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
 }
 
-/* Modo Escuro */
-body.dark-mode,
-html.dark {
-  --bg-main: #000000;
-  --bg-card: #0c0c0c;
-  --text-main: #ffffff;
-  --text-secondary: #bdbdbd;
-  --border-color: #333333;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --btn-bg: #222222;
-  --btn-text: #ffffff;
-}
+/* ============================================
+   🎬 ANIMAÇÕES HIGH-TECH
+   ============================================ */
 
 @keyframes blob {
-	0% {
-		transform: translate(0px, 0px) scale(1);
-	}
-	33% {
-		transform: translate(30px, -50px) scale(1.1);
-	}
-	66% {
-		transform: translate(-20px, 20px) scale(0.9);
-	}
-	100% {
-		transform: translate(0px, 0px) scale(1);
-	}
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
 }
 
-.animate-blob {
-	animation: blob 7s infinite;
+@keyframes pulse-neon {
+  0%, 100% { 
+    box-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+  }
+  50% { 
+    box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan);
+  }
 }
 
-.animation-delay-2000 {
-  animation-delay: 2s;
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.animation-delay-4000 {
-  animation-delay: 4s;
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes wave-animation {
+  0% { transform: scaleY(0.5); }
+  50% { transform: scaleY(1); }
+  100% { transform: scaleY(0.5); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: var(--neon-cyan); }
+  33% { border-color: var(--neon-purple); }
+  66% { border-color: var(--neon-pink); }
+}
+
+@keyframes textGlow {
+  0%, 100% { 
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+  }
+  50% { 
+    text-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan), 0 0 60px var(--neon-cyan);
+  }
+}
+
+/* ============================================
+   🎨 CLASSES DE ANIMAÇÃO
+   ============================================ */
+
+.animate-blob { animation: blob 7s infinite; }
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+.animate-pulse-neon { animation: pulse-neon 2s ease-in-out infinite; }
+.animate-gradient { animation: gradient-shift 3s ease infinite; background-size: 200% 200%; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-glow { animation: glow-pulse 2s ease-in-out infinite; }
+.animate-rotate { animation: rotate-slow 20s linear infinite; }
+.animate-shimmer { 
+  animation: shimmer 2s infinite;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 200% 100%;
+}
+.animate-border-glow { animation: borderGlow 3s infinite; }
+.animate-text-glow { animation: textGlow 2s ease-in-out infinite; }
+
+/* ============================================
+   🖼️ ESTILOS GLOBAIS
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg-darker);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--gradient-dark);
+  color: var(--text-primary);
+  font-family: 'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   🃏 GLASSMORPHISM CARDS
+   ============================================ */
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-card-hover {
+  transition: all 0.3s ease;
+}
+
+.glass-card-hover:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--neon-cyan);
+  box-shadow: var(--glow-cyan), var(--glass-shadow);
+  transform: translateY(-4px);
+}
+
+/* ============================================
+   🔘 BOTÕES HIGH-TECH
+   ============================================ */
+
+.btn-neon {
+  position: relative;
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-neon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--neon-cyan);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-neon:hover {
+  color: var(--bg-dark);
+  box-shadow: var(--glow-cyan);
+  transform: scale(1.05);
+}
+
+.btn-neon:hover::before {
+  opacity: 1;
+}
+
+.btn-neon span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-gradient {
+  padding: 14px 32px;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 245, 255, 0.3);
+}
+
+.btn-gradient:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 245, 255, 0.5);
+}
+
+.btn-glow {
+  position: relative;
+  padding: 14px 32px;
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: var(--gradient-primary);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-glow:hover::after {
+  opacity: 1;
+}
+
+/* ============================================
+   📊 TECH DISPLAYS & METERS
+   ============================================ */
+
+.tech-display {
+  background: linear-gradient(145deg, rgba(0, 10, 20, 0.9), rgba(0, 5, 15, 0.95));
+  border: 1px solid var(--neon-cyan);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: 
+    inset 0 0 20px rgba(0, 245, 255, 0.1),
+    0 0 30px rgba(0, 245, 255, 0.2);
+}
+
+.led-display {
+  font-family: 'Courier New', 'Monaco', monospace;
+  font-weight: bold;
+  color: var(--neon-green);
+  text-shadow: 0 0 10px var(--neon-green);
+  letter-spacing: 2px;
+}
+
+.meter-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.meter-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, 
+    var(--tuner-green) 0%, 
+    var(--tuner-yellow) 50%, 
+    var(--tuner-red) 100%
+  );
+  transform-origin: left;
+}
+
+/* ============================================
+   🌊 VISUALIZADORES DE ÁUDIO
+   ============================================ */
+
+.audio-wave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 40px;
+}
+
+.audio-wave .bar {
+  width: 4px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+  animation: wave-animation 0.5s ease-in-out infinite;
+}
+
+.audio-wave .bar:nth-child(1) { animation-delay: 0s; height: 60%; }
+.audio-wave .bar:nth-child(2) { animation-delay: 0.1s; height: 80%; }
+.audio-wave .bar:nth-child(3) { animation-delay: 0.2s; height: 100%; }
+.audio-wave .bar:nth-child(4) { animation-delay: 0.3s; height: 80%; }
+.audio-wave .bar:nth-child(5) { animation-delay: 0.4s; height: 60%; }
+
+/* ============================================
+   🎯 CÍRCULOS FUTURISTAS
+   ============================================ */
+
+.tech-circle {
+  position: relative;
+  border-radius: 50%;
+  background: var(--gradient-card);
+  border: 2px solid var(--glass-border);
+}
+
+.tech-circle::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px dashed var(--neon-cyan);
+  opacity: 0.5;
+  animation: rotate-slow 20s linear infinite;
+}
+
+.tech-circle::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid var(--neon-purple);
+  opacity: 0.3;
+  animation: rotate-slow 30s linear infinite reverse;
+}
+
+/* ============================================
+   📱 GRADIENTES DE TEXTO
+   ============================================ */
+
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-warm {
+  background: var(--gradient-warm);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-neon {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+}
+
+/* ============================================
+   🔲 GRID FUTURISTA
+   ============================================ */
+
+.cyber-grid {
+  background-image: 
+    linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.scan-lines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+  pointer-events: none;
+}
+
+/* ============================================
+   🎚️ INPUTS HIGH-TECH
+   ============================================ */
+
+.input-tech {
+  background: rgba(0, 10, 20, 0.8);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-tech:focus {
+  outline: none;
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.2);
+}
+
+.input-tech::placeholder {
+  color: var(--text-muted);
+}
+
+/* ============================================
+   🏷️ BADGES & TAGS
+   ============================================ */
+
+.badge-tech {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 245, 255, 0.1);
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+
+.badge-success {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+}
+
+.badge-warning {
+  background: rgba(255, 208, 0, 0.1);
+  border-color: var(--neon-yellow);
+  color: var(--neon-yellow);
+}
+
+.badge-danger {
+  background: rgba(255, 68, 68, 0.1);
+  border-color: var(--tuner-red);
+  color: var(--tuner-red);
+}
+
+/* ============================================
+   🌐 SCROLLBAR PERSONALIZADA
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--neon-cyan), var(--neon-purple));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-cyan);
+}
+
+/* ============================================
+   💫 SELEÇÃO DE TEXTO
+   ============================================ */
+
+::selection {
+  background: var(--neon-cyan);
+  color: var(--bg-dark);
+}
+
+/* ============================================
+   📱 RESPONSIVIDADE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .btn-neon, .btn-gradient {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+  
+  .tech-display {
+    padding: 15px;
+  }
 }

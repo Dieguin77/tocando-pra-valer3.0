@@ -1,79 +1,78 @@
-/* No seu arquivo src/pages/home.css */
-
-.home-container {
-  /* --- AQUI ESTÁ O SEGREDO --- */
-  /* Nós colocamos DOIS backgrounds separados por vírgula. */
-  /* O PRIMEIRO é o que fica por cima (o degradê azul transparente). */
-  /* O SEGUNDO é o que fica por baixo (a sua imagem). */
-
-  background-image:
-    /* Camada 1 (Topo): O Degradê Azul */
-    linear-gradient(
-      to bottom right,      /* Direção do degradê (canto superior esq. para inferior dir.) */
-      rgba(0, 50, 150, 0.8), /* Cor inicial: Azul médio, 80% visível */
-      rgba(0, 20, 60, 0.95)  /* Cor final: Azul bem escuro, 95% visível */
-    ),
-    /* Camada 2 (Fundo): A Imagem do instrumento */
-    url('../assets/imagem-fundo.jpg'); /* <--- TROQUE PELO CAMINHO DA SUA IMAGEM */
-
-
-  /* --- Propriedades para a imagem ficar perfeita --- */
-  background-size: cover;   /* Faz a imagem cobrir todo o espaço sem distorcer */
-  background-position: center; /* Centraliza a imagem */
-  background-repeat: no-repeat; /* Não repete a imagem se a tela for gigante */
-
-  /* Garante que o container ocupe a tela toda */
-  width: 100%;
-  min-height: 100vh; /* Altura mínima de 100% da tela */
-
-  /* (Opcional) Efeito Parallax: a imagem fica fixa enquanto você rola a página */
-  /* background-attachment: fixed; */
-
-  /* Estilos para centralizar o texto (provavelmente você já tem) */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white; /* Texto branco para contrastar */
-}/* src/pages/home.css */
-
-/* --- FUNDO IMERSIVO --- */
 /* src/pages/home.css */
 
+/* ============================================
+   🚀 HOME PAGE HIGH-TECH STYLES
+   ============================================ */
+
+/* --- NAV LINK HIGH-TECH --- */
+.nav-link-hightech {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-link-hightech:hover {
+  color: #00f5ff;
+  background: rgba(0, 245, 255, 0.1);
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* --- FUNDO ANTIGO (COMPATIBILIDADE) --- */
 .home-wrapper {
   min-height: 100vh;
-  
-  /* Gradiente Azul + Foto do Baixo */
-  background-image: 
-    linear-gradient(to bottom right, rgba(0, 50, 150, 0.85), rgba(0, 0, 0, 0.95)),
-    url('../assets/novo-fundo.jpg'); /* <--- Caminho para a nova foto do baixo */
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-
-  /* Resto das configurações... */
-  color: white;
+  background: linear-gradient(180deg, #0a0a0f, #050508);
+  color: #ffffff;
   font-family: 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
   position: relative;
 }
 
-/* --- MENU DE NAVEGAÇÃO (GLASSMORPHISM) --- */
+/* --- MENU DE NAVEGAÇÃO GLASS HIGH-TECH --- */
 .glass-nav {
-  position: fixed; /* Fixo no topo */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 10px 20px; /* Reduzido para mobile */
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* O efeito de vidro fosco chique */
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 245, 255, 0.1);
   z-index: 1000;
   box-sizing: border-box;
 }
@@ -99,7 +98,7 @@
   gap: 8px;
   font-weight: 700;
   font-size: 1.1rem;
-  color: white;
+  color: #ea580c;
   text-decoration: none;
 }
 
@@ -275,11 +274,8 @@
   padding: 60px 20px;
   text-align: center;
   margin-top: 60px;
-}
-
-/* Modo escuro */
-.dark .site-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: #f3f4f6;
+  color: #1f2937;
 }
 
 .footer-logo {
@@ -454,10 +450,14 @@
   padding: 40px;
   border-radius: 20px;
   transition: 0.3s;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
 }
 
 .benefit-card:hover {
   transform: translateY(-10px);
+  background: #ffffff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 .benefit-icon {
@@ -595,10 +595,13 @@
   border-radius: 15px;
   overflow: hidden;
   transition: 0.3s;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
 }
 
 .video-card:hover {
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
 }
 
 .video-card h3 {
@@ -606,6 +609,7 @@
   padding: 15px;
   margin: 0;
   text-align: left;
+  color: #1f2937;
 }
 
 /* --- O TRUQUE DO VÍDEO RESPONSIVO (16:9) --- */

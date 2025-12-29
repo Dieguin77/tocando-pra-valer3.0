@@ -20,9 +20,27 @@ import Navbar from "./components/Navbar";
 
 // 1. Layout Público (Só o Header Horizontal)
 const PublicLayout = () => (
-  <div className="min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-white transition-colors duration-300">
+  <div className="min-h-screen relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0a0a0f, #050508)' }}>
+    {/* Grid de fundo futurista */}
+    <div 
+      className="fixed inset-0 pointer-events-none opacity-30"
+      style={{
+        backgroundImage: `
+          linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px)
+        `,
+        backgroundSize: '50px 50px',
+      }}
+    />
+    {/* Efeitos de luz ambiente */}
+    <div className="fixed top-0 left-1/4 w-96 h-96 rounded-full opacity-20 pointer-events-none" 
+      style={{ background: 'radial-gradient(circle, rgba(0, 245, 255, 0.3), transparent)', filter: 'blur(80px)' }} 
+    />
+    <div className="fixed bottom-0 right-1/4 w-96 h-96 rounded-full opacity-20 pointer-events-none" 
+      style={{ background: 'radial-gradient(circle, rgba(191, 0, 255, 0.3), transparent)', filter: 'blur(80px)' }} 
+    />
     <Navbar />
-    <main className="pt-24">
+    <main className="pt-24 relative z-10">
       <Outlet />
     </main>
   </div>
@@ -30,9 +48,27 @@ const PublicLayout = () => (
 
 // 2. Layout da Plataforma (Com Navbar)
 const PlatformLayout = () => (
-  <div className="min-h-screen bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-white transition-colors duration-300">
+  <div className="min-h-screen relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0a0a0f, #050508)' }}>
+    {/* Grid de fundo futurista */}
+    <div 
+      className="fixed inset-0 pointer-events-none opacity-20"
+      style={{
+        backgroundImage: `
+          linear-gradient(rgba(0, 245, 255, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 245, 255, 0.05) 1px, transparent 1px)
+        `,
+        backgroundSize: '40px 40px',
+      }}
+    />
+    {/* Efeitos de luz ambiente */}
+    <div className="fixed top-20 right-0 w-80 h-80 rounded-full opacity-15 pointer-events-none" 
+      style={{ background: 'radial-gradient(circle, rgba(0, 245, 255, 0.4), transparent)', filter: 'blur(60px)' }} 
+    />
+    <div className="fixed bottom-20 left-0 w-80 h-80 rounded-full opacity-15 pointer-events-none" 
+      style={{ background: 'radial-gradient(circle, rgba(191, 0, 255, 0.4), transparent)', filter: 'blur(60px)' }} 
+    />
     <Navbar />
-    <main className="pt-24 p-6">
+    <main className="pt-24 p-6 relative z-10">
       <Outlet />
     </main>
   </div>

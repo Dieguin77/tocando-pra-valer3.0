@@ -2,36 +2,33 @@
 /* src/pages/songs.css */
 
 .songs-wrapper {
-  min-height: 100vh; /* Garante que ocupa a altura toda da tela */
+  min-height: 100vh;
   
-  /* --- A MÁGICA DO FUNDO DUPLO --- */
+  /* Fundo claro com imagem */
   background-image: 
-    /* Camada 1: O degradê escuro (transparente) que fica POR CIMA */
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 20, 50, 0.95)),
-    
-    /* Camada 2: A sua imagem de notas musicais que fica POR BAIXO */
-    url('../assets/fundo-notas.jpg'); /* <--- CONFIRA SE O NOME ESTÁ CERTO */
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.92), rgba(245, 245, 245, 0.95)),
+    url('../assets/fundo-notas.jpg');
 
-  /* Configurações para a imagem ficar perfeita */
-  background-size: cover;       /* Estica a imagem para cobrir tudo */
-  background-position: center;  /* Centraliza */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* (Opcional) Faz a imagem ficar parada quando você rola a página */
+  background-attachment: fixed;
 
-  /* Resto das configurações de texto */
-  color: var(--text-main);
+  color: #1f2937;
   font-family: 'Inter', system-ui, sans-serif;
   padding-bottom: 60px;
 }
+
 /* --- MENU FLUTUANTE (GLASS NAV) --- */
 .glass-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px); /* O efeito de vidro */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f2937;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   position: fixed;
   top: 0;
   left: 0;
@@ -44,7 +41,7 @@
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: var(--text-main);
+  color: #ea580c;
   font-weight: bold;
   font-size: 1.2rem;
 }

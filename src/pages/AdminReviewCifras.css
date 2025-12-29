@@ -174,7 +174,7 @@
 
 .badge-rejected {
   background: rgba(255, 107, 107, 0.2);
-  color: #ff6b6b;
+  color: #1557B0;
 }
 
 /* Meta Info */
@@ -255,14 +255,14 @@
 
 .rejection-reason {
   background: rgba(255, 107, 107, 0.05);
-  border-left: 4px solid #ff6b6b;
+  border-left: 4px solid#1557B0;
   padding: 16px;
   border-radius: 6px;
   margin-bottom: 16px;
 }
 
 .rejection-reason strong {
-  color: #ff6b6b;
+  color: #1557B0;
 }
 
 .rejection-reason p {
@@ -306,25 +306,25 @@
 
 .btn-reject {
   background: rgba(255, 107, 107, 0.2);
-  color: #ff6b6b;
-  border: 1px solid #ff6b6b;
+  color: #1557B0;
+  border: 1px solid #1557B0;
 }
 
 .btn-reject:hover {
-  background: #ff6b6b;
+  background: #1557B0;
   color: white;
 }
 
 .btn-delete {
   background: rgba(255, 107, 107, 0.2);
-  color: #ff6b6b;
-  border: 1px solid #ff6b6b;
+  color: #1557B0;
+  border: 1px solid #1557B0;
   flex: none;
   padding: 8px 16px;
 }
 
 .btn-delete:hover {
-  background: #ff6b6b;
+  background: #1557B0;
   color: white;
 }
 
