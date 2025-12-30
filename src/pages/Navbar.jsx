@@ -19,7 +19,7 @@ const Navbar = () => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/musicas">Músicas</Link>
+          <Link to="/musicas">Cifras</Link>
         </li>
       </ul>
       <button onClick={toggleTheme} className="theme-toggle">

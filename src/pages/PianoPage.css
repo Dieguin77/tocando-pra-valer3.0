@@ -23,7 +23,7 @@
 
 .piano-key.white.active,
 .piano-key.white:active {
-  background-color: #f6ad55; /* orange-300 */
+  background-color: #bfdbfe; /* blue-200 */
   transform: translateY(4px);
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }

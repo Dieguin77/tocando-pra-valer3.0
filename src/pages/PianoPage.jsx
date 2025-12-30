@@ -10,7 +10,7 @@ export default function PianoPage() {
       <div className="absolute top-6 left-6">
         <Link
           to="/"
-          className="flex items-center gap-2 text-gray-500 hover:text-orange-600 transition font-medium"
+          className="flex items-center gap-2 text-gray-500 hover:text-blue-600 transition font-medium"
         >
           <ArrowLeft size={18} /> Voltar
         </Link>
@@ -18,14 +18,14 @@ export default function PianoPage() {
 
       <div className="text-center mb-10 px-4">
         <h1 className="text-4xl sm:text-5xl font-bold mb-2 flex items-center justify-center gap-3">
-          Piano Virtual <Piano size={40} className="text-orange-600" />
+          Piano Virtual <Piano size={40} className="text-blue-600" />
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
           Teste notas, afine seu ouvido ou apenas divirta-se tocando.
         </p>
       </div>
 
-      <div className="w-full max-w-4xl bg-gray-200 dark:bg-gray-900 p-4 sm:p-6 rounded-xl shadow-2xl border-t-8 border-orange-600">
+      <div className="w-full max-w-4xl bg-gray-200 dark:bg-gray-900 p-4 sm:p-6 rounded-xl shadow-2xl border-t-8 border-blue-600">
         <VirtualPiano />
       </div>
 

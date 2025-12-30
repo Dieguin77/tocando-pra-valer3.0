@@ -35,7 +35,7 @@ export default function ThemeToggle() {
         p-2 rounded-full transition-colors duration-300 border
         ${theme === 'dark' 
           ? 'bg-gray-800 text-yellow-300 border-gray-600 hover:bg-gray-700' 
-          : 'bg-white text-orange-500 border-gray-300 hover:bg-gray-100'
+          : 'bg-white text-blue-500 border-gray-300 hover:bg-gray-100'
         }
       `}
       aria-label="Alternar Tema"

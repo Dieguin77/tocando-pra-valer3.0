@@ -1,3 +1,21 @@
+
+.songs-responsive-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+  .songs-responsive-container {
+    max-width: 100vw;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 /* --- FUNDO GERAL COM NOTAS MUSICAIS --- */
 /* src/pages/songs.css */
 

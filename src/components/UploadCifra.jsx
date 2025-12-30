@@ -96,82 +96,42 @@ export default function UploadCifra({ onCifraSubmitted }) {
     }
   };
 
-  const inputStyle = {
-    background: 'rgba(0, 0, 0, 0.4)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
-    borderRadius: '12px',
-    padding: '12px 16px',
-    color: '#fff',
-    fontSize: '1rem',
-    width: '100%',
-    outline: 'none',
-    transition: 'all 0.3s ease',
-  };
-
-  const inputErrorStyle = {
-    ...inputStyle,
-    borderColor: '#ff4444',
-  };
-
-  const labelStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    marginBottom: '8px',
-    fontWeight: '600',
-    color: 'rgba(255, 255, 255, 0.9)',
-  };
+  const inputClasses = "w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all";
+  const inputErrorClasses = "w-full px-4 py-3 bg-white border border-red-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all";
+  const labelClasses = "flex items-center gap-2 mb-2 font-medium text-gray-700";
 
   return (
-    <div 
-      className="rounded-2xl p-6"
-      style={{
-        background: 'rgba(15, 15, 25, 0.8)',
-        border: '1px solid rgba(0, 255, 136, 0.2)',
-      }}
-    >
+    <div className="bg-white rounded-xl border border-gray-100 p-6">
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2 mb-2">
-          <Music size={24} style={{ color: '#00ff88' }} />
+        <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2 mb-1">
+          <Music size={22} className="text-blue-500" />
           Enviar Cifra
         </h2>
-        <p style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
+        <p className="text-gray-500 text-sm">
           Compartilhe suas cifras com a comunidade
         </p>
       </div>
 
       {success && (
-        <div 
-          className="flex items-center gap-3 p-4 rounded-xl mb-6"
-          style={{
-            background: 'rgba(0, 255, 136, 0.1)',
-            border: '1px solid rgba(0, 255, 136, 0.3)',
-          }}
-        >
-          <CheckCircle size={20} style={{ color: '#00ff88' }} />
-          <span style={{ color: '#00ff88' }}>Cifra enviada com sucesso! Obrigado por contribuir 🎵</span>
+        <div className="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-lg mb-6">
+          <CheckCircle size={20} className="text-green-500" />
+          <span className="text-green-700">Cifra enviada com sucesso! Obrigado por contribuir 🎵</span>
         </div>
       )}
 
       {errors.submit && (
-        <div 
-          className="flex items-center gap-3 p-4 rounded-xl mb-6"
-          style={{
-            background: 'rgba(255, 68, 68, 0.1)',
-            border: '1px solid rgba(255, 68, 68, 0.3)',
-          }}
-        >
-          <AlertCircle size={20} style={{ color: '#ff4444' }} />
-          <span style={{ color: '#ff6666' }}>{errors.submit}</span>
+        <div className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-lg mb-6">
+          <AlertCircle size={20} className="text-red-500" />
+          <span className="text-red-700">{errors.submit}</span>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-5">
         {/* Linha 1: Título e Artista */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label style={labelStyle}>
-              <Music size={16} style={{ color: '#00f5ff' }} /> Título da Música *
+            <label className={labelClasses}>
+              <Music size={16} className="text-gray-400" /> Título da Música *
             </label>
             <input
               type="text"
@@ -179,18 +139,16 @@ export default function UploadCifra({ onCifraSubmitted }) {
               value={formData.titulo}
               onChange={handleChange}
               placeholder="Ex: Aleluia"
-              style={errors.titulo ? inputErrorStyle : inputStyle}
-              onFocus={(e) => e.target.style.borderColor = '#00f5ff'}
-              onBlur={(e) => e.target.style.borderColor = errors.titulo ? '#ff4444' : 'rgba(255, 255, 255, 0.1)'}
+              className={errors.titulo ? inputErrorClasses : inputClasses}
             />
             {errors.titulo && (
-              <span className="text-xs mt-1 block" style={{ color: '#ff6666' }}>{errors.titulo}</span>
+              <span className="text-xs text-red-500 mt-1 block">{errors.titulo}</span>
             )}
           </div>
 
           <div>
-            <label style={labelStyle}>
-              <Mic size={16} style={{ color: '#bf00ff' }} /> Artista *
+            <label className={labelClasses}>
+              <Mic size={16} className="text-gray-400" /> Artista *
             </label>
             <input
               type="text"
@@ -198,12 +156,10 @@ export default function UploadCifra({ onCifraSubmitted }) {
               value={formData.artista}
               onChange={handleChange}
               placeholder="Ex: Gabriela Rocha"
-              style={errors.artista ? inputErrorStyle : inputStyle}
-              onFocus={(e) => e.target.style.borderColor = '#bf00ff'}
-              onBlur={(e) => e.target.style.borderColor = errors.artista ? '#ff4444' : 'rgba(255, 255, 255, 0.1)'}
+              className={errors.artista ? inputErrorClasses : inputClasses}
             />
             {errors.artista && (
-              <span className="text-xs mt-1 block" style={{ color: '#ff6666' }}>{errors.artista}</span>
+              <span className="text-xs text-red-500 mt-1 block">{errors.artista}</span>
             )}
           </div>
         </div>
@@ -211,8 +167,8 @@ export default function UploadCifra({ onCifraSubmitted }) {
         {/* Linha 2: Compositor, Tom, Dificuldade */}
         <div className="grid md:grid-cols-3 gap-4">
           <div>
-            <label style={labelStyle}>
-              ✏️ Compositor
+            <label className={labelClasses}>
+              Compositor
             </label>
             <input
               type="text"
@@ -220,44 +176,38 @@ export default function UploadCifra({ onCifraSubmitted }) {
               value={formData.compositor}
               onChange={handleChange}
               placeholder="Ex: Gabriela Rocha"
-              style={inputStyle}
-              onFocus={(e) => e.target.style.borderColor = '#00f5ff'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
+              className={inputClasses}
             />
           </div>
 
           <div>
-            <label style={labelStyle}>
-              🎹 Tom
+            <label className={labelClasses}>
+              Tom
             </label>
             <select 
               name="tom" 
               value={formData.tom} 
               onChange={handleChange}
-              style={inputStyle}
+              className={inputClasses}
             >
               {tons.map(t => (
-                <option key={t} value={t} style={{ background: '#0a0a0f', color: '#fff' }}>
-                  {t}
-                </option>
+                <option key={t} value={t}>{t}</option>
               ))}
             </select>
           </div>
 
           <div>
-            <label style={labelStyle}>
-              📊 Dificuldade
+            <label className={labelClasses}>
+              Dificuldade
             </label>
             <select
               name="dificuldade"
               value={formData.dificuldade}
               onChange={handleChange}
-              style={inputStyle}
+              className={inputClasses}
             >
               {dificuldades.map(d => (
-                <option key={d} value={d.toLowerCase()} style={{ background: '#0a0a0f', color: '#fff' }}>
-                  {d}
-                </option>
+                <option key={d} value={d.toLowerCase()}>{d}</option>
               ))}
             </select>
           </div>
@@ -265,8 +215,8 @@ export default function UploadCifra({ onCifraSubmitted }) {
 
         {/* Cifra */}
         <div>
-          <label style={labelStyle}>
-            <FileText size={16} style={{ color: '#00ff88' }} /> Cifra (com acordes) *
+          <label className={labelClasses}>
+            <FileText size={16} className="text-gray-400" /> Cifra (com acordes) *
           </label>
           <textarea
             name="cifra"
@@ -274,29 +224,22 @@ export default function UploadCifra({ onCifraSubmitted }) {
             onChange={handleChange}
             placeholder={`Cole a cifra aqui. Ex:\nC      F\nAleluia, aleluia\nAm     G\nQue reina em meu coração`}
             rows="10"
-            style={{
-              ...inputStyle,
-              ...(errors.cifra ? { borderColor: '#ff4444' } : {}),
-              fontFamily: 'monospace',
-              resize: 'vertical',
-            }}
-            onFocus={(e) => e.target.style.borderColor = '#00ff88'}
-            onBlur={(e) => e.target.style.borderColor = errors.cifra ? '#ff4444' : 'rgba(255, 255, 255, 0.1)'}
+            className={`${errors.cifra ? inputErrorClasses : inputClasses} font-mono resize-y`}
           />
           <div className="flex justify-between mt-2">
-            <span className="text-xs" style={{ color: 'rgba(255, 255, 255, 0.4)' }}>
+            <span className="text-xs text-gray-400">
               {formData.cifra.length} caracteres
             </span>
             {errors.cifra && (
-              <span className="text-xs" style={{ color: '#ff6666' }}>{errors.cifra}</span>
+              <span className="text-xs text-red-500">{errors.cifra}</span>
             )}
           </div>
         </div>
 
         {/* Comentários */}
         <div>
-          <label style={labelStyle}>
-            💬 Comentários (opcional)
+          <label className={labelClasses}>
+            Comentários (opcional)
           </label>
           <textarea
             name="comentarios"
@@ -304,9 +247,7 @@ export default function UploadCifra({ onCifraSubmitted }) {
             onChange={handleChange}
             placeholder="Ex: Essa é a versão simplificada, toque com cuidado no refrão..."
             rows="3"
-            style={inputStyle}
-            onFocus={(e) => e.target.style.borderColor = '#00f5ff'}
-            onBlur={(e) => e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'}
+            className={inputClasses}
           />
         </div>
 
@@ -314,13 +255,11 @@ export default function UploadCifra({ onCifraSubmitted }) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-4 rounded-xl font-bold text-lg transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3"
-          style={{
-            background: loading ? 'rgba(0, 255, 136, 0.3)' : 'linear-gradient(135deg, #00ff88, #00f5ff)',
-            color: loading ? 'rgba(255, 255, 255, 0.7)' : '#000',
-            cursor: loading ? 'not-allowed' : 'pointer',
-            boxShadow: loading ? 'none' : '0 4px 20px rgba(0, 255, 136, 0.3)',
-          }}
+          className={`w-full py-4 rounded-lg font-semibold text-lg transition-all flex items-center justify-center gap-3 ${
+            loading 
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+              : 'bg-blue-500 text-white hover:bg-blue-600 active:scale-[0.98]'
+          }`}
         >
           {loading ? (
             <>
@@ -333,16 +272,10 @@ export default function UploadCifra({ onCifraSubmitted }) {
           )}
         </button>
 
-        <div 
-          className="flex items-start gap-3 p-4 rounded-xl"
-          style={{
-            background: 'rgba(0, 245, 255, 0.1)',
-            border: '1px solid rgba(0, 245, 255, 0.2)',
-          }}
-        >
-          <Info size={18} style={{ color: '#00f5ff', flexShrink: 0, marginTop: '2px' }} />
-          <p className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-            Sua cifra será <strong style={{ color: '#00f5ff' }}>revisada</strong> antes de ser publicada.
+        <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-100 rounded-lg">
+          <Info size={18} className="text-blue-500 flex-shrink-0 mt-0.5" />
+          <p className="text-sm text-gray-600">
+            Sua cifra será <strong className="text-blue-600">revisada</strong> antes de ser publicada.
             Certifique-se de que está correta!
           </p>
         </div>

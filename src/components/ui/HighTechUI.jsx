@@ -16,7 +16,7 @@ export const GlassCard = ({
     cyan: 'rgba(0, 245, 255, 0.3)',
     purple: 'rgba(191, 0, 255, 0.3)',
     green: 'rgba(0, 255, 136, 0.3)',
-    orange: 'rgba(255, 107, 0, 0.3)',
+    blue: 'rgba(59, 130, 246, 0.3)',
   };
 
   return (
@@ -51,7 +51,7 @@ export const NeonButton = ({
     cyan: { border: '#00f5ff', shadow: 'rgba(0, 245, 255, 0.5)', hover: '#00f5ff' },
     purple: { border: '#bf00ff', shadow: 'rgba(191, 0, 255, 0.5)', hover: '#bf00ff' },
     green: { border: '#00ff88', shadow: 'rgba(0, 255, 136, 0.5)', hover: '#00ff88' },
-    orange: { border: '#ff6b00', shadow: 'rgba(255, 107, 0, 0.5)', hover: '#ff6b00' },
+    blue: { border: '#3b82f6', shadow: 'rgba(59, 130, 246, 0.5)', hover: '#2563eb' },
   };
 
   const sizes = {
@@ -192,7 +192,7 @@ export const TechDisplay = ({
   const colors = {
     cyan: '#00f5ff',
     green: '#00ff88',
-    orange: '#ff6b00',
+    blue: '#3b82f6',
     purple: '#bf00ff',
   };
 
