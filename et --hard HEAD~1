@@ -1,0 +1,36 @@
+[33md98ecc8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Merge branch 'main' of https://github.com/Dieguin77/tocando-pra-valer3.0
+[33mba8f6ea[m Atualiza
+[33ma4cf030[m feat: últimas atualizações do projeto (dez/2025)
+[33m0f6ba5a[m feat: melhorias no metronomo (ponteiro animado), afinador menos sensível, layout mobile de cifras, troca de laranja para azul e ajustes de nomenclatura
+[33m4eef9ac[m Fix paths to use relative URLs
+[33m6c77e12[m Fix docs folder structure with assets
+[33mfa614db[m Add docs folder for GitHub Pages
+[33mf7a5d19[m "Atualização"
+[33mfbfd474[m Atualização
+[33mc5d09f1[m Atualização da cor das letras do repertório
+[33m0428792[m Atualização
+[33me67e449[m Nova atualização
+[33m90cb347[m Atualização
+[33m620e19c[m Experimento
+[33m15b12be[m Correção erros Tailwind e PostCSS
+[33m2fa270a[m Nova atualização
+[33mff906e2[m Remove node_modules from git tracking
+[33m96ec0c6[m Atualização do botão
+[33m9e7d90e[m feat: sistema completo de upload e revisão de cifras + dark/light theme integrado
+[33m1abed7a[m Atualização
+[33m144a403[m Fix: corrigir import de chordDiagram com case-sensitivity
+[33m6ceb076[m Setup GitHub Pages - adicionar dist/
+[33mc3a4b3a[m Build para GitHub Pages
+[33m1fee556[m Melhoria: substituir emojis textuais por ícones profissionais do Lucide React
+[33m3e9bca4[m Atualização Design
+[33md142cf0[m Atualização
+[33m1c638fd[m Atualização
+[33m081e1a4[m Atualizações
+[33m0c99841[m Initial commit
+[33md19ef20[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m atualização
+[33mc2a4c16[m Finaliza layout: Fundo do repertorio com notas musicais e correcao de botoes
+[33mae1b434[m Aualização Home: Nova galeria, seção de vídeos e rodapé com icones
+[33m7ad5997[m Ajustes de responsividade e correções visuais
+[33m3743c4f[m Nova interface Visual Premium e Menu
+[33md691f5b[m Correção de rotas, lógica de transposição e novas cores
+[33m43ad39f[m Primeiro commit do projeto
