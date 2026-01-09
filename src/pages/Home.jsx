@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Globe, Upload, Instagram, MessageCircle, Youtube, ChevronDown, Wrench, BookOpen, Send, Music, Play, Brain, Smile, Users, ArrowRight } from "lucide-react";
+import { Globe, Instagram, MessageCircle, Youtube, ChevronDown, Wrench, BookOpen, Send, Music, Play, Brain, Smile, Users, ArrowRight } from "lucide-react";
 
 // --- IMPORTAÇÃO DAS IMAGENS ---
 import imgAdolescente from "../assets/adolescente-tocando.jpg";
@@ -48,21 +48,17 @@ export default function Home() {
       {/* --- NAVBAR CLEAN --- */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="Logo" className="h-10 w-auto rounded-lg" />
-            <span className="text-xl font-semibold text-gray-900">
-              Tocando<span className="text-blue-500">PraValer</span>
-            </span>
+          {/* Logo apenas */}
+          <Link to="/" className="flex items-center justify-center">
+            <img src={logo} alt="Logo Tocando Pra Valer" className="h-10 w-auto rounded-lg" />
           </Link>
           
+          {/* Links desktop */}
           <div className="hidden md:flex items-center gap-6 text-sm">
             <Link to="/busca-global" className="flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-colors">
               <Globe size={16} /> Busca Vagalume
             </Link>
             <Link to="/musicas" className="text-gray-600 hover:text-blue-500 transition-colors">Cifras</Link>
-            <Link to="/upload" className="flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-colors">
-              <Upload size={16} /> Enviar Cifra
-            </Link>
             <a href="#beneficios" className="text-gray-600 hover:text-blue-500 transition-colors">Benefícios</a>
             <a href="#videos" className="text-gray-600 hover:text-blue-500 transition-colors">Vídeos</a>
           </div>
@@ -71,14 +67,15 @@ export default function Home() {
           <div className="relative" ref={dropdownRef}>
             <button 
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-2 px-5 py-2 rounded-lg font-medium text-sm bg-blue-500 text-white hover:bg-blue-600 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm bg-blue-500 text-white hover:bg-blue-600 transition-colors"
             >
-              Área do Aluno
+              <span className="hidden sm:inline">Área do Aluno</span>
+              <span className="sm:hidden">Menu</span>
               <ChevronDown size={16} className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
             </button>
             
             {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden">
+              <div className="absolute right-0 mt-2 w-52 bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden z-50">
                 <Link 
                   to="/musicas" 
                   className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors"
@@ -88,12 +85,12 @@ export default function Home() {
                   <span>Cifras</span>
                 </Link>
                 <Link 
-                  to="/ferramentas" 
+                  to="/busca-global" 
                   className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors"
                   onClick={() => setDropdownOpen(false)}
                 >
-                  <Wrench size={18} className="text-blue-500" />
-                  <span>Ferramentas</span>
+                  <Globe size={18} className="text-blue-500" />
+                  <span>Busca Vagalume</span>
                 </Link>
                 <Link 
                   to="/upload" 
@@ -103,6 +100,14 @@ export default function Home() {
                   <Send size={18} className="text-blue-500" />
                   <span>Enviar Cifra</span>
                 </Link>
+                <Link 
+                  to="/ferramentas" 
+                  className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <Wrench size={18} className="text-blue-500" />
+                  <span>Ferramentas</span>
+                </Link>
               </div>
             )}
           </div>
@@ -110,13 +115,13 @@ export default function Home() {
       </nav>
 
       {/* --- HERO SECTION CLEAN --- */}
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-24 pb-16 sm:pt-32 sm:pb-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <span className="inline-block px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-6">
             Plataforma Musical
           </span>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
             Domine o Instrumento e<br />
             <span className="text-blue-500">Toque com Alma</span>
           </h1>
@@ -144,19 +149,19 @@ export default function Home() {
       </section>
 
       {/* --- STATS BAR --- */}
-      <section className="bg-blue-500 text-white py-10">
-        <div className="max-w-4xl mx-auto px-4 grid grid-cols-3 gap-8 text-center">
+      <section className="bg-blue-500 text-white py-8 sm:py-10">
+        <div className="max-w-4xl mx-auto px-4 grid grid-cols-3 gap-4 sm:gap-8 text-center">
           <div>
-            <div className="text-3xl md:text-4xl font-bold">+1.000</div>
-            <div className="text-sm opacity-90">Músicas Cifradas</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold">+1.000</div>
+            <div className="text-xs sm:text-sm opacity-90">Músicas Cifradas</div>
           </div>
           <div>
-            <div className="text-3xl md:text-4xl font-bold">100%</div>
-            <div className="text-sm opacity-90">Precisão Musical</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold">100%</div>
+            <div className="text-xs sm:text-sm opacity-90">Precisão Musical</div>
           </div>
           <div>
-            <div className="text-3xl md:text-4xl font-bold">24h</div>
-            <div className="text-sm opacity-90">Acesso Ilimitado</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold">24h</div>
+            <div className="text-xs sm:text-sm opacity-90">Acesso Ilimitado</div>
           </div>
         </div>
       </section>

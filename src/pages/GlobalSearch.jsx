@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { transposeText } from "../utils/musicLogic";
-import { Search, Music, ArrowLeft, Globe, Zap, Sparkles, X, Minus, Plus, Loader2, AlertCircle } from "lucide-react";
+import { Search, Music, ArrowLeft, Globe, X, Minus, Plus, Loader2, AlertCircle } from "lucide-react";
+import logo from "../assets/logo.png";
 
 export default function GlobalSearch() {
   const [query, setQuery] = useState("");
@@ -61,11 +62,11 @@ export default function GlobalSearch() {
   // ========== BUSCA LETRAS (Lyrics.ovh) ==========
   const searchLyrics = async (artist, song) => {
     const url = `${LYRICS_OVH_API}/${encodeURIComponent(artist)}/${encodeURIComponent(song)}`;
-    const data = await fetchWithProxy(url, true, 15000); // 15s timeout
+    const data = await fetchWithProxy(url, true, 15000);
     return data.lyrics;
   };
 
-  // Busca informações do artista no Vagalume (para lista de músicas)
+  // Busca informações do artista no Vagalume
   const fetchArtistInfo = async (artistSlug) => {
     try {
       const url = `https://api.vagalume.com.br/${artistSlug}/index.js`;
@@ -87,7 +88,6 @@ export default function GlobalSearch() {
     const parts = query.split('-').map(p => p.trim());
     
     try {
-      // CASO 1: Busca direta "Artista - Música" -> Lyrics.ovh
       if (parts.length >= 2) {
         const artist = parts[0];
         const song = parts.slice(1).join(' ');
@@ -107,7 +107,6 @@ export default function GlobalSearch() {
           console.log("Lyrics.ovh não encontrou, tentando lista do artista...");
         }
         
-        // Fallback: Buscar lista de músicas do artista no Vagalume
         const artistSlug = toSlug(artist);
         const artistData = await fetchArtistInfo(artistSlug);
         
@@ -134,7 +133,6 @@ export default function GlobalSearch() {
         }
       }
       
-      // CASO 2: Busca só por artista -> Vagalume lista de músicas
       const artistSlug = toSlug(query);
       const artistData = await fetchArtistInfo(artistSlug);
       
@@ -147,7 +145,6 @@ export default function GlobalSearch() {
         return;
       }
       
-      // Nada encontrado
       setSearchError(`Nenhum resultado para "${query}". Use o formato: Artista - Música`);
       
     } catch (error) {
@@ -167,7 +164,6 @@ export default function GlobalSearch() {
     const song = songInfo.title;
     
     try {
-      // Tentar Lyrics.ovh primeiro (mais confiável)
       try {
         const lyrics = await searchLyrics(artist, song);
         if (lyrics) {
@@ -183,7 +179,6 @@ export default function GlobalSearch() {
         console.log("Lyrics.ovh falhou, tentando Vagalume...");
       }
       
-      // Fallback: Vagalume API
       const targetUrl = `https://api.vagalume.com.br/search.php?art=${encodeURIComponent(artist)}&mus=${encodeURIComponent(song)}&apikey=${VAGALUME_API_KEY}`;
       const data = await fetchWithProxy(targetUrl);
       
@@ -207,320 +202,190 @@ export default function GlobalSearch() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0a0a0f, #050508)' }}>
+    <div className="min-h-screen bg-white">
       
-      {/* Grid de fundo */}
-      <div 
-        className="fixed inset-0 pointer-events-none opacity-30"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-        }}
-      />
-      
-      {/* Efeitos de luz */}
-      <div className="fixed top-0 right-1/4 w-96 h-96 rounded-full opacity-20 pointer-events-none" 
-        style={{ background: 'radial-gradient(circle, rgba(255, 208, 0, 0.4), transparent)', filter: 'blur(80px)' }} 
-      />
-      <div className="fixed bottom-0 left-1/4 w-96 h-96 rounded-full opacity-20 pointer-events-none" 
-        style={{ background: 'radial-gradient(circle, rgba(0, 245, 255, 0.4), transparent)', filter: 'blur(80px)' }} 
-      />
-      
-      {/* --- CABEÇALHO HIGH-TECH --- */}
-      <header 
-        className="sticky top-0 z-50 px-6 py-4"
-        style={{
-          background: 'rgba(10, 10, 15, 0.9)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(0, 245, 255, 0.1)',
-        }}
-      >
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <Link 
-            to="/" 
-            className="flex items-center gap-2 px-4 py-2 rounded-xl transition-all hover:bg-white/5"
-            style={{ color: 'rgba(255, 255, 255, 0.7)' }}
-          >
-            <ArrowLeft size={18} /> Voltar
+      {/* --- NAVBAR PADRÃO --- */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center justify-center">
+            <img src={logo} alt="Logo Tocando Pra Valer" className="h-10 w-auto rounded-lg" />
           </Link>
           
-          <h1 className="text-xl md:text-2xl font-bold flex items-center gap-3">
-            <div 
-              className="w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{ background: 'linear-gradient(135deg, #ffd000, #ff6b00)' }}
-            >
-              <Globe size={20} className="text-white" />
-            </div>
-            <span className="text-white">Busca</span>
-            <span style={{ color: '#ffd000' }}>Global</span>
-          </h1>
-          
-          <div className="w-20"></div>
+          <Link 
+            to="/" 
+            className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-blue-500 transition-colors text-sm"
+          >
+            <ArrowLeft size={16} />
+            <span className="hidden sm:inline">Voltar</span>
+          </Link>
         </div>
-      </header>
+      </nav>
 
-      <main className="max-w-5xl mx-auto p-6 relative z-10">
-        
-        {/* --- ÁREA DE PESQUISA HIGH-TECH --- */}
-        {!selectedSong && (
-          <div className="w-full max-w-3xl mx-auto mt-16 text-center">
-            
-            {/* Badge */}
-            <div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
-              style={{ background: 'rgba(255, 208, 0, 0.1)', border: '1px solid rgba(255, 208, 0, 0.3)' }}
-            >
-              <Sparkles size={16} style={{ color: '#ffd000' }} />
-              <span className="text-sm font-medium" style={{ color: '#ffd000' }}>Milhões de Músicas</span>
-            </div>
-            
-            <h2 
-              className="text-4xl md:text-5xl font-black mb-4"
-              style={{
-                background: 'linear-gradient(135deg, #ffffff, #ffd000)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              Qual música você quer tocar?
-            </h2>
-            <p className="text-lg mb-6" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
-              Busque milhões de letras usando Lyrics.ovh + Vagalume.
-            </p>
-            
-            {/* Dica de uso */}
-            <div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg mb-8"
-              style={{ background: 'rgba(0, 245, 255, 0.1)', border: '1px solid rgba(0, 245, 255, 0.2)' }}
-            >
-              <span className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                💡 <strong style={{ color: '#00f5ff' }}>Dica:</strong> Para melhores resultados, busque no formato <strong style={{ color: '#ffd000' }}>Artista - Música</strong>
+      {/* --- CONTEÚDO PRINCIPAL --- */}
+      <main className="pt-24 pb-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          
+          {/* --- HEADER DA PÁGINA --- */}
+          {!selectedSong && (
+            <div className="text-center mb-10">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-6">
+                <Globe size={16} />
+                Busca Global
               </span>
+              
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Qual música você quer tocar?
+              </h1>
+              <p className="text-gray-600 max-w-xl mx-auto mb-2">
+                Busque milhões de letras usando Lyrics.ovh + Vagalume.
+              </p>
+              <p className="text-sm text-gray-500">
+                💡 <strong>Dica:</strong> Para melhores resultados, busque no formato <strong className="text-blue-500">Artista - Música</strong>
+              </p>
             </div>
+          )}
 
-            {/* Input de busca futurista */}
-            <div className="relative group">
-              <div 
-                className="absolute -inset-1 rounded-2xl opacity-50 blur-lg transition-all group-hover:opacity-100"
-                style={{ background: 'linear-gradient(135deg, #ffd000, #ff6b00)' }}
-              />
-              <div 
-                className="relative flex items-center rounded-2xl overflow-hidden"
-                style={{
-                  background: 'rgba(15, 15, 25, 0.9)',
-                  border: '1px solid rgba(255, 208, 0, 0.3)',
-                }}
-              >
-                <Search className="ml-5 w-5 h-5" style={{ color: 'rgba(255, 255, 255, 0.4)' }} />
-                <input 
-                  type="text" 
-                  placeholder="Artista - Música (ex: Legião Urbana - Tempo Perdido)" 
-                  className="flex-1 px-4 py-5 bg-transparent text-lg text-white placeholder-white/40 outline-none"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && searchMusic()}
-                />
-                <button 
-                  onClick={searchMusic}
-                  className="m-2 px-8 py-3 rounded-xl font-bold transition-all hover:scale-105"
-                  style={{
-                    background: 'linear-gradient(135deg, #ffd000, #ff6b00)',
-                    color: '#000',
-                    boxShadow: '0 4px 20px rgba(255, 208, 0, 0.3)',
-                  }}
-                >
-                  <Zap size={18} className="inline mr-2" />
-                  Buscar
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* --- LOADING HIGH-TECH --- */}
-        {loading && (
-          <div className="mt-20 flex flex-col items-center gap-4">
-            <div className="relative">
-              <div 
-                className="w-16 h-16 rounded-full animate-spin"
-                style={{ 
-                  border: '3px solid rgba(255, 208, 0, 0.2)',
-                  borderTopColor: '#ffd000',
-                }}
-              />
-              <Loader2 
-                className="absolute inset-0 m-auto w-8 h-8 animate-pulse"
-                style={{ color: '#ffd000' }}
-              />
-            </div>
-            <p className="font-medium" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
-              Consultando API Vagalume...
-            </p>
-          </div>
-        )}
-
-        {/* --- LISTA DE RESULTADOS HIGH-TECH --- */}
-        {!selectedSong && results.length > 0 && !loading && (
-          <div className="w-full max-w-3xl mx-auto mt-12">
-            <p className="text-sm mb-4" style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
-              Encontramos <span style={{ color: '#ffd000' }}>{results.length}</span> resultados:
-            </p>
-            <div className="grid gap-3">
-              {results.map((item) => (
-                <div 
-                  key={item.id} 
-                  onClick={() => fetchSongContent(item)}
-                  className="group flex items-center justify-between p-5 rounded-2xl cursor-pointer transition-all duration-300 hover:translate-y-[-2px]"
-                  style={{
-                    background: 'rgba(15, 15, 25, 0.8)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255, 208, 0, 0.4)';
-                    e.currentTarget.style.boxShadow = '0 0 30px rgba(255, 208, 0, 0.1)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                >
-                  <div className="flex items-center gap-4">
-                    <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110"
-                      style={{ 
-                        background: 'linear-gradient(135deg, rgba(255, 208, 0, 0.2), rgba(255, 107, 0, 0.2))',
-                        border: '1px solid rgba(255, 208, 0, 0.3)',
-                      }}
-                    >
-                      <Music size={20} style={{ color: '#ffd000' }} />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-white group-hover:text-yellow-400 transition">
-                        {item.title}
-                      </h3>
-                      <p style={{ color: 'rgba(255, 255, 255, 0.5)' }}>{item.band}</p>
-                    </div>
-                  </div>
-                  <ArrowLeft 
-                    className="rotate-180 transition-transform group-hover:translate-x-1" 
-                    size={18} 
-                    style={{ color: 'rgba(255, 255, 255, 0.3)' }}
+          {/* --- CAMPO DE BUSCA --- */}
+          {!selectedSong && (
+            <div className="max-w-2xl mx-auto mb-10">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="relative flex-1">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                  <input 
+                    type="text" 
+                    placeholder="Artista - Música (ex: Legião Urbana - Tempo Perdido)" 
+                    className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && searchMusic()}
                   />
                 </div>
-              ))}
-            </div>
-          </div>
-        )}
-        
-        {/* MENSAGEM DE ERRO/INFO */}
-        {searchError && !loading && (
-          <div 
-            className="mt-8 max-w-2xl mx-auto flex items-center gap-3 p-4 rounded-xl"
-            style={{
-              background: 'rgba(255, 107, 0, 0.1)',
-              border: '1px solid rgba(255, 107, 0, 0.3)',
-            }}
-          >
-            <AlertCircle size={20} style={{ color: '#ff6b00' }} />
-            <p style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{searchError}</p>
-          </div>
-        )}
-
-        {/* --- VISUALIZADOR DA MÚSICA HIGH-TECH --- */}
-        {selectedSong && !loading && (
-          <div className="w-full max-w-4xl mt-8">
-            
-            {/* Barra de Ferramentas Superior */}
-            <div 
-              className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 p-6 rounded-2xl"
-              style={{
-                background: 'rgba(15, 15, 25, 0.9)',
-                border: '1px solid rgba(255, 208, 0, 0.2)',
-              }}
-            >
-              <div>
-                <h2 
-                  className="text-2xl md:text-3xl font-black mb-1"
-                  style={{
-                    background: 'linear-gradient(135deg, #ffffff, #ffd000)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                  }}
-                >
-                  {selectedSong.title}
-                </h2>
-                <p className="text-lg flex items-center gap-2" style={{ color: '#ffd000' }}>
-                  <Guitar size={20} /> {selectedSong.artist}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                {/* Controle de transposição */}
-                <div 
-                  className="flex items-center rounded-xl overflow-hidden"
-                  style={{
-                    background: 'rgba(0, 0, 0, 0.3)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                  }}
-                >
-                  <button 
-                    onClick={() => setTransposition(prev => prev - 1)} 
-                    className="w-12 h-12 flex items-center justify-center transition-all hover:bg-white/10"
-                    style={{ color: '#00f5ff' }}
-                  >
-                    <Minus size={18} />
-                  </button>
-                  <div 
-                    className="px-4 font-mono font-bold w-16 text-center"
-                    style={{ color: '#ffd000' }}
-                  >
-                    {transposition > 0 ? `+${transposition}` : transposition}
-                  </div>
-                  <button 
-                    onClick={() => setTransposition(prev => prev + 1)} 
-                    className="w-12 h-12 flex items-center justify-center transition-all hover:bg-white/10"
-                    style={{ color: '#00f5ff' }}
-                  >
-                    <Plus size={18} />
-                  </button>
-                </div>
-                
                 <button 
-                  onClick={() => setSelectedSong(null)}
-                  className="px-5 py-3 rounded-xl font-bold transition-all hover:scale-105"
-                  style={{
-                    background: 'rgba(255, 68, 68, 0.2)',
-                    border: '1px solid rgba(255, 68, 68, 0.4)',
-                    color: '#ff6666',
-                  }}
+                  onClick={searchMusic}
+                  disabled={loading}
+                  className="px-8 py-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  <X size={18} className="inline mr-1" />
-                  Fechar
+                  {loading ? <Loader2 size={20} className="animate-spin" /> : <Search size={20} />}
+                  <span className="hidden sm:inline">Buscar</span>
                 </button>
               </div>
             </div>
+          )}
 
-            {/* A CIFRA/LETRA */}
-            <div 
-              className="p-8 rounded-2xl min-h-[500px]"
-              style={{
-                background: 'rgba(10, 10, 20, 0.9)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                boxShadow: 'inset 0 0 60px rgba(0, 0, 0, 0.5)',
-              }}
-            >
-              <pre 
-                className="whitespace-pre-wrap font-mono text-lg md:text-xl leading-loose overflow-x-auto select-text"
-                style={{ color: 'rgba(255, 255, 255, 0.85)' }}
-              >
-                {transposeText(selectedSong.text, transposition)}
-              </pre>
+          {/* --- LOADING --- */}
+          {loading && !selectedSong && (
+            <div className="flex flex-col items-center gap-4 py-12">
+              <Loader2 size={40} className="text-blue-500 animate-spin" />
+              <p className="text-gray-600">Buscando músicas...</p>
             </div>
-          </div>
-        )}
+          )}
+
+          {/* --- MENSAGEM DE ERRO --- */}
+          {searchError && !loading && (
+            <div className="max-w-2xl mx-auto mb-8 flex items-center gap-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+              <AlertCircle size={20} className="text-amber-600 flex-shrink-0" />
+              <p className="text-amber-800">{searchError}</p>
+            </div>
+          )}
+
+          {/* --- LISTA DE RESULTADOS --- */}
+          {!selectedSong && results.length > 0 && !loading && (
+            <div className="max-w-2xl mx-auto">
+              <p className="text-sm text-gray-500 mb-4">
+                Encontramos <span className="font-semibold text-blue-500">{results.length}</span> resultados:
+              </p>
+              <div className="space-y-2">
+                {results.map((item) => (
+                  <div 
+                    key={item.id} 
+                    onClick={() => fetchSongContent(item)}
+                    className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 hover:shadow-md transition-all group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                        <Music size={20} className="text-blue-500" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900 group-hover:text-blue-500 transition-colors">
+                          {item.title}
+                        </h3>
+                        <p className="text-sm text-gray-500">{item.band}</p>
+                      </div>
+                    </div>
+                    <ArrowLeft size={18} className="rotate-180 text-gray-400 group-hover:text-blue-500 transition-colors" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* --- VISUALIZADOR DA MÚSICA --- */}
+          {selectedSong && !loading && (
+            <div className="max-w-4xl mx-auto">
+              
+              {/* Barra de Ferramentas */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 p-4 sm:p-6 bg-gray-50 border border-gray-200 rounded-lg">
+                <div className="min-w-0 flex-1">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 truncate">
+                    {selectedSong.title}
+                  </h2>
+                  <p className="text-blue-500 font-medium flex items-center gap-2">
+                    <Music size={18} />
+                    {selectedSong.artist}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-3 w-full sm:w-auto">
+                  {/* Controle de transposição */}
+                  <div className="flex items-center bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <button 
+                      onClick={() => setTransposition(prev => prev - 1)} 
+                      className="w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors"
+                    >
+                      <Minus size={18} />
+                    </button>
+                    <div className="px-3 font-mono font-bold text-blue-500 min-w-[40px] text-center">
+                      {transposition > 0 ? `+${transposition}` : transposition}
+                    </div>
+                    <button 
+                      onClick={() => setTransposition(prev => prev + 1)} 
+                      className="w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors"
+                    >
+                      <Plus size={18} />
+                    </button>
+                  </div>
+                  
+                  <button 
+                    onClick={() => setSelectedSong(null)}
+                    className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2"
+                  >
+                    <X size={18} />
+                    <span className="hidden sm:inline">Fechar</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Letra/Cifra */}
+              <div className="p-4 sm:p-8 bg-gray-50 border border-gray-200 rounded-lg min-h-[400px]">
+                <pre className="whitespace-pre-wrap font-mono text-base sm:text-lg leading-relaxed text-gray-800 overflow-x-auto">
+                  {transposeText(selectedSong.text, transposition)}
+                </pre>
+              </div>
+              
+              {/* Botão voltar à busca */}
+              <div className="mt-6 text-center">
+                <button 
+                  onClick={() => setSelectedSong(null)}
+                  className="inline-flex items-center gap-2 px-6 py-3 text-gray-600 hover:text-blue-500 transition-colors"
+                >
+                  <ArrowLeft size={18} />
+                  Voltar à busca
+                </button>
+              </div>
+            </div>
+          )}
+
+        </div>
       </main>
     </div>
   );

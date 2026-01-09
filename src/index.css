@@ -1,427 +1,56 @@
 @import "tailwindcss";
 
-/* ============================================
-   🎸 TOCANDO PRA VALER - DESIGN SYSTEM
-   Clean, White, Professional Music Platform
-   ============================================ */
-
-:root {
-  /* 🎨 Cores da Marca */
-  --primary: #3b82f6;           /* Azul - botões principais */
-  --primary-hover: #2563eb;     /* Azul hover */
-  --accent: #3b82f6;            /* Azul - destaques */
-  --accent-hover: #2563eb;      /* Azul hover */
-  
-  /* 🌟 Fundos Light */
-  --bg-main: #ffffff;
-  --bg-secondary: #f9fafb;      /* gray-50 */
-  --bg-card: #ffffff;
-  --bg-card-hover: #f9fafb;
-  
-  /* 📝 Texto */
-  --text-main: #111827;         /* gray-900 */
-  --text-primary: #111827;
-  --text-secondary: #6b7280;    /* gray-500 */
-  --text-muted: #9ca3af;        /* gray-400 */
-  
-  /* 🔲 Bordas */
-  --border-color: #e5e7eb;      /* gray-200 */
-  --border-light: #f3f4f6;      /* gray-100 */
-  
-  /* 🎵 Cores Musicais (Afinador/Metrônomo) */
-  --tuner-green: #22c55e;       /* green-500 */
-  --tuner-yellow: #eab308;      /* yellow-500 */
-  --tuner-red: #ef4444;         /* red-500 */
-  
-  /* ✨ Glassmorphism (Light) */
-  --glass-bg: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(0, 0, 0, 0.08);
-  --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  
-  /* 🔘 Botões */
-  --btn-bg: var(--primary);
-  --btn-text: #ffffff;
-  
-  /* 📐 Spacing & Sizing */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-full: 9999px;
+@theme {
+  --color-primary: #0B5ED7;
+  --color-primary-hover: #0a52be;
 }
 
-/* ============================================
-   🎬 ANIMAÇÕES HIGH-TECH
-   ============================================ */
-
-@keyframes blob {
-  0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-  100% { transform: translate(0px, 0px) scale(1); }
-}
-
-@keyframes pulse-neon {
-  0%, 100% { 
-    box-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-  }
-  50% { 
-    box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan);
+@layer base {
+  body {
+    @apply bg-white text-gray-900;
   }
 }
 
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes glow-pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-
-@keyframes scan-line {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
-}
-
-@keyframes rotate-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes wave-animation {
-  0% { transform: scaleY(0.5); }
-  50% { transform: scaleY(1); }
-  100% { transform: scaleY(0.5); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes borderGlow {
-  0%, 100% { border-color: var(--neon-cyan); }
-  33% { border-color: var(--neon-purple); }
-  66% { border-color: var(--neon-pink); }
-}
-
-@keyframes textGlow {
-  0%, 100% { 
-    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-  }
-  50% { 
-    text-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan), 0 0 60px var(--neon-cyan);
+/* === FALLBACK CSS - Força cor principal em elementos críticos === */
+@layer components {
+  .bg-primary-force {
+    background-color: #0B5ED7 !important;
   }
 }
 
-/* ============================================
-   🎨 CLASSES DE ANIMAÇÃO
-   ============================================ */
-
-.animate-blob { animation: blob 7s infinite; }
-.animation-delay-2000 { animation-delay: 2s; }
-.animation-delay-4000 { animation-delay: 4s; }
-.animate-pulse-neon { animation: pulse-neon 2s ease-in-out infinite; }
-.animate-gradient { animation: gradient-shift 3s ease infinite; background-size: 200% 200%; }
-.animate-float { animation: float 3s ease-in-out infinite; }
-.animate-glow { animation: glow-pulse 2s ease-in-out infinite; }
-.animate-rotate { animation: rotate-slow 20s linear infinite; }
-.animate-shimmer { 
-  animation: shimmer 2s infinite;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  background-size: 200% 100%;
-}
-.animate-border-glow { animation: borderGlow 3s infinite; }
-.animate-text-glow { animation: textGlow 2s ease-in-out infinite; }
-
-/* ============================================
-   🖼️ ESTILOS GLOBAIS
-   ============================================ */
-
-* {
-  box-sizing: border-box;
+/* Override global para blue-500 → #0B5ED7 */
+.bg-blue-500, 
+[class*="bg-blue-500"] {
+  background-color: #0B5ED7;
 }
 
-html {
-  background: var(--bg-main);
-  scroll-behavior: smooth;
+.hover\:bg-blue-600:hover,
+[class*="hover:bg-blue-600"]:hover {
+  background-color: #0a52be;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg-main);
-  color: var(--text-main);
-  font-family: 'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
+.text-blue-500,
+[class*="text-blue-500"] {
+  color: #0B5ED7;
 }
 
-/* ============================================
-   🃏 CARDS LIMPOS
-   ============================================ */
-
-.glass-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--glass-shadow);
+.text-blue-600,
+[class*="text-blue-600"] {
+  color: #0B5ED7;
 }
 
-.glass-card-hover {
-  transition: all 0.2s ease;
+.hover\:text-blue-500:hover {
+  color: #0B5ED7;
 }
 
-.glass-card-hover:hover {
-  border-color: var(--primary);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+.border-blue-500 {
+  border-color: #0B5ED7;
 }
 
-/* ============================================
-   🔘 BOTÕES PRINCIPAIS
-   ============================================ */
-
-.btn-primary {
-  padding: 12px 28px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border-radius: var(--radius-full);
-  background: var(--primary);
-  border: none;
-  color: white;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.bg-blue-50 {
+  background-color: #e8f1fc;
 }
 
-.btn-primary:hover {
-  background: var(--primary-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-}
-
-.btn-accent {
-  padding: 12px 28px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border-radius: var(--radius-full);
-  background: var(--accent);
-  border: none;
-  color: white;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-accent:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
-}
-
-.btn-outline {
-  padding: 12px 28px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border-radius: var(--radius-full);
-  background: transparent;
-  border: 2px solid var(--border-color);
-  color: var(--text-main);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-outline:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-}
-
-/* ============================================
-   📊 DISPLAYS PARA FERRAMENTAS
-   ============================================ */
-
-.tech-display {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.led-display {
-  font-family: 'Courier New', 'Monaco', monospace;
-  font-weight: bold;
-  color: var(--text-main);
-  letter-spacing: 2px;
-}
-
-.meter-bar {
-  height: 8px;
-  background: var(--border-color);
-  border-radius: var(--radius-full);
-  overflow: hidden;
-  position: relative;
-}
-
-.meter-bar::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, 
-    var(--tuner-green) 0%, 
-    var(--tuner-yellow) 50%, 
-    var(--tuner-red) 100%
-  );
-  transform-origin: left;
-}
-
-/* ============================================
-   🌊 VISUALIZADORES DE ÁUDIO (Removido)
-   ============================================ */
-
-/* Audio wave removido - interface mais simples */
-
-/* Removido - interface simplificada */
-
-/* ============================================
-   🎯 CÍRCULOS
-   ============================================ */
-
-.tech-circle {
-  position: relative;
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 2px solid var(--border-color);
-}
-
-/* ============================================
-   📱 GRADIENTES DE TEXTO
-   ============================================ */
-
-.text-gradient {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-primary-color {
-  color: var(--primary);
-}
-
-.text-accent-color {
-  color: var(--accent);
-}
-
-/* Grid e scan lines removidos - interface limpa */
-
-/* ============================================
-   🎚️ INPUTS
-   ============================================ */
-
-.input-tech {
-  background: var(--bg-main);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
-  color: var(--text-main);
-  font-size: 1rem;
-  transition: all 0.2s ease;
-}
-
-.input-tech:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-}
-
-.input-tech::placeholder {
-  color: var(--text-muted);
-}
-
-/* ============================================
-   🏷️ BADGES & TAGS
-   ============================================ */
-
-.badge-tech {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: var(--radius-full);
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid var(--primary);
-  color: var(--primary);
-}
-
-.badge-success {
-  background: rgba(34, 197, 94, 0.1);
-  border-color: var(--tuner-green);
-  color: var(--tuner-green);
-}
-
-.badge-warning {
-  background: rgba(234, 179, 8, 0.1);
-  border-color: var(--tuner-yellow);
-  color: var(--tuner-yellow);
-}
-
-.badge-danger {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: var(--tuner-red);
-  color: var(--tuner-red);
-}
-
-/* ============================================
-   🌐 SCROLLBAR PERSONALIZADA
-   ============================================ */
-
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-darker);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--neon-cyan), var(--neon-purple));
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--neon-cyan);
-}
-
-/* ============================================
-   💫 SELEÇÃO DE TEXTO
-   ============================================ */
-
-::selection {
-  background: var(--neon-cyan);
-  color: var(--bg-dark);
-}
-
-/* ============================================
-   📱 RESPONSIVIDADE
-   ============================================ */
-
-@media (max-width: 768px) {
-  .btn-neon, .btn-gradient {
-    padding: 10px 20px;
-    font-size: 0.85rem;
-  }
-  
-  .tech-display {
-    padding: 15px;
-  }
+.ring-blue-500 {
+  --tw-ring-color: #0B5ED7;
 }
