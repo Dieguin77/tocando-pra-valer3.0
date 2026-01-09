@@ -1,3 +1,14 @@
+<div style={{ 
+  background: 'red', 
+  color: 'white', 
+  padding: '20px',
+  textAlign: 'center',
+  fontWeight: 'bold',
+  fontSize: '24px'
+}}>
+  TESTE FINAL VERCEL
+</div>
+
 import { useEffect } from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 import { initEmailJS } from "./services/emailService";
