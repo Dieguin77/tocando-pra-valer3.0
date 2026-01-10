@@ -45,6 +45,27 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       
+      {/* 🚨 BANNER DE TESTE - REMOVER APÓS CONFIRMAÇÃO DO DEPLOY 🚨 */}
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 9999,
+          background: 'linear-gradient(90deg, #dc2626, #b91c1c)',
+          color: 'white',
+          padding: '16px 20px',
+          textAlign: 'center',
+          fontWeight: 'bold',
+          fontSize: '18px',
+          boxShadow: '0 4px 20px rgba(220, 38, 38, 0.4)',
+        }}
+      >
+        ✅ TESTE DEPLOY OK - Vercel funcionando! (Home.jsx é o componente da rota "/")
+      </div>
+      {/* FIM DO BANNER DE TESTE */}
+      
       {/* --- NAVBAR CLEAN --- */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
