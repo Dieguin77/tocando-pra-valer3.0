@@ -1,4 +1,3 @@
-import ChordDiagram from "./ChordDiagram";
 import { useParams, Link } from "react-router-dom";
 import { musicas } from "../data/musicas";
 import { useState, useEffect } from "react";
