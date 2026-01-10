@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function AlunoPage() {
   return (
     <div className="max-w-3xl mx-auto bg-white rounded-xl shadow p-8 border border-gray-100">

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ChordDiagram = ({ chordData }) => {
   if (!chordData) return null;
 

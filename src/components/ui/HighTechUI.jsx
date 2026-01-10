@@ -1,5 +1,4 @@
-import React from 'react';
-import { Zap, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 // ============================================
 // 🃏 GLASS CARD - Card com efeito glassmorphism

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Search, ArrowLeft, Music } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { musicas } from '../data/musicas';

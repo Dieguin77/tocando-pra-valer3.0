@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Timer, Guitar, Piano, Wrench, Lightbulb } from "lucide-react";
 import Metronome from "../components/Metronome";
 import Tuner from "../components/Tuner";
-import VirtualPiano from "../components/virtualPiano";
+import VirtualPiano from "../components/VirtualPiano";
 
 export default function ToolsPage() {
   const [activeTool, setActiveTool] = useState("metronome");

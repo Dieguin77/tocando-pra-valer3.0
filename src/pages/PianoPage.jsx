@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import VirtualPiano from "../components/virtualPiano";
+import VirtualPiano from "../components/VirtualPiano";
 import ThemeToggle from "../components/ThemeToggle";
 import { ArrowLeft, Keyboard, Piano } from "lucide-react";
 import "./PianoPage.css";

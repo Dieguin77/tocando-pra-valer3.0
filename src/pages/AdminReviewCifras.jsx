@@ -7,11 +7,10 @@ import { Guitar, Clock, CheckCircle, XCircle, PartyPopper, Piano, BarChart2, Cal
 import './AdminReviewCifras.css';
 
 export default function AdminReviewCifras() {
-  const { theme, toggleTheme } = useTheme();
-  const darkMode = theme === 'dark';
+  const { theme } = useTheme();
   const [cifrasPendentes, setCifrasPendentes] = useState([]);
   const [cifrasAprovadas, setCifrasAprovadas] = useState([]);
-  const [cifraseRejeitadas, setCifrasRejeitadas] = useState([]);
+  const [cifrasRejeitadas, setCifrasRejeitadas] = useState([]);
   const [tab, setTab] = useState('pendentes');
   const [expandedId, setExpandedId] = useState(null);
   const [motivoRejeicao, setMotivoRejeicao] = useState('');
