@@ -1,3 +1,4 @@
+import ChordDiagram from "../components/ChordDiagram";
 import { useParams, Link } from "react-router-dom";
 import { musicas } from "../data/musicas";
 import { useState, useEffect } from "react";
@@ -54,6 +55,13 @@ export default function Song() {
           </p>
           <span className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
             Tom: {songData.tom || "Original"}
+
+            {/* Bloco do Diagrama de Acorde */}
+        <div className="mt-6 mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+           <p className="font-bold text-gray-700 mb-2">Acorde de Referência:</p>
+           {/* Aqui passamos um acorde de exemplo (Dó Maior) para testar */}
+           <ChordDiagram chordData={{ frets: [-1, 3, 2, 0, 1, 0] }} />
+        </div>
           </span>
         </div>
 

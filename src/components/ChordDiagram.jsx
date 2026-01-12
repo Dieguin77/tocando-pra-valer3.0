@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const ChordDiagram = ({ chordData }) => {
   if (!chordData) return null;
 
@@ -69,6 +71,12 @@ const ChordDiagram = ({ chordData }) => {
       })}
     </svg>
   );
+};
+
+ChordDiagram.propTypes = {
+  chordData: PropTypes.shape({
+    frets: PropTypes.arrayOf(PropTypes.number).isRequired,
+  }),
 };
 
 export default ChordDiagram;
