@@ -53,16 +53,14 @@ export default function Home() {
           left: 0,
           right: 0,
           zIndex: 9999,
-          background: 'linear-gradient(90deg, #dc2626, #b91c1c)',
           color: 'white',
           padding: '16px 20px',
           textAlign: 'center',
           fontWeight: 'bold',
           fontSize: '18px',
-          boxShadow: '0 4px 20px rgba(220, 38, 38, 0.4)',
         }}
       >
-        ✅ TESTE DEPLOY OK - Vercel funcionando! (Home.jsx é o componente da rota "/")
+    
       </div>
       {/* FIM DO BANNER DE TESTE */}
       
