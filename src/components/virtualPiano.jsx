@@ -81,7 +81,7 @@ export default function VirtualPiano() {
   const whiteNotes = baseNotes.filter(n => n.type === "white");
 
   return (
-    <div className="flex flex-col items-center gap-6 p-4 w-full h-full">
+    <div className="flex flex-col items-center gap-3 sm:gap-6 p-2 sm:p-4 w-full h-full">
       
       {/* Display */}
       <div className="text-center">
@@ -112,8 +112,8 @@ export default function VirtualPiano() {
         </button>
       </div>
 
-      {/* PIANO RESPONSIVO (CORREÇÃO AQUI) */}
-      <div className="relative w-full aspect-[2/1] select-none shadow-xl rounded-b-xl overflow-hidden bg-white">
+      {/* PIANO RESPONSIVO */}
+      <div className="relative w-full h-48 sm:h-56 md:h-64 select-none shadow-xl rounded-b-xl overflow-hidden bg-white">
         
         {/* Camada Teclas Brancas (Flexbox) */}
         <div className="flex w-full h-full">
@@ -121,13 +121,14 @@ export default function VirtualPiano() {
             <div
               key={note.name}
               onMouseDown={() => playSound(note.baseFreq, note.name)}
-              className={`flex-1 border-r border-gray-200 last:border-0 border-b-4 rounded-b-lg cursor-pointer flex flex-col items-center justify-end pb-2 transition-colors ${
+              onTouchStart={(e) => { e.preventDefault(); playSound(note.baseFreq, note.name); }}
+              className={`flex-1 border-r border-gray-200 last:border-0 border-b-4 rounded-b-lg cursor-pointer flex flex-col items-center justify-end pb-2 sm:pb-3 transition-colors ${
                 activeKey === note.name 
                   ? "bg-blue-50 border-brand-blue" 
                   : "bg-white border-gray-200 hover:bg-gray-50"
               }`}
             >
-              <span className="text-[10px] sm:text-xs text-gray-400 font-bold mb-1">{note.key.toUpperCase()}</span>
+              <span className="text-xs sm:text-sm text-gray-500 font-bold mb-0.5">{note.name.replace('2', '')}</span>
               <span className="text-[10px] sm:text-xs text-brand-blue font-bold">{NOTE_NAMES_PT[note.name]}</span>
             </div>
           ))}
@@ -146,15 +147,16 @@ export default function VirtualPiano() {
               <div
                 key={note.name}
                 onMouseDown={() => playSound(note.baseFreq, note.name)}
+                onTouchStart={(e) => { e.preventDefault(); playSound(note.baseFreq, note.name); }}
                 style={{ 
                   left: `${leftPosition}%`, 
                   transform: 'translateX(-50%)' // Centraliza na divisória
                 }}
-                className={`absolute w-[10%] h-full rounded-b-md cursor-pointer pointer-events-auto transition-colors shadow-md flex items-end justify-center pb-2 ${
+                className={`absolute w-[10%] h-full rounded-b-md cursor-pointer pointer-events-auto transition-colors shadow-md flex items-end justify-center pb-1 sm:pb-2 ${
                   activeKey === note.name ? "bg-brand-blue" : "bg-gray-800 hover:bg-gray-700"
                 }`}
               >
-                <span className="text-[8px] sm:text-[10px] text-gray-400 font-bold">{note.key.toUpperCase()}</span>
+                <span className="text-[8px] sm:text-[10px] text-gray-300 font-bold">{note.name.replace('2', '')}</span>
               </div>
             );
           })}

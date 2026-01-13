@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0B5ED7;
-  --color-primary-hover: #0a52be;
+  --color-primary: #0172AA;
+  --color-primary-hover: #015d8c;
+  --color-brand-blue: #0172AA;
 }
 
 @layer base {
@@ -14,43 +15,64 @@
 /* === FALLBACK CSS - Força cor principal em elementos críticos === */
 @layer components {
   .bg-primary-force {
-    background-color: #0B5ED7 !important;
+    background-color: #0172AA !important;
   }
 }
 
-/* Override global para blue-500 → #0B5ED7 */
+/* Override global para blue-500 → #0172AA */
 .bg-blue-500, 
 [class*="bg-blue-500"] {
-  background-color: #0B5ED7;
+  background-color: #0172AA;
 }
 
 .hover\:bg-blue-600:hover,
 [class*="hover:bg-blue-600"]:hover {
-  background-color: #0a52be;
+  background-color: #015d8c;
 }
 
 .text-blue-500,
 [class*="text-blue-500"] {
-  color: #0B5ED7;
+  color: #0172AA;
 }
 
 .text-blue-600,
 [class*="text-blue-600"] {
-  color: #0B5ED7;
+  color: #0172AA;
 }
 
 .hover\:text-blue-500:hover {
-  color: #0B5ED7;
+  color: #0172AA;
+}
+
+.hover\:text-blue-600:hover {
+  color: #0172AA;
 }
 
 .border-blue-500 {
-  border-color: #0B5ED7;
+  border-color: #0172AA;
+}
+
+.border-blue-600 {
+  border-color: #0172AA;
 }
 
 .bg-blue-50 {
-  background-color: #e8f1fc;
+  background-color: #e6f3f9;
 }
 
 .ring-blue-500 {
-  --tw-ring-color: #0B5ED7;
+  --tw-ring-color: #0172AA;
+}
+
+/* brand-blue utility class */
+.text-brand-blue {
+  color: #0172AA;
+}
+
+.bg-brand-blue {
+  background-color: #0172AA;
+}
+
+.border-brand-blue {
+  border-color: #0172AA;
 }

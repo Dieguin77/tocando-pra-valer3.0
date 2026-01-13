@@ -25,7 +25,7 @@ export default function PianoPage() {
         </p>
       </div>
 
-      <div className="w-full max-w-4xl bg-gray-200 dark:bg-gray-900 p-4 sm:p-6 rounded-xl shadow-2xl border-t-8 border-blue-600">
+      <div className="w-full max-w-4xl bg-transparent sm:bg-gray-200 dark:sm:bg-gray-900 p-0 sm:p-6 rounded-xl sm:shadow-2xl sm:border-t-8 sm:border-blue-600">
         <VirtualPiano />
       </div>
 
