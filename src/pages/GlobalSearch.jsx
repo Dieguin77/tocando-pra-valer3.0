@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { transposeText } from "../utils/musicLogic";
 import { Search, Music, ArrowLeft, Globe, X, Minus, Plus, Loader2, AlertCircle } from "lucide-react";
-import logo from "../assets/logo.png";
+import logo from "../assets/logooficial.png";
 
 export default function GlobalSearch() {
   const [query, setQuery] = useState("");
@@ -207,7 +207,7 @@ export default function GlobalSearch() {
       {/* --- NAVBAR PADRÃO --- */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center justify-center">
+          <Link to="../assets/logooficial.png" className="flex items-center justify-center">
             <img src={logo} alt="Logo Tocando Pra Valer" className="h-10 w-auto rounded-lg" />
           </Link>
           

@@ -8,8 +8,10 @@ import imgCriancas from "../assets/crianças-tocando.jpg";
 import imgHomem from "../assets/homem-tocando.jpg";
 import imgIdosos from "../assets/idosos-tocando.jpg";
 import imgLife from "../assets/life-violao.jpg";
-import logo from "../assets/logo.png";
+import logo from "../assets/logooficial.png";
 
+
+// --- COMPONENTE PRINCIPAL DA PÁGINA HOME ---
 export default function Home() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -45,30 +47,12 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       
-      {/* 🚨 BANNER DE TESTE - REMOVER APÓS CONFIRMAÇÃO DO DEPLOY 🚨 */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 9999,
-          color: 'white',
-          padding: '16px 20px',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          fontSize: '18px',
-        }}
-      >
-    
-      </div>
-      {/* FIM DO BANNER DE TESTE */}
       
       {/* --- NAVBAR CLEAN --- */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           {/* Logo apenas */}
-          <Link to="/" className="flex items-center justify-center">
+          <Link to="../src/assets/logooficial.png" className="flex items-center justify-center">
             <img src={logo} alt="Logo Tocando Pra Valer" className="h-10 w-auto rounded-lg" />
           </Link>
           
@@ -359,7 +343,7 @@ export default function Home() {
       <footer className="py-12 px-4 bg-gray-900">
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <img src={logo} alt="Logo" className="h-10 w-auto rounded-lg" />
+            <img src={logo} alt="logooficial" className="h-10 w-auto rounded-lg" />
             <span className="text-xl font-semibold text-white">
               Tocando<span className="text-blue-500">PraValer</span>
             </span>
