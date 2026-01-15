@@ -340,16 +340,13 @@ export default function Home() {
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="py-12 px-4 bg-gray-900">
+      <footer className="none">
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
             <img src={logo} alt="logooficial" className="h-10 w-auto rounded-lg" />
-            <span className="text-xl font-semibold text-white">
-              Tocando<span className="text-blue-500">PraValer</span>
-            </span>
           </div>
           
-          <p className="text-gray-400 mb-8">
+          <p className="text-black-400 mb-8">
             Siga nossas redes e entre em contato direto.
           </p>
           
@@ -382,7 +379,7 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="pt-8 text-sm text-gray-500 border-t border-gray-800">
+          <div className="pt-8 text-sm text-black-900 border-t border-black-1000">
             <p>© 2025 Tocando Pra Valer. Desenvolvido por Diego Gomes.</p>
           </div>
         </div>
