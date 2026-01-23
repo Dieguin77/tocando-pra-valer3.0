@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Music, Mic, FileText, Send, Loader2, CheckCircle, AlertCircle, Info, Cloud, CloudOff } from 'lucide-react';
+import { Music, Mic, FileText, Send, Loader2, CheckCircle, AlertCircle, Info, Cloud, CloudOff, Mail } from 'lucide-react';
 import { enviarCifra, getBackendInfo } from '../services/cifrasService';
+import { enviarConfirmacao } from '../services/emailService';
 
 export default function UploadCifra({ onCifraSubmitted }) {
   const backendInfo = getBackendInfo();
@@ -13,6 +14,7 @@ export default function UploadCifra({ onCifraSubmitted }) {
     compositor: '',
     dificuldade: 'intermediário',
     comentarios: '',
+    email: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -31,6 +33,8 @@ export default function UploadCifra({ onCifraSubmitted }) {
     if (!formData.cifra.trim()) newErrors.cifra = 'A cifra é obrigatória';
     if (formData.cifra.trim().length < 20)
       newErrors.cifra = 'A cifra deve ter pelo menos 20 caracteres';
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+      newErrors.email = 'E-mail inválido';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -68,6 +72,16 @@ export default function UploadCifra({ onCifraSubmitted }) {
         setOfflineMode(true);
       }
 
+      // Enviar e-mail de confirmação se o cliente informou o e-mail
+      if (formData.email) {
+        try {
+          await enviarConfirmacao(formData.email, formData.titulo, formData.artista);
+          console.log('✅ E-mail de confirmação enviado para:', formData.email);
+        } catch (emailError) {
+          console.warn('⚠️ Não foi possível enviar e-mail de confirmação:', emailError);
+        }
+      }
+
       setSuccess(true);
       setFormData({
         titulo: '',
@@ -77,6 +91,7 @@ export default function UploadCifra({ onCifraSubmitted }) {
         compositor: '',
         dificuldade: 'intermediário',
         comentarios: '',
+        email: '',
       });
 
       if (onCifraSubmitted) {
@@ -197,6 +212,25 @@ export default function UploadCifra({ onCifraSubmitted }) {
               <span className="text-xs text-red-500 mt-1 block">{errors.artista}</span>
             )}
           </div>
+        </div>
+
+        {/* E-mail para confirmação */}
+        <div>
+          <label className={labelClasses}>
+            <Mail size={16} className="text-gray-400" /> Seu E-mail (opcional)
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Ex: seu@email.com - Receba confirmação do envio"
+            className={errors.email ? inputErrorClasses : inputClasses}
+          />
+          {errors.email && (
+            <span className="text-xs text-red-500 mt-1 block">{errors.email}</span>
+          )}
+          <span className="text-xs text-gray-400 mt-1 block">Informe seu e-mail para receber confirmação quando a cifra for enviada</span>
         </div>
 
         {/* Linha 2: Compositor, Tom, Dificuldade */}
