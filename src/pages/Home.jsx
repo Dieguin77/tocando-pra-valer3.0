@@ -425,7 +425,7 @@ export default function Home() {
           </div>
 
           <div className="pt-8 text-sm text-black-900 border-t border-black-1000">
-            <p>© 2025 Tocando Pra Valer. Desenvolvido por <a href="https://diegodev.dev.br" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 hover:underline transition-colors">Dev. Diego Batista</a>.</p>
+            <p>© 2026 Tocando Pra Valer. Desenvolvido por <a href="https://diegodev.dev.br" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 hover:underline transition-colors">Dev. Diego Batista</a>.</p>
           </div>
         </div>
       </footer>
