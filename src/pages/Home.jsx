@@ -380,7 +380,7 @@ export default function Home() {
           </div>
 
           <div className="pt-8 text-sm text-black-900 border-t border-black-1000">
-            <p>© 2025 Tocando Pra Valer. Desenvolvido por Diego Gomes.</p>
+            <p>© 2025 Tocando Pra Valer. Desenvolvido por Dev. Diego Batista.</p>
           </div>
         </div>
       </footer>

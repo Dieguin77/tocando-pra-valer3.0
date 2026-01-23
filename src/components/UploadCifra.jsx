@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { Music, Mic, FileText, Send, Loader2, CheckCircle, AlertCircle, Info } from 'lucide-react';
+import { Music, Mic, FileText, Send, Loader2, CheckCircle, AlertCircle, Info, Cloud, CloudOff } from 'lucide-react';
+import { enviarCifra, getBackendInfo } from '../services/cifrasService';
 
 export default function UploadCifra({ onCifraSubmitted }) {
+  const backendInfo = getBackendInfo();
+  
   const [formData, setFormData] = useState({
     titulo: '',
     artista: '',
@@ -15,6 +18,7 @@ export default function UploadCifra({ onCifraSubmitted }) {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [offlineMode, setOfflineMode] = useState(false);
 
   const dificuldades = ['Fácil', 'Intermediário', 'Difícil'];
   const tons = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -54,23 +58,15 @@ export default function UploadCifra({ onCifraSubmitted }) {
     }
 
     setLoading(true);
+    setOfflineMode(false);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Usar o novo serviço de cifras
+      const result = await enviarCifra(formData);
 
-      const cifraPendente = {
-        id: `cifra_${Date.now()}`,
-        ...formData,
-        dataCriacao: new Date().toISOString(),
-        status: 'pendente',
-        musicoEmail: '',
-      };
-
-      const cifraspendentes = JSON.parse(
-        localStorage.getItem('cifrasPendentes') || '[]'
-      );
-      cifraspendentes.push(cifraPendente);
-      localStorage.setItem('cifrasPendentes', JSON.stringify(cifraspendentes));
+      if (result.offline) {
+        setOfflineMode(true);
+      }
 
       setSuccess(true);
       setFormData({
@@ -84,10 +80,13 @@ export default function UploadCifra({ onCifraSubmitted }) {
       });
 
       if (onCifraSubmitted) {
-        onCifraSubmitted(cifraPendente);
+        onCifraSubmitted(result.cifra);
       }
 
-      setTimeout(() => setSuccess(false), 3000);
+      setTimeout(() => {
+        setSuccess(false);
+        setOfflineMode(false);
+      }, 5000);
     } catch (error) {
       console.error('Erro ao enviar cifra:', error);
       setErrors({ submit: 'Erro ao enviar cifra. Tente novamente.' });
@@ -103,19 +102,55 @@ export default function UploadCifra({ onCifraSubmitted }) {
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-6">
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2 mb-1">
-          <Music size={22} className="text-blue-500" />
-          Enviar Cifra
-        </h2>
+        <div className="flex items-center justify-between mb-1">
+          <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+            <Music size={22} className="text-blue-500" />
+            Enviar Cifra
+          </h2>
+          {/* Indicador de Backend */}
+          <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
+            backendInfo.isConfigured 
+              ? 'bg-green-50 text-green-600' 
+              : 'bg-amber-50 text-amber-600'
+          }`}>
+            {backendInfo.isConfigured ? (
+              <>
+                <Cloud size={14} />
+                <span>Sincronizado</span>
+              </>
+            ) : (
+              <>
+                <CloudOff size={14} />
+                <span>Modo Local</span>
+              </>
+            )}
+          </div>
+        </div>
         <p className="text-gray-500 text-sm">
           Compartilhe suas cifras com a comunidade
         </p>
       </div>
 
       {success && (
-        <div className="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-lg mb-6">
-          <CheckCircle size={20} className="text-green-500" />
-          <span className="text-green-700">Cifra enviada com sucesso! Obrigado por contribuir 🎵</span>
+        <div className={`flex items-center gap-3 p-4 rounded-lg mb-6 ${
+          offlineMode 
+            ? 'bg-amber-50 border border-amber-200' 
+            : 'bg-green-50 border border-green-200'
+        }`}>
+          <CheckCircle size={20} className={offlineMode ? 'text-amber-500' : 'text-green-500'} />
+          <div>
+            <span className={offlineMode ? 'text-amber-700' : 'text-green-700'}>
+              {offlineMode 
+                ? 'Cifra salva localmente (modo offline) 📱'
+                : 'Cifra enviada com sucesso! Obrigado por contribuir 🎵'
+              }
+            </span>
+            {offlineMode && (
+              <p className="text-xs text-amber-600 mt-1">
+                Será sincronizada quando o backend estiver configurado.
+              </p>
+            )}
+          </div>
         </div>
       )}
 
