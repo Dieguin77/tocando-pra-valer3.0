@@ -14,13 +14,26 @@ import logo from "../assets/logooficial.png";
 // --- COMPONENTE PRINCIPAL DA PÁGINA HOME ---
 export default function Home() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [cifrasDropdownOpen, setCifrasDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const cifrasDropdownRef = useRef(null);
+
+  // Função para scroll suave até uma seção
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   // Fechar dropdown ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
+      }
+      if (cifrasDropdownRef.current && !cifrasDropdownRef.current.contains(event.target)) {
+        setCifrasDropdownOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -61,9 +74,41 @@ export default function Home() {
             <Link to="/busca-global" className="flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-colors">
               <Globe size={16} /> Busca Vagalume
             </Link>
-            <Link to="/musicas" className="text-gray-600 hover:text-blue-500 transition-colors">Cifras</Link>
-            <a href="#beneficios" className="text-gray-600 hover:text-blue-500 transition-colors">Benefícios</a>
-            <a href="#videos" className="text-gray-600 hover:text-blue-500 transition-colors">Vídeos</a>
+            
+            {/* Dropdown Cifras */}
+            <div className="relative" ref={cifrasDropdownRef}>
+              <button 
+                onClick={() => setCifrasDropdownOpen(!cifrasDropdownOpen)}
+                className="flex items-center gap-1 text-gray-600 hover:text-blue-500 transition-colors cursor-pointer"
+              >
+                Cifras
+                <ChevronDown size={14} className={`transition-transform ${cifrasDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {cifrasDropdownOpen && (
+                <div className="absolute left-0 mt-2 w-44 bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden z-50">
+                  <Link 
+                    to="/musicas" 
+                    className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors"
+                    onClick={() => setCifrasDropdownOpen(false)}
+                  >
+                    <BookOpen size={18} className="text-blue-500" />
+                    <span>Ver Cifras</span>
+                  </Link>
+                  <Link 
+                    to="/upload" 
+                    className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors"
+                    onClick={() => setCifrasDropdownOpen(false)}
+                  >
+                    <Send size={18} className="text-blue-500" />
+                    <span>Enviar Cifra</span>
+                  </Link>
+                </div>
+              )}
+            </div>
+            
+            <button onClick={() => scrollToSection('beneficios')} className="text-gray-600 hover:text-blue-500 transition-colors cursor-pointer">Benefícios</button>
+            <button onClick={() => scrollToSection('videos')} className="text-gray-600 hover:text-blue-500 transition-colors cursor-pointer">Vídeos</button>
           </div>
           
           {/* Dropdown Área do Aluno */}
@@ -380,7 +425,7 @@ export default function Home() {
           </div>
 
           <div className="pt-8 text-sm text-black-900 border-t border-black-1000">
-            <p>© 2025 Tocando Pra Valer. Desenvolvido por Dev. Diego Batista.</p>
+            <p>© 2025 Tocando Pra Valer. Desenvolvido por <a href="https://diegodev.dev.br" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 hover:underline transition-colors">Dev. Diego Batista</a>.</p>
           </div>
         </div>
       </footer>
