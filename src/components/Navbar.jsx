@@ -21,7 +21,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo apenas */}
-        <Link to="../assets/logooficial.png" className="flex items-center justify-center">
+        <Link to="/" className="flex items-center justify-center" aria-label="Ir para a página inicial">
           <img src={logo} alt="Logo Tocando Pra Valer" className="h-10 w-auto rounded-lg" />
         </Link>
         

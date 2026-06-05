@@ -14,7 +14,10 @@ export default function GlobalSearch() {
 
   // APIs disponíveis
   const LYRICS_OVH_API = "https://api.lyrics.ovh/v1";
-  const VAGALUME_API_KEY = "660a4395f992ff67786584e238f501aa"; 
+  // Chave da Vagalume: prioriza variável de ambiente (VITE_VAGALUME_API_KEY),
+  // com fallback para a chave pública padrão.
+  const VAGALUME_API_KEY =
+    import.meta.env.VITE_VAGALUME_API_KEY || "660a4395f992ff67786584e238f501aa";
 
   // Função para converter string para slug
   const toSlug = (str) => {
@@ -28,35 +31,58 @@ export default function GlobalSearch() {
       .trim();
   };
 
-  // Lista de proxies para CORS
-  const PROXIES = ["", "https://corsproxy.io/?"];
+  // Estratégias de requisição: tenta direto primeiro (APIs com CORS aberto,
+  // como Lyrics.ovh) e, em caso de bloqueio CORS, recorre a proxies públicos
+  // confiáveis. Cada proxy recebe a URL-alvo já codificada.
+  const PROXIES = [
+    (target) => target, // direto
+    (target) => `https://api.allorigins.win/raw?url=${encodeURIComponent(target)}`,
+    (target) => `https://corsproxy.io/?url=${encodeURIComponent(target)}`,
+  ];
 
-  // Função para tentar múltiplos proxies com timeout
-  const fetchWithProxy = async (targetUrl, isJson = true, timeoutMs = 10000) => {
-    for (const proxy of PROXIES) {
+  // Função para tentar múltiplas estratégias com timeout robusto
+  const fetchWithProxy = async (targetUrl, isJson = true, timeoutMs = 12000) => {
+    let lastError = null;
+
+    for (const buildUrl of PROXIES) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
       try {
-        const url = proxy ? proxy + encodeURIComponent(targetUrl) : targetUrl;
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-        
+        const url = buildUrl(targetUrl);
         const response = await fetch(url, {
-          headers: proxy ? { 'Origin': window.location.origin } : {},
-          signal: controller.signal
+          // NÃO enviar header "Origin": é um header proibido e o navegador o ignora.
+          headers: { Accept: isJson ? "application/json, text/plain, */*" : "text/plain, */*" },
+          signal: controller.signal,
         });
-        clearTimeout(timeoutId);
-        
-        if (response.ok) {
-          return isJson ? await response.json() : await response.text();
+
+        if (!response.ok) {
+          lastError = new Error(`HTTP ${response.status}`);
+          continue;
+        }
+
+        // Alguns proxies retornam text/plain mesmo para JSON: parse defensivo.
+        const raw = await response.text();
+        if (!raw) {
+          lastError = new Error("Resposta vazia");
+          continue;
+        }
+        if (!isJson) return raw;
+        try {
+          return JSON.parse(raw);
+        } catch {
+          lastError = new Error("JSON inválido");
+          continue;
         }
       } catch (e) {
-        if (e.name === 'AbortError') {
-          console.log(`${proxy || 'Direto'} timeout...`);
-        } else {
-          console.log(`${proxy || 'Direto'} falhou...`);
-        }
+        lastError = e;
+        console.log(e?.name === "AbortError" ? "Timeout na requisição..." : "Estratégia falhou, tentando próxima...");
+      } finally {
+        clearTimeout(timeoutId);
       }
     }
-    throw new Error("Falha na conexão");
+
+    throw lastError || new Error("Falha na conexão");
   };
 
   // ========== BUSCA LETRAS (Lyrics.ovh) ==========
@@ -207,7 +233,7 @@ export default function GlobalSearch() {
       {/* --- NAVBAR PADRÃO --- */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="../assets/logooficial.png" className="flex items-center justify-center">
+          <Link to="/" className="flex items-center justify-center" aria-label="Ir para a página inicial">
             <img src={logo} alt="Logo Tocando Pra Valer" className="h-10 w-auto rounded-lg" />
           </Link>
           

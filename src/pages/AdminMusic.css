@@ -1,226 +1,131 @@
-/* src/pages/AdminMusic.css - High Tech Design */
+/* src/pages/AdminMusic.css — Design clean, minimalista e profissional
+   Paleta: fundo branco/off-white, textos cinza-escuro, destaque azul da marca. */
 
 .admin-music-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
-  color: #ffffff;
-  position: relative;
-  overflow: hidden;
+  background: #ffffff;
+  color: #1f2937; /* gray-800 */
 }
 
-/* Efeito de partículas/grid no fundo */
-.admin-music-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    radial-gradient(circle at 25% 25%, rgba(26, 115, 232, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(66, 133, 244, 0.08) 0%, transparent 50%),
-    linear-gradient(rgba(26, 115, 232, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26, 115, 232, 0.03) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.admin-music-container > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Header High Tech */
+/* Header */
 .admin-header {
   text-align: center;
-  margin-bottom: 50px;
-  padding: 40px;
-  background: linear-gradient(135deg, rgba(26, 115, 232, 0.15) 0%, rgba(66, 133, 244, 0.05) 100%);
-  border: 1px solid rgba(26, 115, 232, 0.3);
-  border-radius: 24px;
-  backdrop-filter: blur(20px);
-  position: relative;
-  overflow: hidden;
-}
-
-.admin-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(26, 115, 232, 0.2), transparent);
-  animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-  0% { left: -100%; }
-  100% { left: 100%; }
+  margin-bottom: 40px;
+  padding: 32px;
+  background: #f9fafb; /* gray-50 */
+  border: 1px solid #e5e7eb; /* gray-200 */
+  border-radius: 16px;
 }
 
 .admin-header h1 {
-  font-size: 2.8rem;
-  margin: 15px 0;
-  background: linear-gradient(135deg, #1A73E8 0%, #4285F4 50%, #00d4ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 2rem;
+  margin: 12px 0;
+  color: #111827; /* gray-900 */
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   justify-content: center;
-  font-weight: 800;
-  letter-spacing: -1px;
-  text-shadow: 0 0 40px rgba(26, 115, 232, 0.5);
+  font-weight: 700;
 }
 
 .admin-header p {
-  color: #a0aec0;
-  font-size: 1.2rem;
-  margin-top: 10px;
+  color: #6b7280; /* gray-500 */
+  font-size: 1.05rem;
+  margin-top: 8px;
 }
 
-/* Back Link - Botão Futurístico */
+/* Link de voltar */
 .back-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #4285F4;
+  color: #0172AA; /* blue-500 */
   text-decoration: none;
   font-weight: 600;
-  margin-bottom: 15px;
-  padding: 12px 24px;
-  background: rgba(26, 115, 232, 0.1);
-  border: 1px solid rgba(26, 115, 232, 0.3);
-  border-radius: 50px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-bottom: 12px;
+  padding: 10px 20px;
+  background: #e6f3f9; /* blue-50 */
+  border: 1px solid #cce7f1; /* blue-100 */
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .back-link:hover {
-  background: rgba(26, 115, 232, 0.2);
-  border-color: #1A73E8;
-  transform: translateX(-5px);
-  box-shadow: 0 0 30px rgba(26, 115, 232, 0.4);
-  color: #ffffff;
+  background: #cce7f1; /* blue-100 */
+  color: #015d8c; /* blue-600 */
 }
 
-/* Songs Section - Glassmorphism */
+/* Seção de músicas */
 .songs-added {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 40px;
-  margin-top: 40px;
-  position: relative;
-  overflow: hidden;
-}
-
-.songs-added::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(26, 115, 232, 0.8), transparent);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 32px;
+  margin-top: 32px;
 }
 
 .songs-added h2 {
-  background: linear-gradient(135deg, #ffffff 0%, #4285F4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 30px;
-  font-size: 1.8rem;
+  color: #111827;
+  margin-bottom: 24px;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   gap: 12px;
   font-weight: 700;
 }
 
-/* Cards Grid */
+/* Grid de cards */
 .songs-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
-  margin-bottom: 30px;
+  gap: 24px;
+  margin-bottom: 24px;
 }
 
-/* Song Card - High Tech Style */
+/* Card de música */
 .song-card {
-  background: linear-gradient(145deg, rgba(26, 115, 232, 0.1) 0%, rgba(15, 15, 30, 0.8) 100%);
-  border: 1px solid rgba(26, 115, 232, 0.2);
-  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
   padding: 20px;
   position: relative;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-}
-
-.song-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(26, 115, 232, 0.2) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .song-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  border-color: #1A73E8;
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.4),
-    0 0 40px rgba(26, 115, 232, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.song-card:hover::before {
-  opacity: 1;
+  transform: translateY(-2px);
+  border-color: #7fc0e0; /* blue-300 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .song-image {
   width: 100%;
   height: 160px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 8px;
   margin-bottom: 16px;
-  border: 2px solid rgba(26, 115, 232, 0.3);
-  transition: all 0.4s ease;
-}
-
-.song-card:hover .song-image {
-  border-color: #1A73E8;
-  box-shadow: 0 0 20px rgba(26, 115, 232, 0.4);
+  border: 1px solid #e5e7eb;
 }
 
 .song-details h3 {
-  color: #ffffff;
-  font-size: 1.2rem;
-  margin: 0 0 10px 0;
+  color: #111827;
+  font-size: 1.15rem;
+  margin: 0 0 8px 0;
   word-break: break-word;
   font-weight: 700;
 }
 
 .song-details p {
   font-size: 0.9rem;
-  color: #a0aec0;
+  color: #6b7280;
   margin: 6px 0;
 }
 
 .song-details strong {
-  color: #4285F4;
+  color: #374151; /* gray-700 */
 }
 
 .song-details a {
@@ -228,211 +133,131 @@
   align-items: center;
   gap: 8px;
   margin-top: 12px;
-  color: #1A73E8;
+  color: #0172AA;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
   padding: 8px 16px;
-  background: rgba(26, 115, 232, 0.15);
-  border-radius: 50px;
-  transition: all 0.3s ease;
+  background: #e6f3f9;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .song-details a:hover {
-  background: #1A73E8;
+  background: #0172AA;
   color: #ffffff;
-  transform: translateX(5px);
-  box-shadow: 0 0 20px rgba(26, 115, 232, 0.5);
 }
 
-/* Remove Button - Neon Style */
+/* Botão remover */
 .btn-remove {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 36px;
-  height: 36px;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
-  border: none;
-  color: white;
-  font-size: 1.2rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #6b7280;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
 }
 
 .btn-remove:hover {
-  background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%);
-  transform: scale(1.15) rotate(90deg);
-  box-shadow: 0 6px 25px rgba(255, 71, 87, 0.6);
+  background: #fef2f2; /* red-50 (feedback de exclusão discreto) */
+  color: #dc2626; /* red-600 */
+  border-color: #fecaca; /* red-200 */
 }
 
-/* Export Section - CTA Style */
+/* Seção de exportação */
 .export-section {
-  background: linear-gradient(135deg, #1A73E8 0%, #4285F4 50%, #1557B0 100%);
+  background: #0172AA; /* azul da marca */
   color: #ffffff;
-  padding: 30px;
-  border-radius: 20px;
-  margin-bottom: 25px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 40px rgba(26, 115, 232, 0.4);
-}
-
-.export-section::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 100%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-  animation: pulse-glow 4s infinite;
-}
-
-@keyframes pulse-glow {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.1); opacity: 0.8; }
+  padding: 28px;
+  border-radius: 12px;
+  margin-bottom: 24px;
 }
 
 .export-section h3 {
   margin-top: 0;
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   display: flex;
   align-items: center;
   gap: 12px;
   color: #ffffff;
   font-weight: 700;
-  position: relative;
-  z-index: 1;
 }
 
 .btn-export {
-  padding: 14px 32px;
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  color: white;
-  font-weight: 700;
-  border-radius: 50px;
+  padding: 12px 28px;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  color: #015d8c; /* blue-600 */
+  font-weight: 600;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
   margin-bottom: 12px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  position: relative;
-  z-index: 1;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 .btn-export:hover {
-  background: #ffffff;
-  color: #1A73E8;
-  border-color: #ffffff;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+  background: #e6f3f9;
+  color: #015d8c; /* blue-700 */
 }
 
 .export-section .info {
-  font-size: 0.95rem;
-  opacity: 0.9;
+  font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.9);
-  position: relative;
-  z-index: 1;
 }
 
 .export-section code {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
   padding: 4px 10px;
   border-radius: 6px;
   font-family: 'Fira Code', 'Courier New', monospace;
-  color: #00d4ff;
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: #ffffff;
 }
 
-/* Info Box - Futuristic */
+/* Caixa informativa */
 .info-box {
-  background: linear-gradient(135deg, rgba(26, 115, 232, 0.1) 0%, rgba(15, 15, 30, 0.8) 100%);
-  border-left: 4px solid #1A73E8;
-  padding: 25px 30px;
-  border-radius: 16px;
-  margin-top: 30px;
-  border: 1px solid rgba(26, 115, 232, 0.2);
-  backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
-}
-
-.info-box::before {
-  content: '💡';
-  position: absolute;
-  top: -20px;
-  right: 20px;
-  font-size: 4rem;
-  opacity: 0.1;
+  background: #f9fafb;
+  border-left: 4px solid #0172AA;
+  padding: 24px 28px;
+  border-radius: 12px;
+  margin-top: 28px;
+  border: 1px solid #e5e7eb;
 }
 
 .info-box h3 {
-  background: linear-gradient(135deg, #1A73E8 0%, #00d4ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #111827;
   margin-top: 0;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
 }
 
 .info-box ol {
-  color: #e2e8f0;
-  line-height: 2;
+  color: #374151;
+  line-height: 1.9;
   padding-left: 20px;
 }
 
 .info-box li {
-  margin-bottom: 12px;
-  color: #a0aec0;
-  position: relative;
+  margin-bottom: 10px;
+  color: #4b5563; /* gray-600 */
 }
 
 .info-box li::marker {
-  color: #1A73E8;
+  color: #0172AA;
   font-weight: 700;
 }
-
-/* Dark Mode já é o padrão neste design High Tech */
-[data-theme="dark"] .admin-music-container,
-[data-theme="light"] .admin-music-container {
-  background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
-}
-
-/* Animações de entrada */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.song-card {
-  animation: fadeInUp 0.6s ease-out backwards;
-}
-
-.song-card:nth-child(1) { animation-delay: 0.1s; }
-.song-card:nth-child(2) { animation-delay: 0.2s; }
-.song-card:nth-child(3) { animation-delay: 0.3s; }
-.song-card:nth-child(4) { animation-delay: 0.4s; }
-.song-card:nth-child(5) { animation-delay: 0.5s; }
-.song-card:nth-child(6) { animation-delay: 0.6s; }
 
 /* Responsivo */
 @media (max-width: 768px) {
@@ -441,24 +266,24 @@
   }
 
   .admin-header {
-    padding: 25px 20px;
-    border-radius: 16px;
+    padding: 24px 20px;
+    border-radius: 12px;
   }
 
   .admin-header h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     flex-direction: column;
     gap: 10px;
   }
 
   .songs-list {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
   }
 
   .songs-added {
-    padding: 25px 20px;
-    border-radius: 16px;
+    padding: 24px 20px;
+    border-radius: 12px;
   }
 
   .export-section {
@@ -469,27 +294,4 @@
     width: 100%;
     justify-content: center;
   }
-}
-
-/* Efeito de hover global para links */
-a {
-  position: relative;
-}
-
-/* Scrollbar personalizada */
-.admin-music-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.admin-music-container::-webkit-scrollbar-track {
-  background: rgba(26, 115, 232, 0.1);
-}
-
-.admin-music-container::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #1A73E8 0%, #4285F4 100%);
-  border-radius: 4px;
-}
-
-.admin-music-container::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #4285F4 0%, #1A73E8 100%);
 }

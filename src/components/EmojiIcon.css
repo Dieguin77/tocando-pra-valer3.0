@@ -68,13 +68,12 @@
 
 /* Variantes de botão */
 .icon-button-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #0172AA; /* azul da marca (blue-500) */
   color: white;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .icon-button-primary:hover {
-  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+  background: #015d8c; /* blue-600 */
 }
 
 .icon-button-secondary {
@@ -89,25 +88,21 @@
 }
 
 .icon-button-danger {
-  background: #ff6b6b;
+  background: #ef4444; /* red-500 (apenas para ações destrutivas) */
   color: white;
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
 }
 
 .icon-button-danger:hover {
-  background: #ff5252;
-  box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+  background: #dc2626; /* red-600 */
 }
 
 .icon-button-success {
-  background: #51cf66;
+  background: #22c55e; /* green-500 (apenas confirmações) */
   color: white;
-  box-shadow: 0 4px 12px rgba(81, 207, 102, 0.3);
 }
 
 .icon-button-success:hover {
-  background: #40c057;
-  box-shadow: 0 6px 16px rgba(81, 207, 102, 0.4);
+  background: #16a34a; /* green-600 */
 }
 
 .icon-button-ghost {
