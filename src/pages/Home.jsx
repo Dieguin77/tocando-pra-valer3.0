@@ -283,9 +283,11 @@ export default function Home() {
             </div>
             
             <div>
-              <img 
-                src={imgHomem} 
-                alt="Músico usando o app" 
+              <img
+                src={imgHomem}
+                alt="Músico usando o app"
+                loading="lazy"
+                decoding="async"
                 className="rounded-2xl w-full h-auto object-cover shadow-lg"
               />
             </div>
@@ -349,10 +351,12 @@ export default function Home() {
                 key={item.id} 
                 className="relative group rounded-xl overflow-hidden aspect-[3/4]"
               >
-                <img 
-                  src={item.img} 
-                  alt={item.titulo} 
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
+                <img
+                  src={item.img}
+                  alt={item.titulo}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <span className="text-white font-medium text-center px-4">

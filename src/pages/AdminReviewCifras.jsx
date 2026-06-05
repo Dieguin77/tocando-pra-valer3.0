@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useTheme } from '../contexts/ThemeContext';
-import EmojiIcon from '../components/EmojiIcon';
 import ThemeToggle from '../components/ThemeToggle';
 import { 
   Guitar, Clock, CheckCircle, XCircle, PartyPopper, Piano, BarChart2, 
@@ -18,7 +16,6 @@ import {
 import './AdminReviewCifras.css';
 
 export default function AdminReviewCifras() {
-  const { theme } = useTheme();
   const backendInfo = getBackendInfo();
   
   const [cifrasPendentes, setCifrasPendentes] = useState([]);
@@ -26,7 +23,7 @@ export default function AdminReviewCifras() {
   const [cifrasRejeitadas, setCifrasRejeitadas] = useState([]);
   const [tab, setTab] = useState('pendentes');
   const [expandedId, setExpandedId] = useState(null);
-  const [motivoRejeicao, setMotivoRejeicao] = useState('');
+  const [_motivoRejeicao, setMotivoRejeicao] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
 

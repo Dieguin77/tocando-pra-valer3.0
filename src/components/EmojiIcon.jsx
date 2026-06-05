@@ -36,8 +36,6 @@ import {
   Home,
   ArrowLeft,
   ArrowRight,
-  ChevronDown,
-  ChevronUp,
   Menu,
   X,
   AlertCircle,

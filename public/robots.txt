@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Ajuste o domínio abaixo para o domínio de produção definitivo
+Sitemap: https://tocandopravaler.vercel.app/sitemap.xml

@@ -72,7 +72,7 @@ export default function GlobalSearch() {
       const url = `https://api.vagalume.com.br/${artistSlug}/index.js`;
       const data = await fetchWithProxy(url);
       return data;
-    } catch (e) {
+    } catch {
       return null;
     }
   };
@@ -103,7 +103,7 @@ export default function GlobalSearch() {
             setTransposition(0);
             return;
           }
-        } catch (e) {
+        } catch {
           console.log("Lyrics.ovh não encontrou, tentando lista do artista...");
         }
         
@@ -175,7 +175,7 @@ export default function GlobalSearch() {
           setTransposition(0);
           return;
         }
-      } catch (e) {
+      } catch {
         console.log("Lyrics.ovh falhou, tentando Vagalume...");
       }
       

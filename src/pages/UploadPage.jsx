@@ -4,9 +4,9 @@ import UploadCifra from '../components/UploadCifra';
 import { Music, Search, CheckCircle, Globe, Star, BookOpen, Pencil, Target, AlertTriangle, HelpCircle, Mail, Trophy, ArrowLeft } from 'lucide-react';
 
 export default function UploadPage() {
-  const [cifraSent, setCifraSent] = useState(false);
+  const [_cifraSent, setCifraSent] = useState(false);
 
-  const handleCifraSubmitted = (cifra) => {
+  const handleCifraSubmitted = (_cifra) => {
     setCifraSent(true);
     setTimeout(() => setCifraSent(false), 3000);
   };

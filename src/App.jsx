@@ -11,23 +11,45 @@
  *   ou pode quebrar a estrutura de rotas.
  */
 
-import { useEffect } from "react";
-import { Routes, Route, Outlet } from "react-router-dom";
+import { useEffect, lazy, Suspense } from "react";
+import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { initEmailJS } from "./services/emailService";
 
-// Importação das Páginas
-import Home from "./pages/Home";
-import Songs from "./pages/Songs";
-import Song from "./pages/Song";
-import AdminMusic from "./pages/AdminMusic";
-import UploadPage from "./pages/UploadPage";
-import AdminReviewCifras from "./pages/AdminReviewCifras";
-import GlobalSearch from "./pages/GlobalSearch";
-import PianoPage from "./pages/PianoPage";
-import ToolsPage from "./pages/ToolsPage";
+// Importação das Páginas (code splitting: cada rota vira um chunk separado)
+const Home = lazy(() => import("./pages/Home"));
+const Songs = lazy(() => import("./pages/Songs"));
+const Song = lazy(() => import("./pages/Song"));
+const AdminMusic = lazy(() => import("./pages/AdminMusic"));
+const UploadPage = lazy(() => import("./pages/UploadPage"));
+const AdminReviewCifras = lazy(() => import("./pages/AdminReviewCifras"));
+const GlobalSearch = lazy(() => import("./pages/GlobalSearch"));
+const PianoPage = lazy(() => import("./pages/PianoPage"));
+const ToolsPage = lazy(() => import("./pages/ToolsPage"));
 
 // Importação dos Componentes de Layout
 import Navbar from "./components/Navbar";
+
+// Fallback exibido enquanto o chunk da rota é carregado
+const PageLoader = () => (
+  <div
+    className="flex items-center justify-center min-h-[50vh] text-gray-500"
+    role="status"
+    aria-live="polite"
+  >
+    Carregando…
+  </div>
+);
+
+// Página 404 para rotas inexistentes
+const NotFound = () => (
+  <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4 text-center px-4">
+    <h1 className="text-4xl font-bold text-gray-800">404</h1>
+    <p className="text-gray-500">Página não encontrada.</p>
+    <Link to="/" className="text-brand-blue font-semibold hover:underline">
+      Voltar para a Home
+    </Link>
+  </div>
+);
 
 // --- LAYOUTS ---
 
@@ -57,27 +79,32 @@ export default function App() {
   }, []);
 
   return (
-    <Routes>
-      {/* Home tem layout próprio */}
-      <Route path="/" element={<Home />} />
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
+        {/* Home tem layout próprio */}
+        <Route path="/" element={<Home />} />
 
-      {/* GRUPO 1: Rotas Públicas (Site, Vendas, Busca) */}
-      <Route element={<PublicLayout />}>
-        <Route path="/busca-global" element={<GlobalSearch />} />
-        <Route path="/piano" element={<PianoPage />} />
-      </Route>
+        {/* GRUPO 1: Rotas Públicas (Site, Vendas, Busca) */}
+        <Route element={<PublicLayout />}>
+          <Route path="/busca-global" element={<GlobalSearch />} />
+          <Route path="/piano" element={<PianoPage />} />
+        </Route>
 
-      {/* GRUPO 2: Rotas da Plataforma (Área do Aluno / Admin) */}
-      <Route element={<PlatformLayout />}>
-        <Route path="/musicas" element={<Songs />} />
-        <Route path="/musica/:id" element={<Song />} />
-        <Route path="/upload" element={<UploadPage />} />
-        <Route path="/ferramentas" element={<ToolsPage />} />
-        
-        {/* Admin */}
-        <Route path="/admin/musicas" element={<AdminMusic />} />
-        <Route path="/admin/revisar-cifras" element={<AdminReviewCifras />} />
-      </Route>
-    </Routes>
+        {/* GRUPO 2: Rotas da Plataforma (Área do Aluno / Admin) */}
+        <Route element={<PlatformLayout />}>
+          <Route path="/musicas" element={<Songs />} />
+          <Route path="/musica/:id" element={<Song />} />
+          <Route path="/upload" element={<UploadPage />} />
+          <Route path="/ferramentas" element={<ToolsPage />} />
+
+          {/* Admin */}
+          <Route path="/admin/musicas" element={<AdminMusic />} />
+          <Route path="/admin/revisar-cifras" element={<AdminReviewCifras />} />
+
+          {/* 404 — rota não encontrada */}
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }

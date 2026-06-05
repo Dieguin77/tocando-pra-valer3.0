@@ -97,7 +97,7 @@ export const enrichSongsWithGeniusData = async (musicas) => {
  * @param {string} url - URL da música no Genius
  * @returns {Promise<string>} Letra da música
  */
-export const getLyricsFromGenius = async (url) => {
+export const getLyricsFromGenius = async (_url) => {
   try {
     // Esta é uma operação complexa que requer backend
     // Genius não fornece letras via API por razões legais

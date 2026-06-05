@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SearchMusic from '../components/SearchMusic';
-import { useTheme } from '../contexts/ThemeContext';
 import EmojiIcon from '../components/EmojiIcon';
 import './AdminMusic.css';
 
 export default function AdminMusic() {
-  const { theme, toggleTheme } = useTheme();
-  const darkMode = theme === 'dark';
   const [songs, setSongs] = useState([]);
 
   const handleSongFound = (songData) => {
@@ -45,7 +42,7 @@ export default function AdminMusic() {
             {songs.map(song => (
               <div key={song.id} className="song-card">
                 {song.imagem && (
-                  <img src={song.imagem} alt={song.titulo} className="song-image" />
+                  <img src={song.imagem} alt={song.titulo} loading="lazy" decoding="async" className="song-image" />
                 )}
                 
                 <div className="song-details">

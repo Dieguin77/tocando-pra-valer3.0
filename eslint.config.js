@@ -5,7 +5,7 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
-  { ignores: ['dist', 'docs', 'node_modules'] },
+  { ignores: ['dist', 'docs', 'node_modules', 'public'] },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
@@ -29,6 +29,17 @@ export default [
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
       'react/jsx-no-target-blank': 'off',
+      // Projeto JavaScript puro (sem TypeScript): a validação de prop-types
+      // gera ruído sem ganho real de segurança de tipos. Desativada.
+      'react/prop-types': 'off',
+      'no-unused-vars': [
+        'error',
+        {
+          varsIgnorePattern: '^_',
+          argsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+        },
+      ],
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },

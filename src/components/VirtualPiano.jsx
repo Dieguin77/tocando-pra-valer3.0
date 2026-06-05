@@ -12,33 +12,32 @@ const NOTE_NAMES_PT = {
   "A#": "Lá#", "B": "Si", "C2": "Dó",
 };
 
+// Constante de módulo: não depende de estado, evita recriação a cada render
+const BASE_NOTES = [
+  { name: "C", type: "white", baseFreq: 261.63, key: "a" },
+  { name: "C#", type: "black", baseFreq: 277.18, key: "w" },
+  { name: "D", type: "white", baseFreq: 293.66, key: "s" },
+  { name: "D#", type: "black", baseFreq: 311.13, key: "e" },
+  { name: "E", type: "white", baseFreq: 329.63, key: "d" },
+  { name: "F", type: "white", baseFreq: 349.23, key: "f" },
+  { name: "F#", type: "black", baseFreq: 369.99, key: "t" },
+  { name: "G", type: "white", baseFreq: 392.00, key: "g" },
+  { name: "G#", type: "black", baseFreq: 415.30, key: "y" },
+  { name: "A", type: "white", baseFreq: 440.00, key: "h" },
+  { name: "A#", type: "black", baseFreq: 466.16, key: "u" },
+  { name: "B", type: "white", baseFreq: 493.88, key: "j" },
+  { name: "C2", type: "white", baseFreq: 523.25, key: "k" },
+];
+
 export default function VirtualPiano() {
   const [activeKey, setActiveKey] = useState(null);
   const [octave, setOctave] = useState(4);
 
-  const baseNotes = [
-    { name: "C", type: "white", baseFreq: 261.63, key: "a" },
-    { name: "C#", type: "black", baseFreq: 277.18, key: "w" },
-    { name: "D", type: "white", baseFreq: 293.66, key: "s" },
-    { name: "D#", type: "black", baseFreq: 311.13, key: "e" },
-    { name: "E", type: "white", baseFreq: 329.63, key: "d" },
-    { name: "F", type: "white", baseFreq: 349.23, key: "f" },
-    { name: "F#", type: "black", baseFreq: 369.99, key: "t" },
-    { name: "G", type: "white", baseFreq: 392.00, key: "g" },
-    { name: "G#", type: "black", baseFreq: 415.30, key: "y" },
-    { name: "A", type: "white", baseFreq: 440.00, key: "h" },
-    { name: "A#", type: "black", baseFreq: 466.16, key: "u" },
-    { name: "B", type: "white", baseFreq: 493.88, key: "j" },
-    { name: "C2", type: "white", baseFreq: 523.25, key: "k" },
-  ];
-
-  const getFrequency = (baseFreq) => {
-    return baseFreq * Math.pow(2, octave - 4);
-  };
+  const baseNotes = BASE_NOTES;
 
   const playSound = useCallback((baseFreq, noteName) => {
     setActiveKey(noteName);
-    const freq = getFrequency(baseFreq);
+    const freq = baseFreq * Math.pow(2, octave - 4);
 
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioCtx.createOscillator();

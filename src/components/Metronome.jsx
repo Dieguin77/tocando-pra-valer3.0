@@ -76,12 +76,15 @@ export default function Metronome() {
     }
   };
 
-  // Reinicia quando BPM ou compasso muda
+  // Reinicia quando BPM ou compasso muda (apenas se já estiver tocando).
+  // Intencionalmente NÃO depende de isPlaying/start/stop para evitar
+  // reinício duplo ao iniciar/parar pelo botão.
   useEffect(() => {
     if (isPlaying) {
       stopMetronome();
       startMetronome();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bpm, beatsPerMeasure]);
 
   // Cleanup

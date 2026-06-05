@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { searchSongOnGenius } from '../services/geniusAPI';
-import EmojiIcon, { IconButton } from './EmojiIcon';
+import EmojiIcon from './EmojiIcon';
 import './SearchMusic.css';
 
 export default function SearchMusic({ onSongFound }) {
@@ -81,7 +81,7 @@ export default function SearchMusic({ onSongFound }) {
           <h3>Encontrada!</h3>
           
           {result.imagem && (
-            <img src={result.imagem} alt={result.titulo} className="result-image" />
+            <img src={result.imagem} alt={result.titulo} loading="lazy" decoding="async" className="result-image" />
           )}
           
           <div className="result-info">

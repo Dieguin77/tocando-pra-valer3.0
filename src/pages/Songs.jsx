@@ -80,7 +80,7 @@ export default function Songs() {
         {/* Estado Vazio */}
         {filteredSongs.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-gray-400 text-lg">Nenhuma cifra encontrada para "{searchTerm}"</p>
+            <p className="text-gray-400 text-lg">Nenhuma cifra encontrada para &quot;{searchTerm}&quot;</p>
           </div>
         )}
       </div>

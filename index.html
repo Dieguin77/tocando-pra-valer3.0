@@ -2,19 +2,71 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tocando Pra Valer</title>
-    <meta property="og:image" content="https://bolt.new/static/og_default.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
+    <!-- SEO principal -->
+    <title>Tocando Pra Valer — Aulas de Música, Cifras e Ferramentas para Músicos</title>
+    <meta
+      name="description"
+      content="Tocando Pra Valer: aprenda música de forma prática com aulas, biblioteca de cifras, afinador, metrônomo e piano virtual online. Tudo em um só lugar, grátis."
+    />
+    <meta
+      name="keywords"
+      content="aulas de música, cifras, violão, guitarra, afinador online, metrônomo, piano virtual, tocando pra valer"
+    />
+    <meta name="author" content="Tocando Pra Valer" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0172AA" />
+
+    <!-- Canonical (ajuste para o domínio de produção definitivo) -->
+    <link rel="canonical" href="https://tocandopravaler.vercel.app/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Tocando Pra Valer" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content="Tocando Pra Valer — Aulas de Música, Cifras e Ferramentas" />
+    <meta
+      property="og:description"
+      content="Aprenda música de forma prática: aulas, cifras, afinador, metrônomo e piano virtual online, tudo em um só lugar."
+    />
+    <meta property="og:url" content="https://tocandopravaler.vercel.app/" />
+    <meta property="og:image" content="https://tocandopravaler.vercel.app/logo.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tocando Pra Valer — Aulas de Música e Cifras" />
+    <meta
+      name="twitter:description"
+      content="Aulas, cifras, afinador, metrônomo e piano virtual online. Tudo em um só lugar."
+    />
+    <meta name="twitter:image" content="https://tocandopravaler.vercel.app/logo.png" />
+
+    <!-- Schema.org / JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Tocando Pra Valer",
+        "description": "Plataforma de aulas de música, cifras e ferramentas para músicos (afinador, metrônomo e piano virtual).",
+        "url": "https://tocandopravaler.vercel.app/",
+        "logo": "https://tocandopravaler.vercel.app/logo.png"
+      }
+    </script>
+
+    <!-- Anti-FOUC: aplica o tema salvo antes do React montar -->
     <script>
-      (function() {
+      (function () {
         try {
           const saved = localStorage.getItem('theme');
           let theme = saved;
           if (!theme) {
-            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const prefersDark =
+              window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             theme = prefersDark ? 'dark' : 'light';
           }
           const apply = (el) => {
@@ -28,7 +80,7 @@
         } catch (e) {}
       })();
     </script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
