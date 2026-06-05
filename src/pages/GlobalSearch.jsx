@@ -35,9 +35,11 @@ export default function GlobalSearch() {
   // como Lyrics.ovh) e, em caso de bloqueio CORS, recorre a proxies públicos
   // confiáveis. Cada proxy recebe a URL-alvo já codificada.
   const PROXIES = [
-    (target) => target, // direto
+    // 1ª opção: nossa Serverless Function na Vercel (same-origin, sem CORS).
+    (target) => `/api/proxy?url=${encodeURIComponent(target)}`,
+    // Fallbacks (úteis em dev, onde /api não existe, ou se a function falhar):
+    (target) => target, // direto (Lyrics.ovh costuma ter CORS aberto)
     (target) => `https://api.allorigins.win/raw?url=${encodeURIComponent(target)}`,
-    (target) => `https://corsproxy.io/?url=${encodeURIComponent(target)}`,
   ];
 
   // Função para tentar múltiplas estratégias com timeout robusto
