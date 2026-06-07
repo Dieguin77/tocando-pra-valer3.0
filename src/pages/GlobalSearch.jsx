@@ -100,7 +100,8 @@ export default function GlobalSearch() {
       const url = `https://api.vagalume.com.br/${artistSlug}/index.js`;
       const data = await fetchWithProxy(url);
       return data;
-    } catch {
+    } catch (e) {
+      console.warn("fetchArtistInfo falhou:", artistSlug, e?.message);
       return null;
     }
   };
@@ -135,30 +136,23 @@ export default function GlobalSearch() {
           console.log("Lyrics.ovh não encontrou, tentando lista do artista...");
         }
         
-        const artistSlug = toSlug(artist);
-        const artistData = await fetchArtistInfo(artistSlug);
-        
-        if (artistData?.artist?.lyrics?.item) {
-          const songSlug = toSlug(song);
-          const matchingSongs = artistData.artist.lyrics.item.filter(item => 
-            toSlug(item.desc).includes(songSlug) || songSlug.includes(toSlug(item.desc))
-          );
-          
-          const songsToShow = matchingSongs.length > 0 
-            ? matchingSongs 
-            : artistData.artist.lyrics.item;
-          
-          setResults(songsToShow.slice(0, 20).map(item => ({
-            id: item.id,
-            title: item.desc,
-            band: artistData.artist.desc,
-          })));
-          
-          if (matchingSongs.length === 0) {
-            setSearchError(`"${song}" não encontrada. Mostrando outras músicas de ${artistData.artist.desc}`);
+        try {
+          const vagalumeUrl = `https://api.vagalume.com.br/search.php?art=${encodeURIComponent(artist)}&mus=${encodeURIComponent(song)}&apikey=${VAGALUME_API_KEY}`;
+          const data = await fetchWithProxy(vagalumeUrl);
+          if ((data.type === 'exact' || data.type === 'approx') && data.mus?.length > 0) {
+            setResults(data.mus.map(item => ({
+              id: item.id,
+              title: item.name,
+              band: data.art.name,
+            })));
+            return;
           }
-          return;
+        } catch (e) {
+          console.warn("Vagalume search.php falhou:", e?.message);
         }
+
+        setSearchError(`"${song}" de "${artist}" não encontrada. Verifique o nome do artista e da música.`);
+        return;
       }
       
       const artistSlug = toSlug(query);
