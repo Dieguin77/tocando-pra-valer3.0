@@ -8,6 +8,11 @@
 const ALLOWED_HOSTS = ["api.lyrics.ovh", "api.vagalume.com.br"];
 
 export default async function handler(req, res) {
+  if (req.method !== "GET") {
+    res.setHeader("Allow", "GET");
+    return res.status(405).json({ error: "Método não permitido." });
+  }
+
   const { url } = req.query;
 
   if (!url) {
@@ -41,6 +46,7 @@ export default async function handler(req, res) {
       "Content-Type",
       upstream.headers.get("content-type") || "text/plain; charset=utf-8"
     );
+    res.setHeader("Vary", "Accept-Encoding");
     // Cache na borda da Vercel para aliviar as APIs de origem
     res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
     return res.status(upstream.status).send(body);

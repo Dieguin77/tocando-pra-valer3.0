@@ -191,15 +191,15 @@ export default function Tuner() {
   };
 
   return (
-    <div className="flex flex-col items-center gap-6 p-8 bg-white border border-gray-200 rounded-2xl shadow-sm max-w-md mx-auto">
+    <div className="flex flex-col items-center gap-6 p-8 glass-surface border border-gray-200 dark:border-slate-700 rounded-2xl shadow-sm max-w-md mx-auto">
       
       {/* Display da Nota */}
       <div className="text-center">
-        <div className="text-8xl font-bold text-gray-900">
+        <div className="text-8xl font-bold text-gray-900 dark:text-gray-100">
           {note ? note.name : "--"}
         </div>
         {note && (
-          <div className="text-lg text-gray-500 mt-1">
+          <div className="text-lg text-gray-500 dark:text-gray-400 mt-1">
             {note.letter}{note.octave}
           </div>
         )}
@@ -208,9 +208,9 @@ export default function Tuner() {
       {/* Indicador de Afinação */}
       <div className="w-full max-w-xs">
         {/* Barra de cents */}
-        <div className="relative h-3 bg-gray-200 rounded-full overflow-hidden">
+        <div className="relative h-3 bg-gray-200 dark:bg-slate-700 rounded-full overflow-hidden">
           {/* Marcador central */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-400 -translate-x-1/2 z-10" />
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-400 dark:bg-slate-500 -translate-x-1/2 z-10" />
           
           {/* Indicador móvel */}
           {note && (
@@ -224,7 +224,7 @@ export default function Tuner() {
         </div>
         
         {/* Labels */}
-        <div className="flex justify-between text-xs text-gray-400 mt-1">
+        <div className="flex justify-between text-xs text-gray-400 dark:text-gray-500 mt-1">
           <span>-50</span>
           <span>0</span>
           <span>+50</span>
@@ -235,14 +235,14 @@ export default function Tuner() {
       <div className={`text-lg font-medium ${
         !note ? "text-gray-400" :
         Math.abs(cents) <= 5 ? "text-green-600" :
-        "text-gray-600"
+        "text-gray-600 dark:text-gray-300"
       }`}>
         {getTuningText()}
       </div>
 
       {/* Frequência */}
       {frequency && (
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-gray-500 dark:text-gray-400">
           {frequency} Hz
         </div>
       )}
@@ -277,7 +277,7 @@ export default function Tuner() {
       </button>
 
       {/* Dica */}
-      <p className="text-xs text-gray-400 text-center max-w-xs">
+      <p className="text-xs text-gray-400 dark:text-gray-500 text-center max-w-xs">
         Toque uma corda do instrumento próximo ao microfone para ver a nota detectada.
       </p>
     </div>

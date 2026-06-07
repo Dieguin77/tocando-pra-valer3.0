@@ -1,31 +1,60 @@
 import ChordDiagram from "../components/ChordDiagram";
 import { useParams, Link } from "react-router-dom";
 import { musicas } from "../data/musicas";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { fetchLyrics } from "../services/vagalume";
 import { ArrowLeft } from "lucide-react";
 
 export default function Song() {
   const { id } = useParams();
-  
+
   // Encontra a música no seu "banco de dados" local
-  const songData = musicas.find((m) => m.id === parseInt(id));
+  const songData = useMemo(() => {
+    const parsedId = Number.parseInt(id, 10);
+    if (Number.isNaN(parsedId)) {
+      return null;
+    }
+    return musicas.find((m) => m.id === parsedId) || null;
+  }, [id]);
 
   // Estado para guardar a letra que virá da API
-  const [lyrics, setLyrics] = useState("Carregando letra...");
+  const [lyrics, setLyrics] = useState("");
+  const [lyricsStatus, setLyricsStatus] = useState("idle");
 
   // Efeito que roda assim que a tela abre
   useEffect(() => {
-    if (songData) {
-      // Chama a API do Vagalume
-      fetchLyrics(songData.artista, songData.titulo).then((letraEncontrada) => {
+    if (!songData) {
+      return;
+    }
+
+    let isCancelled = false;
+    setLyricsStatus("loading");
+
+    // Chama a API do Vagalume
+    fetchLyrics(songData.artista, songData.titulo)
+      .then((letraEncontrada) => {
+        if (isCancelled) {
+          return;
+        }
+
         if (letraEncontrada) {
           setLyrics(letraEncontrada);
+          setLyricsStatus("success");
         } else {
           setLyrics("Letra não encontrada no Vagalume.");
+          setLyricsStatus("empty");
+        }
+      })
+      .catch(() => {
+        if (!isCancelled) {
+          setLyrics("Não foi possível carregar a letra agora.");
+          setLyricsStatus("error");
         }
       });
-    }
+
+    return () => {
+      isCancelled = true;
+    };
   }, [songData]);
 
   if (!songData) {
@@ -35,10 +64,10 @@ export default function Song() {
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-3xl mx-auto px-6 py-8">
-        
+
         {/* Botão Voltar */}
-        <Link 
-          to="/musicas" 
+        <Link
+          to="/musicas"
           className="inline-flex items-center text-gray-500 hover:text-blue-500 transition-colors mb-8"
         >
           <ArrowLeft size={18} className="mr-2" />
@@ -53,25 +82,30 @@ export default function Song() {
           <p className="text-lg text-gray-500 mb-4">
             {songData.artista}
           </p>
+
           <span className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
             Tom: {songData.tom || "Original"}
-
-            {/* Bloco do Diagrama de Acorde */}
-        <div className="mt-6 mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-           <p className="font-bold text-gray-700 mb-2">Acorde de Referência:</p>
-           {/* Aqui passamos um acorde de exemplo (Dó Maior) para testar */}
-           <ChordDiagram chordData={{ frets: [-1, 3, 2, 0, 1, 0] }} />
-        </div>
           </span>
+        </div>
+
+        {/* Bloco do Diagrama de Acorde */}
+        <div className="mt-6 mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+          <p className="font-bold text-gray-700 mb-2">Acorde de Referência:</p>
+          <ChordDiagram chordData={{ frets: [-1, 3, 2, 0, 1, 0] }} />
         </div>
 
         {/* Área da Letra / Cifra */}
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Letra da Música</h3>
-          
+
           <div className="whitespace-pre-wrap text-lg leading-relaxed text-gray-700 font-sans bg-gray-50 p-6 rounded-xl">
-            {lyrics}
+            {lyricsStatus === "loading" ? "Carregando letra..." : lyrics}
           </div>
+          {lyricsStatus === "error" && (
+            <p className="text-sm text-red-500 mt-3">
+              Erro de conexão com o serviço de letras.
+            </p>
+          )}
         </div>
 
         {/* Embed do Youtube (se tiver ID) */}

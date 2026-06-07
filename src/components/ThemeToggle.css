@@ -1,32 +1,34 @@
 /* src/components/ThemeToggle.css */
 
 .theme-toggle-btn {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 2px solid #e0e0e0;
-  background: #f0f0f0;
+  width: 42px;
+  height: 42px;
+  border-radius: 9999px;
+  border: 1px solid #d7e0ea;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.12);
   transition: all 0.3s ease;
-  z-index: 1000;
+  z-index: 40;
 }
 
 /* Modo escuro */
 .dark .theme-toggle-btn,
 .dark-mode .theme-toggle-btn,
 body.dark-mode .theme-toggle-btn {
-  border-color: #333333;
-  background: #222222;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  border-color: #334155;
+  background: rgba(13, 22, 36, 0.78);
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.5);
 }
 
 .theme-toggle-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(15, 23, 42, 0.18);
 }
 
 .dark .theme-toggle-btn:hover,
@@ -36,12 +38,12 @@ body.dark-mode .theme-toggle-btn:hover {
 }
 
 .theme-toggle-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
 }
 
 .theme-toggle-btn .icon {
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
   color: #121212;
   transition: transform 0.3s ease;
 }
@@ -69,12 +71,12 @@ body.dark-mode .theme-toggle-btn .icon {
 /* Responsivo para mobile */
 @media (max-width: 768px) {
   .theme-toggle-btn {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
   
   .theme-toggle-btn .icon {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
   }
 }

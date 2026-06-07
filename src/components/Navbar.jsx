@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Home, Music, Wrench, Globe, Send, ChevronDown } from 'lucide-react';
 import logo from '../assets/logooficial.png';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,7 +19,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 glass-navbar border-b shadow-sm">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo apenas */}
         <Link to="/" className="flex items-center justify-center" aria-label="Ir para a página inicial">
@@ -29,21 +30,21 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-4">
           <Link 
             to="/" 
-            className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors text-sm"
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/90 dark:hover:bg-slate-800 transition-colors text-sm"
           >
             <Home size={18} />
             Home
           </Link>
           <Link 
             to="/busca-global" 
-            className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors text-sm"
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/90 dark:hover:bg-slate-800 transition-colors text-sm"
           >
             <Globe size={18} />
             Busca Vagalume
           </Link>
           <Link 
             to="/musicas" 
-            className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors text-sm"
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/90 dark:hover:bg-slate-800 transition-colors text-sm"
           >
             <Music size={18} />
             Cifras
@@ -55,6 +56,7 @@ const Navbar = () => {
             <Wrench size={18} />
             Ferramentas
           </Link>
+          <ThemeToggle />
         </div>
 
         {/* Menu mobile */}
@@ -68,10 +70,10 @@ const Navbar = () => {
           </button>
           
           {menuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden z-50">
+            <div className="absolute right-0 mt-2 w-56 glass-surface rounded-lg shadow-lg border border-gray-100 overflow-hidden z-50">
               <Link 
                 to="/" 
-                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50"
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-800/80"
                 onClick={() => setMenuOpen(false)}
               >
                 <Home size={18} className="text-blue-500" />
@@ -79,7 +81,7 @@ const Navbar = () => {
               </Link>
               <Link 
                 to="/busca-global" 
-                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50"
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-800/80"
                 onClick={() => setMenuOpen(false)}
               >
                 <Globe size={18} className="text-blue-500" />
@@ -87,7 +89,7 @@ const Navbar = () => {
               </Link>
               <Link 
                 to="/musicas" 
-                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50"
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-800/80"
                 onClick={() => setMenuOpen(false)}
               >
                 <Music size={18} className="text-blue-500" />
@@ -95,7 +97,7 @@ const Navbar = () => {
               </Link>
               <Link 
                 to="/upload" 
-                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50"
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-800/80"
                 onClick={() => setMenuOpen(false)}
               >
                 <Send size={18} className="text-blue-500" />
@@ -103,12 +105,15 @@ const Navbar = () => {
               </Link>
               <Link 
                 to="/ferramentas" 
-                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50"
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-800/80"
                 onClick={() => setMenuOpen(false)}
               >
                 <Wrench size={18} className="text-blue-500" />
                 Ferramentas
               </Link>
+              <div className="px-4 py-3 border-t border-gray-200 dark:border-slate-700 flex justify-end">
+                <ThemeToggle />
+              </div>
             </div>
           )}
         </div>

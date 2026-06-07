@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 // Mapeamento de teclas
 const KEY_MAP = {
@@ -32,14 +32,27 @@ const BASE_NOTES = [
 export default function VirtualPiano() {
   const [activeKey, setActiveKey] = useState(null);
   const [octave, setOctave] = useState(4);
+  const audioContextRef = useRef(null);
 
   const baseNotes = BASE_NOTES;
+
+  const getAudioContext = useCallback(() => {
+    if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    if (audioContextRef.current.state === "suspended") {
+      audioContextRef.current.resume();
+    }
+
+    return audioContextRef.current;
+  }, []);
 
   const playSound = useCallback((baseFreq, noteName) => {
     setActiveKey(noteName);
     const freq = baseFreq * Math.pow(2, octave - 4);
 
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const audioCtx = getAudioContext();
     const oscillator = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
 
@@ -56,7 +69,7 @@ export default function VirtualPiano() {
     oscillator.stop(audioCtx.currentTime + 0.8);
 
     setTimeout(() => setActiveKey(null), 200);
-  }, [octave]); // Dependência necessária para recalcular frequência correta
+  }, [getAudioContext, octave]); // Dependência necessária para recalcular frequência correta
 
   const handleKeyDown = useCallback((event) => {
       const noteName = KEY_MAP[event.key.toLowerCase()];
@@ -70,6 +83,15 @@ export default function VirtualPiano() {
       if (event.key.toLowerCase() === 'z') setOctave(prev => Math.max(1, prev - 1));
       if (event.key.toLowerCase() === 'x') setOctave(prev => Math.min(7, prev + 1));
     }, [baseNotes, playSound, activeKey]);
+
+  useEffect(() => {
+    return () => {
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+        audioContextRef.current = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);

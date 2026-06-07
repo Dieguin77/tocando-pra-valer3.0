@@ -1,23 +1,32 @@
-import { useState } from 'react';
+import { useDeferredValue, useMemo, useState } from 'react';
 import { Search, ArrowLeft, Music } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { musicas } from '../data/musicas';
 
 export default function Songs() {
   const [searchTerm, setSearchTerm] = useState('');
+  const deferredSearch = useDeferredValue(searchTerm);
 
-  // Filtragem simples
-  const filteredSongs = musicas.filter(song => 
-    song.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (song.artista && song.artista.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  const normalizedSearch = deferredSearch.trim().toLowerCase();
+
+  const filteredSongs = useMemo(() => {
+    if (!normalizedSearch) {
+      return musicas;
+    }
+
+    // A busca é memorizada e usa valor adiado para reduzir trabalho enquanto o usuário digita.
+    return musicas.filter((song) =>
+      song.titulo.toLowerCase().includes(normalizedSearch) ||
+      (song.artista && song.artista.toLowerCase().includes(normalizedSearch))
+    );
+  }, [normalizedSearch]);
 
   return (
     <div className="min-h-screen bg-white">
       <div className="songs-responsive-container">
-        
+
         {/* Header / Voltar */}
-        <Link 
+        <Link
           to="/"
           className="inline-flex items-center text-gray-500 hover:text-gray-900 transition-colors mb-8"
         >
@@ -37,9 +46,9 @@ export default function Songs() {
 
         {/* Barra de Busca */}
         <div className="relative max-w-xl mb-10">
-          <div className="flex items-center bg-gray-50 rounded-xl border border-gray-200">
+          <div className="glass-surface flex items-center rounded-xl border border-gray-200">
             <Search className="w-5 h-5 text-gray-400 ml-4" />
-            <input 
+            <input
               type="text"
               placeholder="Buscar por cifra ou artista..."
               value={searchTerm}
@@ -52,10 +61,10 @@ export default function Songs() {
         {/* Grid de Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredSongs.map((song) => (
-            <Link 
+            <Link
               to={`/musica/${song.id}`}
-              key={song.id} 
-              className="group bg-white border border-gray-200 rounded-xl p-5 hover:border-blue-300 hover:shadow-md transition-all"
+              key={song.id}
+              className="group glass-surface border border-gray-200 rounded-xl p-5 hover:border-blue-300 hover:shadow-md transition-all"
             >
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-blue-50 rounded-lg text-blue-500 group-hover:bg-blue-100 transition-colors">
