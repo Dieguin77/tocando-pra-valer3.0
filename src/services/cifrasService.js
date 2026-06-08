@@ -627,3 +627,21 @@ export const getBackendInfo = () => ({
 
 // Exportar constantes úteis
 export { BACKENDS, ACTIVE_BACKEND };
+
+/**
+ * Retorna cifras aprovadas normalizadas para o formato de musicas.jsx.
+ * Permite que Songs.jsx e Song.jsx exibam cifras da comunidade ao lado das fixas.
+ */
+export const getCifrasPublicadas = () => {
+  const aprovadas = localStorageGet('aprovado');
+  return aprovadas.map((c) => ({
+    id: c.id,
+    titulo: c.titulo,
+    artista: c.artista,
+    compositores: c.compositor || '',
+    tom: c.tom,
+    letra: c.cifra,
+    dificuldade: c.dificuldade,
+    imagem: null,
+  }));
+};

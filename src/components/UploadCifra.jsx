@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Music, Mic, FileText, Send, Loader2, CheckCircle, AlertCircle, Info, Cloud, CloudOff, Mail } from 'lucide-react';
 import { enviarCifra, getBackendInfo } from '../services/cifrasService';
-import { enviarConfirmacao } from '../services/emailService';
+import { enviarConfirmacao, notificarAdminNovaCifra } from '../services/emailService';
 
 export default function UploadCifra({ onCifraSubmitted }) {
   const backendInfo = getBackendInfo();
@@ -80,6 +80,14 @@ export default function UploadCifra({ onCifraSubmitted }) {
         } catch (emailError) {
           console.warn('⚠️ Não foi possível enviar e-mail de confirmação:', emailError);
         }
+      }
+
+      // Notificar administrador sobre nova cifra pendente de revisão
+      try {
+        await notificarAdminNovaCifra(result.cifra);
+        console.log('✅ Administrador notificado sobre nova cifra pendente.');
+      } catch (notifError) {
+        console.warn('⚠️ Não foi possível notificar o administrador:', notifError);
       }
 
       setSuccess(true);

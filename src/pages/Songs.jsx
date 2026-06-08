@@ -1,25 +1,32 @@
-import { useDeferredValue, useMemo, useState } from 'react';
+import { useDeferredValue, useEffect, useMemo, useState } from 'react';
 import { Search, ArrowLeft, Music } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { musicas } from '../data/musicas';
+import { getCifrasPublicadas } from '../services/cifrasService';
 
 export default function Songs() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [uploadedSongs, setUploadedSongs] = useState([]);
   const deferredSearch = useDeferredValue(searchTerm);
+
+  useEffect(() => {
+    setUploadedSongs(getCifrasPublicadas());
+  }, []);
 
   const normalizedSearch = deferredSearch.trim().toLowerCase();
 
   const filteredSongs = useMemo(() => {
+    const allMusicas = [...musicas, ...uploadedSongs];
+
     if (!normalizedSearch) {
-      return musicas;
+      return allMusicas;
     }
 
-    // A busca é memorizada e usa valor adiado para reduzir trabalho enquanto o usuário digita.
-    return musicas.filter((song) =>
+    return allMusicas.filter((song) =>
       song.titulo.toLowerCase().includes(normalizedSearch) ||
       (song.artista && song.artista.toLowerCase().includes(normalizedSearch))
     );
-  }, [normalizedSearch]);
+  }, [normalizedSearch, uploadedSongs]);
 
   return (
     <div className="min-h-screen bg-white">

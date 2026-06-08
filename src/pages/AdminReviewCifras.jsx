@@ -294,7 +294,7 @@ export default function AdminReviewCifras() {
 
                     <button
                       className="btn-delete flex items-center gap-1"
-                      onClick={() => deletarCifra(cifra.id, 'aprovada')}
+                      onClick={() => deletarCifra(cifra.id, 'aprovado')}
                     >
                       <Trash2 size={16} /> Deletar
                     </button>

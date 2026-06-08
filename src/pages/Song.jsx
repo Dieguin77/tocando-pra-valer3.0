@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { musicas } from "../data/musicas";
 import { useState, useEffect, useMemo } from "react";
 import { fetchLyrics } from "../services/vagalume";
+import { getCifrasPublicadas } from "../services/cifrasService";
 import { ArrowLeft } from "lucide-react";
 
 export default function Song() {
@@ -11,10 +12,16 @@ export default function Song() {
   // Encontra a música no seu "banco de dados" local
   const songData = useMemo(() => {
     const parsedId = Number.parseInt(id, 10);
-    if (Number.isNaN(parsedId)) {
-      return null;
+
+    // Primeiro: procura nas músicas fixas (ID numérico)
+    if (!Number.isNaN(parsedId)) {
+      const found = musicas.find((m) => m.id === parsedId);
+      if (found) return found;
     }
-    return musicas.find((m) => m.id === parsedId) || null;
+
+    // Segundo: procura nas cifras aprovadas da comunidade (ID string)
+    const publicadas = getCifrasPublicadas();
+    return publicadas.find((c) => c.id === id) || null;
   }, [id]);
 
   // Estado para guardar a letra que virá da API

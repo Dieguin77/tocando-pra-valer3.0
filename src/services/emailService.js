@@ -72,11 +72,11 @@ export const notificarAdminNovaCifra = async (cifra) => {
       to_email: ADMIN_EMAIL,
       titulo: cifra.titulo,
       artista: cifra.artista,
-      musico_email: cifra.musicoEmail,
+      musico_email: cifra.email || '',
       tom: cifra.tom,
       dificuldade: cifra.dificuldade,
       data_envio: new Date().toLocaleDateString('pt-BR'),
-      link_admin: `${window.location.origin}/admin/revisar-cifras`,
+      link_admin: `${window.location.origin}/#/admin/revisar-cifras`,
     });
 
     console.log('✅ Notificação de admin enviada:', response);
