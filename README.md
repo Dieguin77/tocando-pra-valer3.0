@@ -548,6 +548,7 @@ MIT License — Copyright (c) 2026 Diego Batista Gomes Moraes
 <div align="center">
 
   [![Portfólio](https://img.shields.io/badge/🌐_Portfólio-diegodev.dev.br-0172AA?style=flat-square)](https://diegodev.dev.br)
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Diego_Batista-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/diegobatistt)
   [![GitHub](https://img.shields.io/badge/GitHub-Dieguin77-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Dieguin77)
   [![Email](https://img.shields.io/badge/Email-diegobatistt@gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:diegobatistt@gmail.com)
 
