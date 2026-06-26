@@ -2,7 +2,7 @@
 
   <img src="public/logo.png" alt="Tocando Pra Valer" width="110" />
 
-  # 🎸 Tocando Pra Valer
+  #  Tocando Pra Valer
 
   **Plataforma musical completa para músicos brasileiros**
 
@@ -31,7 +31,7 @@
 
 ---
 
-## 📋 Índice
+## Índice
 
 - [Sobre o Projeto](#-sobre-o-projeto)
 - [Demo ao Vivo](#-demo-ao-vivo)
@@ -51,7 +51,7 @@
 
 ---
 
-## 🎯 Sobre o Projeto
+## Sobre o Projeto
 
 O **Tocando Pra Valer** nasceu para resolver um problema real: músicos iniciantes e intermediários precisam de ferramentas práticas espalhadas em dezenas de sites diferentes. A proposta é centralizar tudo em uma plataforma leve, acessível e sem necessidade de cadastro.
 
@@ -67,36 +67,36 @@ O **Tocando Pra Valer** nasceu para resolver um problema real: músicos iniciant
 
 ### Destaques Técnicos
 
-- ⚡ **Code splitting** com `React.lazy` + `Suspense` — bundle inicial otimizado
-- 🔁 **`useDeferredValue`** para debounce nativo de busca sem bibliotecas externas (React 18)
-- 🔌 **Multi-backend** com detecção automática (Supabase · Formspree · Google Sheets · localStorage)
-- 🌐 **CORS Proxy próprio** via Vercel Serverless Function com cache e whitelist de hosts
-- 🎨 **Design system** com CSS custom properties (dark/light mode + anti-FOUC)
-- 🪝 **Custom hooks** para lógica reutilizável (`useClickOutside`)
-- ♿ **Acessibilidade**: `aria-label`, `aria-expanded`, `role`, `alt` text, focus management
+-  **Code splitting** com `React.lazy` + `Suspense` — bundle inicial otimizado
+-  **`useDeferredValue`** para debounce nativo de busca sem bibliotecas externas (React 18)
+-  **Multi-backend** com detecção automática (Supabase · Formspree · Google Sheets · localStorage)
+-  **CORS Proxy próprio** via Vercel Serverless Function com cache e whitelist de hosts
+-  **Design system** com CSS custom properties (dark/light mode + anti-FOUC)
+-  **Custom hooks** para lógica reutilizável (`useClickOutside`)
+-  **Acessibilidade**: `aria-label`, `aria-expanded`, `role`, `alt` text, focus management
 
 ---
 
 ## 🌐 Demo ao Vivo
 
-> 🔗 **[tocando-pra-valer3-0.vercel.app](https://tocando-pra-valer3-0.vercel.app)**
+>  **[tocando-pra-valer3-0.vercel.app](https://tocando-pra-valer3-0.vercel.app)**
 
 | Seção | Rota |
 |---|---|
-| 🏠 Landing Page | `/` |
-| 📖 Biblioteca de Cifras | `/#/musicas` |
-| 🔧 Ferramentas (Piano · Afinador · Metrônomo) | `/#/ferramentas` |
-| 🎹 Piano Virtual | `/#/piano` |
-| 🔍 Busca de Letras | `/#/busca-global` |
-| 📤 Enviar Cifra | `/#/upload` |
+|  Landing Page | `/` |
+|  Biblioteca de Cifras | `/#/musicas` |
+|  Ferramentas (Piano · Afinador · Metrônomo) | `/#/ferramentas` |
+|  Piano Virtual | `/#/piano` |
+|  Busca de Letras | `/#/busca-global` |
+|  Enviar Cifra | `/#/upload` |
 
 > **Screenshots** — adicione capturas de tela em `docs/screenshots/` para exibir aqui.
 
 ---
 
-## ✨ Funcionalidades
+##  Funcionalidades
 
-### 📖 Biblioteca de Cifras
+###  Biblioteca de Cifras
 - Busca em tempo real com `useDeferredValue` (debounce nativo do React 18, sem lodash)
 - Transposição automática de tom com um clique
 - Diagramas visuais de acordes (banco com 40+ acordes para guitarra/violão)
@@ -104,7 +104,7 @@ O **Tocando Pra Valer** nasceu para resolver um problema real: músicos iniciant
 - Embed de vídeo aula do YouTube diretamente na página da cifra
 - Suporte a cifras enviadas pela comunidade (aprovadas via fluxo admin)
 
-### 🔧 Ferramentas Musicais
+### Ferramentas Musicais
 - **Metrônomo** — BPM ajustável (60–240) com marcação visual e sonora sincronizadas
 - **Afinador** — Detecção de frequência em tempo real via Web Audio API (microfone)
 - **Piano Virtual** — 2 oitavas completas, suporte a clique do mouse e atalhos de teclado:
@@ -114,14 +114,14 @@ Teclas brancas:  A   S   D   F   G   H   J   K
 Teclas pretas:   W   E       T   Y   U
 ```
 
-### 🔍 Busca Global de Letras
+### Busca Global de Letras
 - Busca por artista e título em qualquer idioma
 - Integração primária com **Vagalume API** (especializado em músicas brasileiras)
 - Fallback automático para **Lyrics.ovh** (cobertura internacional)
 - CORS proxy próprio no Vercel com retry em múltiplos endpoints
 - Transposição de tom diretamente na letra buscada
 
-### 📤 Sistema de Contribuição de Cifras
+### Sistema de Contribuição de Cifras
 - Formulário completo com validação de campos no client-side
 - **4 backends suportados com detecção automática por variável de ambiente**:
 
@@ -140,7 +140,7 @@ Colaborador envia cifra
               └─▶ Rejeição   → email com motivo ao colaborador
 ```
 
-### 🎨 UX / Design System
+### UX / Design System
 - **Dark Mode** com persistência em `localStorage` e detecção da preferência do SO
 - Script anti-FOUC no `<head>` para aplicar o tema antes do React montar (zero flash)
 - Glass morphism UI com `backdrop-filter: blur()`
@@ -149,7 +149,7 @@ Colaborador envia cifra
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 ### Core
 
@@ -190,7 +190,7 @@ Colaborador envia cifra
 
 ---
 
-## 🏗️ Arquitetura
+## Arquitetura
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -243,7 +243,7 @@ Em vez de depender de proxies públicos (instáveis e lentos), a Serverless Func
 
 ---
 
-## 📁 Estrutura de Pastas
+## Estrutura de Pastas
 
 ```
 tocando-pra-valer/
@@ -306,7 +306,7 @@ tocando-pra-valer/
 
 ---
 
-## ⚙️ Pré-requisitos
+## Pré-requisitos
 
 - **Node.js** 18 LTS ou superior
 - **npm** 9+
@@ -318,7 +318,7 @@ npm --version    # 9.0.0 ou superior
 
 ---
 
-## 💻 Como Executar
+## Como Executar
 
 ### 1. Clone o repositório
 
@@ -361,7 +361,7 @@ Acesse: **http://localhost:5173**
 
 ---
 
-## 🔧 Variáveis de Ambiente
+## Variáveis de Ambiente
 
 Copie `.env.example` para `.env.local` e preencha:
 
@@ -395,7 +395,7 @@ VITE_SUPABASE_ANON_KEY=eyJhbGci...
 
 ---
 
-## 🚀 Build e Deploy
+## Build e Deploy
 
 ### Build de produção
 
@@ -431,7 +431,7 @@ npm run deploy
 
 ---
 
-## 🔌 Integrações de API
+## Integrações de API
 
 ### CORS Proxy (`/api/proxy.js`)
 
@@ -459,7 +459,7 @@ Quatro templates EmailJS para o fluxo completo sem backend próprio:
 
 ---
 
-## 📊 SEO e Performance
+## SEO e Performance
 
 ### Otimizações implementadas
 
@@ -478,9 +478,9 @@ Quatro templates EmailJS para o fluxo completo sem backend próprio:
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
-### ✅ v3.0 — atual
+### v3.0 — atual
 
 - [x] Biblioteca de cifras com busca em tempo real (`useDeferredValue`)
 - [x] Transposição automática de tom
@@ -494,7 +494,7 @@ Quatro templates EmailJS para o fluxo completo sem backend próprio:
 - [x] CORS Proxy próprio (Vercel Serverless)
 - [x] SEO: Open Graph, Twitter Cards, Schema.org
 
-### 🔜 v4.0 — planejado
+### v4.0 — planejado
 
 - [ ] Autenticação de usuários (Supabase Auth)
 - [ ] Cifras favoritas salvas por usuário
@@ -506,7 +506,7 @@ Quatro templates EmailJS para o fluxo completo sem backend próprio:
 
 ---
 
-## 🤝 Contribuindo
+## Contribuindo
 
 Contribuições são muito bem-vindas!
 
@@ -531,7 +531,7 @@ Use a plataforma em [`/#/upload`](https://tocando-pra-valer3-0.vercel.app/#/uplo
 
 ---
 
-## 📄 Licença
+## Licença
 
 Distribuído sob a **Licença MIT**. Consulte [`LICENSE`](LICENSE) para mais detalhes.
 
@@ -541,7 +541,7 @@ MIT License — Copyright (c) 2026 Diego Batista Gomes Moraes
 
 ---
 
-## 📬 Contato
+## Contato
 
 **Diego Batista Gomes Moraes** — Desenvolvedor Web Front-end & Full Stack
 
@@ -566,7 +566,7 @@ MIT License — Copyright (c) 2026 Diego Batista Gomes Moraes
 
   **Achou o projeto útil? [Deixe uma ⭐ estrela!](https://github.com/Dieguin77/tocando-pra-valer)**
 
-  Feito com ❤️ e muito ☕ por [Diego Batista](https://diegodev.dev.br)
+  Feito com dedicação por [Diego Batista](https://diegodev.dev.br)
 
   *"A música é a taquigrafia da emoção." — Leon Tolstói*
 
