@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Globe, Instagram, MessageCircle, Youtube, ChevronDown, Wrench, BookOpen, Send, Music, Play, Brain, Smile, Users, ArrowRight } from "lucide-react";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 // --- IMPORTAÇÃO DAS IMAGENS ---
 import imgAdolescente from "../assets/adolescente-tocando.jpg";
@@ -18,27 +19,12 @@ export default function Home() {
   const dropdownRef = useRef(null);
   const cifrasDropdownRef = useRef(null);
 
-  // Função para scroll suave até uma seção
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  useClickOutside(dropdownRef, () => setDropdownOpen(false));
+  useClickOutside(cifrasDropdownRef, () => setCifrasDropdownOpen(false));
 
-  // Fechar dropdown ao clicar fora
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
-      }
-      if (cifrasDropdownRef.current && !cifrasDropdownRef.current.contains(event.target)) {
-        setCifrasDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const scrollToSection = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   const fotosGaleria = [
     { id: 1, img: imgAdolescente, titulo: "Jovens Talentos" },
@@ -77,8 +63,10 @@ export default function Home() {
             
             {/* Dropdown Cifras */}
             <div className="relative" ref={cifrasDropdownRef}>
-              <button 
+              <button
                 onClick={() => setCifrasDropdownOpen(!cifrasDropdownOpen)}
+                aria-expanded={cifrasDropdownOpen}
+                aria-haspopup="true"
                 className="flex items-center gap-1 text-gray-600 hover:text-blue-500 transition-colors cursor-pointer"
               >
                 Cifras
@@ -111,14 +99,16 @@ export default function Home() {
             <button onClick={() => scrollToSection('videos')} className="text-gray-600 hover:text-blue-500 transition-colors cursor-pointer">Vídeos</button>
           </div>
           
-          {/* Dropdown Área do Aluno */}
+          {/* Menu de acesso rápido */}
           <div className="relative" ref={dropdownRef}>
-            <button 
+            <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
+              aria-expanded={dropdownOpen}
+              aria-haspopup="true"
+              aria-label="Abrir menu de navegação"
               className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm bg-blue-500 text-white hover:bg-blue-600 transition-colors"
             >
-              <span className="hidden sm:inline">Área do Aluno</span>
-              <span className="sm:hidden">Menu</span>
+              Explorar
               <ChevronDown size={16} className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
             </button>
             
@@ -197,15 +187,15 @@ export default function Home() {
       </section>
 
       {/* --- STATS BAR --- */}
-      <section className="bg-blue-500 text-white py-8 sm:py-10">
+      <section className="bg-blue-500 text-white py-8 sm:py-10" aria-label="Destaques da plataforma">
         <div className="max-w-4xl mx-auto px-4 grid grid-cols-3 gap-4 sm:gap-8 text-center">
           <div>
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold">+1.000</div>
-            <div className="text-xs sm:text-sm opacity-90">Músicas Cifradas</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold">100%</div>
+            <div className="text-xs sm:text-sm opacity-90">Gratuito</div>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold">100%</div>
-            <div className="text-xs sm:text-sm opacity-90">Precisão Musical</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold">3</div>
+            <div className="text-xs sm:text-sm opacity-90">Ferramentas Online</div>
           </div>
           <div>
             <div className="text-2xl sm:text-3xl md:text-4xl font-bold">24h</div>
@@ -376,60 +366,73 @@ export default function Home() {
             Pronto para elevar seu nível?
           </h2>
           <p className="text-lg text-white/90 mb-10">
-            Junte-se a milhares de músicos que já estão evoluindo com nossa plataforma.
+            Comece agora, sem cadastro e sem custo. Tudo o que você precisa para tocar.
           </p>
-          <Link 
-            to="/musicas" 
+          <Link
+            to="/musicas"
             className="inline-flex items-center gap-3 px-8 py-4 rounded-lg font-semibold bg-white text-blue-600 hover:bg-gray-100 transition-colors"
           >
             <Music size={20} />
-            Acessar Acervo Agora
+            Ver Cifras Grátis
           </Link>
         </div>
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="none">
+      <footer className="bg-gray-50 py-16 px-4 border-t border-gray-100">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <img src={logo} alt="logooficial" className="h-10 w-auto rounded-lg" />
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <img src={logo} alt="Logo Tocando Pra Valer" className="h-10 w-auto rounded-lg" />
           </div>
-          
-          <p className="text-black-400 mb-8">
+
+          <p className="text-gray-500 mb-8">
             Siga nossas redes e entre em contato direto.
           </p>
-          
+
           <div className="flex flex-wrap justify-center gap-4 mb-10">
-            <a 
-              href="https://www.instagram.com/tocandopravaler" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://www.instagram.com/tocandopravaler"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Seguir no Instagram"
               className="flex items-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium hover:opacity-90 transition-opacity"
             >
               <Instagram size={20} /> Instagram
             </a>
 
-            <a 
-              href="https://wa.me/55999941669" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://wa.me/55999941669"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Falar pelo WhatsApp"
               className="flex items-center gap-2 px-5 py-3 rounded-lg bg-green-500 text-white font-medium hover:opacity-90 transition-opacity"
             >
               <MessageCircle size={20} /> WhatsApp
             </a>
 
-            <a 
-              href="https://www.youtube.com/@TocandoPraValer" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://www.youtube.com/@TocandoPraValer"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Assistir no YouTube"
               className="flex items-center gap-2 px-5 py-3 rounded-lg bg-red-500 text-white font-medium hover:opacity-90 transition-opacity"
             >
               <Youtube size={20} /> YouTube
             </a>
           </div>
 
-          <div className="pt-8 text-sm text-black-900 border-t border-black-1000">
-            <p>© 2026 Tocando Pra Valer. Desenvolvido por <a href="https://diegodev.dev.br" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 hover:underline transition-colors">Dev. Diego Batista</a>.</p>
+          <div className="pt-8 text-sm text-gray-500 border-t border-gray-200">
+            <p>
+              © 2026 Tocando Pra Valer. Feito por{' '}
+              <a
+                href="https://diegodev.dev.br"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:text-blue-600 hover:underline transition-colors"
+              >
+                Diego Batista
+              </a>.
+            </p>
           </div>
         </div>
       </footer>

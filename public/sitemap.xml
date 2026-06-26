@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Observação: a aplicação usa HashRouter (rotas via #/...), portanto apenas a
-  raiz é indexável por crawlers. Ajuste o domínio para o de produção.
+  Nota: HashRouter usa #/ nas rotas, então apenas a raiz é indexável por crawlers.
+  As rotas internas são carregadas client-side e não são visíveis para o Googlebot
+  sem SSR/SSG. Para SEO completo de subpáginas, considere migrar para BrowserRouter
+  ou adotar uma solução de pré-renderização.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tocandopravaler.vercel.app/</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://tocando-pra-valer3-0.vercel.app/</loc>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

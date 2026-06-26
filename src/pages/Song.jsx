@@ -105,12 +105,23 @@ export default function Song() {
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Letra da Música</h3>
 
-          <div className="whitespace-pre-wrap text-lg leading-relaxed text-gray-700 font-sans bg-gray-50 p-6 rounded-xl">
-            {lyricsStatus === "loading" ? "Carregando letra..." : lyrics}
-          </div>
+          {lyricsStatus === "loading" ? (
+            <div className="flex items-center gap-3 p-6 bg-gray-50 rounded-xl text-gray-400">
+              <div
+                className="w-5 h-5 border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin flex-shrink-0"
+                aria-hidden="true"
+              />
+              <span className="text-sm">Buscando a letra…</span>
+            </div>
+          ) : (
+            <div className="whitespace-pre-wrap text-lg leading-relaxed text-gray-700 font-sans bg-gray-50 p-6 rounded-xl">
+              {lyrics}
+            </div>
+          )}
+
           {lyricsStatus === "error" && (
             <p className="text-sm text-red-500 mt-3">
-              Erro de conexão com o serviço de letras.
+              Não foi possível carregar a letra. Verifique sua conexão e tente novamente.
             </p>
           )}
         </div>

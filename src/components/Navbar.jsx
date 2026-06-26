@@ -1,22 +1,15 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Home, Music, Wrench, Globe, Send, ChevronDown } from 'lucide-react';
+import { Home, Music, Wrench, Globe, Send, Menu, X } from 'lucide-react';
 import logo from '../assets/logooficial.png';
 import ThemeToggle from './ThemeToggle';
+import { useClickOutside } from '../hooks/useClickOutside';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setMenuOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  useClickOutside(dropdownRef, () => setMenuOpen(false));
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-navbar border-b shadow-sm">
@@ -61,12 +54,13 @@ const Navbar = () => {
 
         {/* Menu mobile */}
         <div className="md:hidden relative" ref={dropdownRef}>
-          <button 
+          <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500 text-white text-sm"
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+            className="flex items-center justify-center w-10 h-10 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors"
           >
-            Menu
-            <ChevronDown size={16} className={`transition-transform ${menuOpen ? 'rotate-180' : ''}`} />
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
           
           {menuOpen && (

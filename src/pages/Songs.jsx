@@ -43,9 +43,7 @@ export default function Songs() {
 
         {/* Título Principal */}
         <div className="mb-10">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            Cifras
-          </h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Cifras</h1>
           <p className="text-lg text-gray-500">
             Explore nossa coleção de cifras musicais.
           </p>
@@ -64,6 +62,13 @@ export default function Songs() {
             />
           </div>
         </div>
+
+        {/* Contador de resultados */}
+        {filteredSongs.length > 0 && (
+          <p className="text-sm text-gray-400 mb-4">
+            {filteredSongs.length} {filteredSongs.length === 1 ? 'cifra encontrada' : 'cifras encontradas'}
+          </p>
+        )}
 
         {/* Grid de Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -95,8 +100,23 @@ export default function Songs() {
 
         {/* Estado Vazio */}
         {filteredSongs.length === 0 && (
-          <div className="text-center py-16">
-            <p className="text-gray-400 text-lg">Nenhuma cifra encontrada para &quot;{searchTerm}&quot;</p>
+          <div className="text-center py-20">
+            <div className="text-5xl mb-4" aria-hidden="true">🎵</div>
+            <p className="text-gray-700 font-medium text-lg mb-1">
+              Nenhuma cifra encontrada
+            </p>
+            <p className="text-gray-400 text-sm mb-6">
+              Não encontramos resultados para{' '}
+              <span className="font-medium text-gray-600">&quot;{searchTerm}&quot;</span>
+            </p>
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="text-blue-500 hover:text-blue-600 text-sm font-medium transition-colors"
+              >
+                Limpar busca
+              </button>
+            )}
           </div>
         )}
       </div>

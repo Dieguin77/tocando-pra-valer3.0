@@ -1,21 +1,9 @@
-/**
- * ⚠️ IMPORTANTE: Por que NÃO colocar testes visuais aqui no App.jsx?
- * 
- * Em projetos com React Router, o App.jsx é apenas o "roteador central".
- * Ele define QUAIS componentes serão renderizados em QUAIS rotas, mas
- * o conteúdo visual de cada página fica nos componentes específicos.
- * 
- * - A rota "/" renderiza o componente <Home />
- * - Portanto, qualquer teste visual para a página inicial deve ir em Home.jsx
- * - Se você colocar HTML diretamente aqui, ele vai aparecer em TODAS as páginas
- *   ou pode quebrar a estrutura de rotas.
- */
-
 import { useEffect, lazy, Suspense } from "react";
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { initEmailJS } from "./services/emailService";
+import Navbar from "./components/Navbar";
 
-// Importação das Páginas (code splitting: cada rota vira um chunk separado)
+// Páginas carregadas sob demanda (code splitting — cada rota vira um chunk separado)
 const Home = lazy(() => import("./pages/Home"));
 const Songs = lazy(() => import("./pages/Songs"));
 const Song = lazy(() => import("./pages/Song"));
@@ -26,36 +14,37 @@ const GlobalSearch = lazy(() => import("./pages/GlobalSearch"));
 const PianoPage = lazy(() => import("./pages/PianoPage"));
 const ToolsPage = lazy(() => import("./pages/ToolsPage"));
 
-// Importação dos Componentes de Layout
-import Navbar from "./components/Navbar";
-
-// Fallback exibido enquanto o chunk da rota é carregado
 const PageLoader = () => (
   <div
-    className="flex items-center justify-center min-h-[50vh] text-gray-500"
+    className="flex flex-col items-center justify-center min-h-[60vh] gap-3"
     role="status"
     aria-live="polite"
+    aria-label="Carregando página"
   >
-    Carregando…
+    <div className="w-8 h-8 border-2 border-gray-200 border-t-blue-500 rounded-full animate-spin" />
+    <span className="text-sm text-gray-400">Carregando…</span>
   </div>
 );
 
-// Página 404 para rotas inexistentes
 const NotFound = () => (
-  <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4 text-center px-4">
-    <h1 className="text-4xl font-bold text-gray-800">404</h1>
-    <p className="text-gray-500">Página não encontrada.</p>
-    <Link to="/" className="text-brand-blue font-semibold hover:underline">
+  <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4 text-center px-4">
+    <span className="text-7xl" aria-hidden="true">🎵</span>
+    <h1 className="text-5xl font-bold text-gray-800 dark:text-gray-100">404</h1>
+    <p className="text-lg font-medium text-gray-600 dark:text-gray-300">Página não encontrada</p>
+    <p className="text-gray-400 max-w-xs text-sm">
+      Essa nota saiu do pentagrama. Volte para o início e continue tocando.
+    </p>
+    <Link
+      to="/"
+      className="mt-2 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-colors"
+    >
       Voltar para a Home
     </Link>
   </div>
 );
 
-// --- LAYOUTS ---
-
-// 1. Layout Público (Só o Header Horizontal)
 const PublicLayout = () => (
-  <div className="min-h-screen bg-white">
+  <div className="min-h-screen bg-white dark:bg-gray-950">
     <Navbar />
     <main className="pt-20">
       <Outlet />
@@ -63,9 +52,8 @@ const PublicLayout = () => (
   </div>
 );
 
-// 2. Layout da Plataforma (Com Navbar)
 const PlatformLayout = () => (
-  <div className="min-h-screen bg-gray-50">
+  <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
     <Navbar />
     <main className="pt-20 p-6">
       <Outlet />
